@@ -6,11 +6,11 @@ Acts a landing page/connects all of my projects.
 
 The home page is a GUI interface, where each 'page' is a window, inspired by old atari/compaq machines.
 
-The `./development_server` and `./production_server` run this locally/in prod/have a couple extra commands to help me manage approving comments for the guestbook. All run with [`supervisor`](https://github.com/Supervisor/supervisor) by some code [here](https://github.com/seanbreckenridge/vps).
+The `./development_server` and `./production_server` run this locally/in prod/have a couple extra commands to help me manage approving comments for the guestbook. All run with [`supervisor`](https://github.com/Supervisor/supervisor) by some code [here](https://github.com/purarue/vps).
 
 ![](./assets/screenshot.png)
 
-Before this iteration of the design, this [sort of looked like a geocities website](https://www.cameronsworld.net/), I extracted a version out of the git history [available here](https://github.com/seanbreckenridge/glue_geocities)
+Before this iteration of the design, this [sort of looked like a geocities website](https://www.cameronsworld.net/), I extracted a version out of the git history [available here](https://github.com/purarue/glue_geocities)
 
 #### Dashboard
 
@@ -18,7 +18,7 @@ To password protect phoenix dashboard for production; using nginx (after install
 
 To generate a password:
 
-`sudo htpasswd -c /etc/nginx/.htpasswd sean`
+`sudo htpasswd -c /etc/nginx/.htpasswd username`
 
 To protect the route:
 

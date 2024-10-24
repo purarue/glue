@@ -120,7 +120,7 @@ const IconData: LinkInfo[] = [
   {
     name: "Dotfiles",
     icon: "/images/frontend/dotfiles.png",
-    url: "https://github.com/seanbreckenridge/dotfiles",
+    url: "https://github.com/purarue/dotfiles",
   },
   {
     name: "Tools",

@@ -16,7 +16,7 @@ export default function WhatToDoNow({ err }: IWhatDoNow) {
             with the console logs
           </a>{" "}
           over{" "}
-          <a href="https://github.com/seanbreckenridge/glue/issues/new">here</a>
+          <a href="https://github.com/purarue/glue/issues/new">here</a>
         </p>
         <p>{err.message}</p>
       </div>

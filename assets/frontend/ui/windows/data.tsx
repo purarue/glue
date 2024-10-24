@@ -67,7 +67,7 @@ const DataBody = memo(() => {
       <p>
         My{" "}
         <TapLink
-          href="https://github.com/seanbreckenridge/HPI"
+          href="https://github.com/purarue/HPI"
           target="_blank"
           rel="noreferrer"
         >

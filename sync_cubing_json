@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# use https://github.com/seanbreckenridge/wca_userinfo
+# use https://github.com/purarue/wca_userinfo
 # to fetch my wca results
 # save it to a file and sync it to the remote dir
 #
@@ -16,7 +16,7 @@ echo 'Updating cubing record file...'
 THIS_DIR="$(realpath "$(dirname "${BASH_SOURCE[0]}")")"
 cd "${THIS_DIR}" || exit $?
 
-havecmd wca_userinfo || cargo install --git "https://github.com/seanbreckenridge/wca_userinfo"
+havecmd wca_userinfo || cargo install --git "https://github.com/purarue/wca_userinfo"
 
 mkdir -p ./data
 wca_userinfo 2017BREC02 | jq >./data/cubing.json

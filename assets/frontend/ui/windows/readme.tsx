@@ -75,7 +75,7 @@ const ReadmeBody = memo(() => {
         <ul>
           <li>
             <TapLink
-              href="https://github.com/seanbreckenridge/"
+              href="https://github.com/purarue/"
               target="_blank"
               rel="noreferrer"
             >

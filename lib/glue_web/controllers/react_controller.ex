@@ -24,7 +24,7 @@ defmodule GlueWeb.ReactController do
 
 But here are some links to other parts of the site:
 
-Github:\t\t\thttps://github.com/seanbreckenridge/
+Github:\t\t\thttps://github.com/purarue/
 Notes:\t\t\thttps://sean.fish/x/
 Projects:\t\thttps://sean.fish/projects/
 Favorite XKCDs:\t\thttps://sean.fish/xkcd/
