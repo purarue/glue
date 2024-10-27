@@ -99,7 +99,7 @@ const ReadmeBody = memo(() => {
       <p>
         If you're interested in my random thoughts, my{" "}
         <TapLink
-          href="https://sean.fish/x/notes/"
+          href="https://purarue.xyz/x/notes/"
           target="_blank"
           rel="noreferrer"
         >

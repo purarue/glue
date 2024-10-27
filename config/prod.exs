@@ -11,7 +11,7 @@ import Config
 # before starting your production server.
 config :glue, GlueWeb.Endpoint,
   http: [port: String.to_integer(System.get_env("GLUE_PORT") || "8082")],
-  url: [host: "sean.fish", port: 443],
+  url: [host: "purarue.xyz", port: 443],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production

@@ -25,13 +25,14 @@ defmodule GlueWeb.ReactController do
 But here are some links to other parts of the site:
 
 Github:\t\t\thttps://github.com/purarue/
-Notes:\t\t\thttps://sean.fish/x/
-Projects:\t\thttps://sean.fish/projects/
-Favorite XKCDs:\t\thttps://sean.fish/xkcd/
-A DVD Logo:\t\thttps://sean.fish/dvd/
-Anime Short Films:\thttps://sean.fish/animeshorts/\n"
+Notes:\t\t\thttps://purarue.xyz/x/
+Projects:\t\thttps://purarue.xyz/projects/
+Favorite XKCDs:\t\thttps://purarue.xyz/xkcd/
+A DVD Logo:\t\thttps://purarue.xyz/dvd/
+Anime Short Films:\thttps://purarue.xyz/animeshorts/\n"
 
-    IO.ANSI.blue() <> IO.ANSI.italic() <> figlet <> IO.ANSI.reset() <> "\n\n" <> welcome
+    # IO.ANSI.blue() <> IO.ANSI.italic() <> figlet <> IO.ANSI.reset() <> "\n\n" <> welcome
+    welcome
   end
 
   @spec is_curl(Plug.Conn.t()) :: boolean()

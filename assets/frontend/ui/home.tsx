@@ -179,7 +179,7 @@ function Home() {
         </TapLink>
         {/* a hidden icon (easter egg) which when clicked takes you to my old site */}
         <TapLink
-          href="https://sean.fish/geocities/"
+          href="https://purarue.xyz/geocities/"
           className="menu-toolbar-item menu-bar-item unlinkify geocities"
           aria-hidden="true"
         >

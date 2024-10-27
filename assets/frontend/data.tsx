@@ -18,7 +18,7 @@ const MediaElsewhere: LinkInfo[] = [
   },
   {
     name: "Music [Spreadsheet]",
-    url: "https://sean.fish/s/albums",
+    url: "https://purarue.xyz/s/albums",
     tooltip: "Personal Music Spreadsheet/Album tracking",
   },
   {
@@ -79,7 +79,7 @@ const IconData: LinkInfo[] = [
   {
     name: "Media Feed",
     icon: "/images/frontend/camerafeed.png",
-    url: "https://sean.fish/feed/",
+    url: "https://purarue.xyz/feed/",
   },
   {
     name: "Data",
@@ -87,22 +87,22 @@ const IconData: LinkInfo[] = [
   },
   {
     name: "Projects",
-    url: "https://sean.fish/projects",
+    url: "https://purarue.xyz/projects",
     icon: "/images/frontend/laptop.png",
   },
   {
     name: "Notes",
-    url: "https://sean.fish/x/",
+    url: "https://purarue.xyz/x/",
     icon: "/images/frontend/brain.png",
   },
   {
     name: "Journal",
-    url: "https://sean.fish/x/journal/",
+    url: "https://purarue.xyz/x/journal/",
     icon: "/images/frontend/feather.png",
   },
   {
     name: "Photography",
-    url: "https://sean.fish/x/photography/",
+    url: "https://purarue.xyz/x/photography/",
     icon: "/images/frontend/camera.png",
   },
   {
@@ -125,7 +125,7 @@ const IconData: LinkInfo[] = [
   {
     name: "Tools",
     icon: "/images/frontend/gear.png",
-    url: "https://sean.fish/x/notes/tools/",
+    url: "https://purarue.xyz/x/notes/tools/",
   },
   {
     name: "Browser",

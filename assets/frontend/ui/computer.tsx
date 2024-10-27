@@ -26,7 +26,7 @@ const cpuCount = navigator.hardwareConcurrency ?? "Pass";
 const loadingText: string[] = [
   "Loading...",
   "---------------",
-  // "sean.fishOS",
+  // "purarue.xyz OS",
   // "---------------",
   "Devices",
   "---------------",

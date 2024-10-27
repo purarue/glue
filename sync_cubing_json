@@ -4,7 +4,7 @@
 # save it to a file and sync it to the remote dir
 #
 # this runs every few weeks by a block in my
-# https://sean.fish/d/.local/scripts/linux/housekeeping?dark
+# https://purarue.xyz/d/.local/scripts/linux/housekeeping?dark
 
 set -e
 set -o pipefail

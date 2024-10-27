@@ -1,6 +1,6 @@
-# [Glue](https://sean.fish)
+# [Glue](https://purarue.xyz)
 
-<https://sean.fish>
+<https://purarue.xyz>
 
 Acts a landing page/connects all of my projects.
 
