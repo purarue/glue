@@ -175,7 +175,7 @@ function Home() {
           id="site-title"
           className="menu-toolbar-item menu-bar-item unlinkify pixel-large"
         >
-          <h1>....</h1>
+          <h1>purarue</h1>
         </TapLink>
         {/* a hidden icon (easter egg) which when clicked takes you to my old site */}
         <TapLink
@@ -326,7 +326,7 @@ const PageHitRender = React.memo(({ count }: IPageHitRender) => {
 const OSVersion = React.memo(() => {
   return (
     <span id="os-version">
-      OS Build {hash} {new Date().getFullYear()}
+      purarue OS Build {hash} {new Date().getFullYear()}
     </span>
   );
 });
