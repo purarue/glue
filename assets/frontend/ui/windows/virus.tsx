@@ -19,7 +19,7 @@ function randomLocation(
   browserWidth: number,
   browserHeight: number,
   dialogHeight: number,
-  dialogWidth: number,
+  dialogWidth: number
 ): Point {
   const minX = windowBuffer;
   const minY = windowBuffer;
@@ -38,7 +38,7 @@ export function VirusWindow(setwMsg: setWindowMsg): launchWindowFunc {
       browserWidth,
       browserHeight,
       minHeight,
-      minWidth,
+      minWidth
     );
     const windowId = Date.now().toString();
     const vTitle = <VirusTitle />;
@@ -67,12 +67,9 @@ export function VirusWindow(setwMsg: setWindowMsg): launchWindowFunc {
       windowObj: virusDialog,
     });
     // setTimeout to spawn another one!
-    setTimeout(
-      () => {
-        VirusWindow(setwMsg)();
-      },
-      randInt(2000, 5000),
-    );
+    setTimeout(() => {
+      VirusWindow(setwMsg)();
+    }, randInt(2000, 5000));
   };
 }
 
@@ -98,7 +95,7 @@ const VirusBody = ({ height, width }: VirusBodyProps) => {
   const xc = useRef<number>(Math.ceil(width / 10) + 2);
   const yc = useRef<number>(Math.ceil(height / 10) + 2);
   const matrixRefs = useRef<Array<Array<React.RefObject<HTMLDivElement>>>>(
-    createMatrixRefs(xc.current, yc.current),
+    createMatrixRefs(xc.current, yc.current)
   );
 
   const randomizeMatrix = useCallback(() => {
@@ -118,12 +115,9 @@ const VirusBody = ({ height, width }: VirusBodyProps) => {
     // fire off the first randomize
     randomizeMatrix();
     // set an interval to randomize the matrix every 1-2 seconds
-    const interval = setInterval(
-      () => {
-        randomizeMatrix();
-      },
-      randInt(1000, 2000),
-    );
+    const interval = setInterval(() => {
+      randomizeMatrix();
+    }, randInt(1000, 2000));
     return () => clearInterval(interval);
   }, []);
 

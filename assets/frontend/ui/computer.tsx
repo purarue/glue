@@ -45,7 +45,7 @@ const lastFrameDuration = 1000;
 
 function renderFrame(
   currentFrame: number,
-  setLoadingFunc: Dispatch<SetStateAction<number>>,
+  setLoadingFunc: Dispatch<SetStateAction<number>>
 ): void {
   // there are still frames to render
   if (currentFrame < loadingTextLength) {
@@ -58,7 +58,7 @@ function renderFrame(
       () => {
         renderFrame(currentFrame + 1, setLoadingFunc);
       },
-      currentFrame == loadingTextLength - 2 ? lastFrameDuration : frameDuration,
+      currentFrame == loadingTextLength - 2 ? lastFrameDuration : frameDuration
     );
   }
 }

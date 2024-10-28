@@ -108,8 +108,8 @@ const Dialog = (props: IDialogProps) => {
     scrollTo(
       Math.min(
         winData.fullY - winData.height,
-        scrollOffset + winData.height / 3,
-      ),
+        scrollOffset + winData.height / 3
+      )
     );
   };
 
@@ -227,7 +227,7 @@ const Dialog = (props: IDialogProps) => {
             }}
             className={clsx(
               "rnd",
-              value.selectedWindow === props.windowId && "top-dialog",
+              value.selectedWindow === props.windowId && "top-dialog"
             )}
             // these are unset if another window sets itself as the selected window
           >
@@ -235,19 +235,19 @@ const Dialog = (props: IDialogProps) => {
               <div
                 className={clsx(
                   "dialog-loading-container",
-                  winShow.showBackground || "dialog-part-hidden",
+                  winShow.showBackground || "dialog-part-hidden"
                 )}
               >
                 <div
                   className={clsx(
                     "dialog-menu-bar-container",
-                    winShow.showMenuBar || "dialog-part-hidden",
+                    winShow.showMenuBar || "dialog-part-hidden"
                   )}
                 >
                   <div
                     className={clsx(
                       "dialog-menu-button dialog-exit-button",
-                      winShow.showExitButton || "dialog-part-hidden",
+                      winShow.showExitButton || "dialog-part-hidden"
                     )}
                     onClick={props.hitCloseCallback}
                     onTouchEnd={props.hitCloseCallback} // also close on touch events
@@ -269,7 +269,7 @@ const Dialog = (props: IDialogProps) => {
                   <div
                     className={clsx(
                       "dialog-menu-button dialog-up-button",
-                      winShow.showScrollButtons || "dialog-part-hidden",
+                      winShow.showScrollButtons || "dialog-part-hidden"
                     )}
                     onTouchStart={handleDisableRND} // disable dragging when user starts touching
                     onTouchEnd={() => {
@@ -293,7 +293,7 @@ const Dialog = (props: IDialogProps) => {
                   <div
                     className={clsx(
                       "dialog-menu-button dialog-down-button",
-                      winShow.showScrollButtons || "dialog-part-hidden",
+                      winShow.showScrollButtons || "dialog-part-hidden"
                     )}
                     onTouchStart={handleDisableRND}
                     onTouchEnd={() => {
@@ -320,7 +320,7 @@ const Dialog = (props: IDialogProps) => {
                   className={clsx(
                     "dialog-body",
                     hasMsg && "dialog-message",
-                    winShow.showBody || "dialog-part-hidden",
+                    winShow.showBody || "dialog-part-hidden"
                   )}
                   onWheel={(e) => {
                     e.preventDefault();

@@ -52,8 +52,7 @@ const DataBody = memo(() => {
   return (
     <div className="data-body">
       <p>
-        Call it Lifelogging, Quantified Self or whatever else, I{"'"}ve been
-        involved with writing{" "}
+        For a while, I{"'"}ve been involved with writing{" "}
         <TapLink
           href="https://purarue.xyz/projects/"
           target="_blank"
@@ -61,8 +60,7 @@ const DataBody = memo(() => {
         >
           data exporters
         </TapLink>{" "}
-        (saving data from applications and websites I use) and parsers for the
-        past few years now.
+        (saving and parsing data from applications and websites I use)
       </p>
       <p>
         My{" "}
@@ -74,28 +72,21 @@ const DataBody = memo(() => {
           HPI
         </TapLink>{" "}
         (Human Programming Interface) repository acts as a sort of entrypoint to
-        all of my data -- which then integrates with{" "}
-        <TapLink
-          href="https://github.com/karlicoss/promnesia"
-          target="_blank"
-          rel="noreferrer"
-        >
-          promnesia
-        </TapLink>
-        , which lets me interact with the data in context
-      </p>
-      <p>
-        If you'd like to read more on the why, see{" "}
-        <TapLink
-          href="https://github.com/karlicoss/HPI#why"
-          target="_blank"
-          rel="noreferrer"
-        >
-          here
-        </TapLink>
+        all of my data, allowing me to do quick queries against data from old
+        websites, tools, browser histories, etc.
       </p>
       <p>
         {`The 'Media Feed' here also heavily leans on HPI to get data from the many online media websites I use`}
+      </p>
+      <p>
+        See{" "}
+        <TapLink
+          href="https://purarue.xyz/x/blog/ramblings-journal-art-technology/"
+          target="_blank"
+        >
+          blog post
+        </TapLink>{" "}
+        for a reflection on a bit of how I think about using the tools/data.
       </p>
     </div>
   );

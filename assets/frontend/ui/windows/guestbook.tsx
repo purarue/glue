@@ -33,7 +33,7 @@ interface Status {
 async function handleRequest(
   name: string,
   comment: string,
-  setStatus: Dispatch<SetStateAction<Status | undefined>>,
+  setStatus: Dispatch<SetStateAction<Status | undefined>>
 ): Promise<void> {
   const res: Status = await fetch("/api/gb_comment/", {
     method: "post",

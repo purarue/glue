@@ -18,7 +18,7 @@ export type launchWindowFunc = () => void;
 
 // type of functions which create functions which virtual windows (Paint/Cubing)
 export type createsLaunchWindowFunc = (
-  setwMsg: setWindowMsg,
+  setwMsg: setWindowMsg
 ) => launchWindowFunc;
 
 // interface to define what happens when the user clicks on things
@@ -63,7 +63,7 @@ export const actions: IHashActionFunc = {
 // a link element from
 export function getAction(
   el: LinkInfo,
-  setwMsg: setWindowMsg,
+  setwMsg: setWindowMsg
 ): string | launchWindowFunc {
   const action: createsLaunchWindowFunc = actions[el.name];
   if (action !== undefined) {

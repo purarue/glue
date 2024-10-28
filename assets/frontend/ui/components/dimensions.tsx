@@ -42,7 +42,7 @@ export function getWindowDimensions(): Dimensions {
 
 export default function useWindowDimensions() {
   const [windowDimensions, setWindowDimensions] = useState(
-    getWindowDimensions(),
+    getWindowDimensions()
   );
 
   useEffect(() => {

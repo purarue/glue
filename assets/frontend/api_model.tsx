@@ -61,7 +61,7 @@ const requestAndSetCubing = async (setData: setContextFunc) => {
           cubing: response,
         };
       });
-    },
+    }
   );
 };
 
@@ -75,7 +75,7 @@ const requestAndSetComments = async (setData: setContextFunc) => {
           comments: response,
         };
       });
-    },
+    }
   );
 };
 
@@ -89,7 +89,7 @@ const requestAndSetPageHits = async (setData: setContextFunc) => {
           pageHits: response,
         };
       });
-    },
+    }
   );
 };
 

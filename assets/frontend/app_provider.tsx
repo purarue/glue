@@ -58,7 +58,7 @@ const setSelectedWindow = (setCtx: setContextFunc, windowId?: string) => {
 
 const setBackgroundColor = (
   setCtx: setContextFunc,
-  backgroundColor: string,
+  backgroundColor: string
 ) => {
   setCtx((oldData: Context): Context => {
     return {

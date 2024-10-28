@@ -14,7 +14,7 @@ const TapLink = (
       AnchorHTMLAttributes<HTMLAnchorElement>,
       HTMLAnchorElement
     >
-  >,
+  >
 ) => {
   return (
     <a

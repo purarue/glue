@@ -123,7 +123,7 @@ const DesktopIcon = (props: IDesktopIcon) => {
     );
   } else {
     throw Error(
-      "DesktopIcon expects either the 'click' or 'url' prop to be set)",
+      "DesktopIcon expects either the 'click' or 'url' prop to be set)"
     );
   }
 };
