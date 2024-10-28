@@ -617,11 +617,17 @@ textarea {
       border: 2px solid $offwhite;
       border-top: none;
       border-left: none;
-      background: -moz-radial-gradient(black 15%, transparent 16%),
-        -moz-radial-gradient(black 15%, transparent 16%), $offwhite;
-      background: -webkit-radial-gradient(black 15%, transparent 16%),
-        -webkit-radial-gradient(black 15%, transparent 16%), $offwhite;
-      background-position: 0 0, 10px 10px;
+      background:
+        -moz-radial-gradient(black 15%, transparent 16%),
+        -moz-radial-gradient(black 15%, transparent 16%),
+        $offwhite;
+      background:
+        -webkit-radial-gradient(black 15%, transparent 16%),
+        -webkit-radial-gradient(black 15%, transparent 16%),
+        $offwhite;
+      background-position:
+        0 0,
+        10px 10px;
       -webkit-background-size: 5px 5px;
       -moz-background-size: 5px 5px;
       background-size: 5px 5px;
