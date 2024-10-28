@@ -94,13 +94,13 @@ const Paint = () => {
   // a bit less than the dialog dimensions
   const canvasWidth = Math.max(
     minWidth * paintCanvasScale,
-    browserWidth * fullScreenDialogScale * paintCanvasScale
+    browserWidth * fullScreenDialogScale * paintCanvasScale,
   );
   const canvasHeight = Math.max(
     minHeight * paintCanvasScale,
     browserHeight *
       fullScreenDialogScale *
-      (paintCanvasScale * paintCanvasScale)
+      (paintCanvasScale * paintCanvasScale),
   );
 
   // interpolate current dimensions
@@ -178,7 +178,7 @@ export const PaintControls = ({
   const [radius, setRadius] = useState<number>(initialRadius ?? defaultRadius);
   const [error, setError] = useState<string | null>(null);
   const [colorPalette, setColorPalette] = useState<string[]>(
-    randomColorArray(pSize)
+    randomColorArray(pSize),
   );
 
   const colorRef = useRef<HTMLInputElement>(null);

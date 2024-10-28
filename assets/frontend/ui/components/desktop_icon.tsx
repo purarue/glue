@@ -96,7 +96,7 @@ const DesktopIcon = (props: IDesktopIcon) => {
       </figure>
     );
   } else if (props.url !== undefined) {
-    const isExternal = props.url!.startsWith("http");
+    // const isExternal = props.url!.startsWith("http");
     return (
       <figure
         className="desktop-icon"
@@ -123,7 +123,7 @@ const DesktopIcon = (props: IDesktopIcon) => {
     );
   } else {
     throw Error(
-      "DesktopIcon expects either the 'click' or 'url' prop to be set)"
+      "DesktopIcon expects either the 'click' or 'url' prop to be set)",
     );
   }
 };
