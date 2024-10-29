@@ -10,7 +10,7 @@ $height-break-large: 650px;
       @content;
     }
   } @else if $media == medium {
-    @media only screen and (min-width: $width-break-small + 1) and (max-width: $width-break-large - 1) {
+    @media only screen and (min-width: ($width-break-small + 1)) and (max-width: ($width-break-large - 1)) {
       @content;
     }
   } @else if $media == large {
@@ -26,7 +26,7 @@ $height-break-large: 650px;
       @content;
     }
   } @else if $media == medium {
-    @media only screen and (min-height: $height-break-small + 1) and (max-height: $height-break-large - 1) {
+    @media only screen and (min-height: ($height-break-small + 1)) and (max-height: ($height-break-large - 1)) {
       @content;
     }
   } @else if $media == large {
@@ -521,7 +521,7 @@ textarea {
               height: 30px;
             }
             @include swidth(large) {
-              height: 50px;
+              height: 45px;
             }
           }
 
