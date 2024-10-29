@@ -48,27 +48,33 @@ const useCurrentyListening = (options: CurrentPlayingOptions) => {
 
   useEffect(() => {
     if (lastJsonMessage !== null) {
-      console.log("lastJsonMessage", lastJsonMessage);
+      // console.log("lastJsonMessage", lastJsonMessage);
       if (isMessage(lastJsonMessage)) {
         const resp: Message = lastJsonMessage;
         switch (resp.msg_type) {
           case "currently-listening":
             if (isCurrentSong(resp.data)) {
-              console.log("updating currently-listening", resp.data);
+              // console.log("updating currently-listening", resp.data);
               setCurrentSong(resp.data);
             } else {
-              console.log("invalid currently-listening", resp.data);
+              // console.log("invalid currently-listening", resp.data);
             }
             break;
           case "pong":
-            console.log("pong");
+            // console.log("pong");
             break;
           default:
-            console.log("unknown msg_type:", resp.msg_type);
+            console.warn(
+              "currently-listening: unknown msg_type:",
+              resp.msg_type,
+            );
             break;
         }
       } else {
-        console.log("couldn't parse message:", lastMessage);
+        console.warn(
+          "currently-listening: couldn't parse message:",
+          lastMessage,
+        );
       }
     }
   }, [lastJsonMessage, lastMessage]);
