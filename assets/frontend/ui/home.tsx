@@ -337,9 +337,7 @@ const OSVersion = React.memo(() => {
 
   return (
     <span id="os-version">
-      <div>
-        purarue OS Build {hash} {new Date().getFullYear()}
-      </div>
+      <div>purarue OS Build {hash}</div>
       <div
         className="save-icon"
         onMouseEnter={() => setHoveringImage(true)}
