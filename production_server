@@ -81,7 +81,7 @@ mix compile
 mix phx.digest.clean
 
 cd ./assets
-yarn
-yarn deploy
+npm install
+npm run deploy
 cd "${THIS_DIR}"
 exec mix glue.prod.server
