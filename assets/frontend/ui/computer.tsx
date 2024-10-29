@@ -6,6 +6,7 @@ import {
 } from "../app_provider";
 import GUI from "./gui";
 import unix from "dayjs";
+import { hash } from "../build";
 
 // top level of interface
 // renders the the initial loading screen, makes requests off to APi
@@ -29,10 +30,11 @@ const loadingText: string[] = [
   "Devices",
   "---------------",
   `Language .... ${navigator.language ?? "en"}`,
-  `Date Now .... ${d.format("YYYY-MM-DD")}`,
+  `Date ........ ${d.format("YYYY-MM-DD")}`,
   `Cores ....... ${cpuCount}`,
-  `Network ..... ${navigator.onLine ? "Online" : "Offline"}`,
+  `Network ..... ${navigator.onLine ? "Pass" : "Failed"}`,
   "Backend ..... Pass",
+  `Version ..... ${hash}`,
   "---------------",
   "BOOTLOADED",
 ];
