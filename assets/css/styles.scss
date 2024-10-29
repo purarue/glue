@@ -243,10 +243,28 @@ textarea {
   border: $outer_border_width solid black;
 
   #os-version {
+    padding-bottom: 3px;
+    padding-right: 3px;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+
     margin-top: 1rem;
     position: absolute;
     bottom: $outer_border_width;
     right: $outer_border_width;
+  }
+
+  .save-icon {
+    padding-left: 10px;
+    height: 1.25em;
+    width: auto;
+
+    img {
+      height: 100%;
+      width: auto;
+    }
   }
 
   a {
@@ -291,7 +309,7 @@ textarea {
       }
     }
 
-    #page-hits {
+    #menu-right {
       margin-left: auto;
       display: flex;
       flex-flow: row nowrap;

@@ -189,7 +189,7 @@ function Home() {
             width="3rem"
           />
         </TapLink>
-        <PageHitCounter />
+        <HeaderRight />
       </div>
       <div id="window-body">
         <div id="desktop-body">
@@ -283,7 +283,7 @@ const DragRect = React.memo((props: _draggedRect) => {
   );
 });
 
-const PageHitCounter = () => {
+const HeaderRight = () => {
   return (
     <AppContextConsumer>
       {(value: Context) => {
@@ -292,7 +292,7 @@ const PageHitCounter = () => {
           hits = (value.pageHits as PageHits).count;
         }
         return (
-          <div id="page-hits">
+          <div id="menu-right">
             <PageHitRender count={hits} />
           </div>
         );
@@ -324,9 +324,31 @@ const PageHitRender = React.memo(({ count }: IPageHitRender) => {
 });
 
 const OSVersion = React.memo(() => {
+  const [hoveringImage, setHoveringImage] = useState(false);
+  const [imageUrl, setImageUrl] = useState("/image/frontend/source-0.png");
+
+  useEffect(() => {
+    if (hoveringImage) {
+      setImageUrl("/images/frontend/source.gif");
+    } else {
+      setImageUrl("/images/frontend/source-0.png");
+    }
+  }, [hoveringImage]);
+
   return (
     <span id="os-version">
-      purarue OS Build {hash} {new Date().getFullYear()}
+      <div>
+        purarue OS Build {hash} {new Date().getFullYear()}
+      </div>
+      <div
+        className="save-icon"
+        onMouseEnter={() => setHoveringImage(true)}
+        onMouseLeave={() => setHoveringImage(false)}
+      >
+        <a href="https://github.com/purarue/glue" target="_blank">
+          <img src={imageUrl} alt="source code" />
+        </a>
+      </div>
     </span>
   );
 });

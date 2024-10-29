@@ -24,10 +24,14 @@ To protect the route:
 
 ```
 location /dashboard/ {
-  # should include nginx pheonix params
+  # should include nginx phoenix params
   # include /etc/nginx/pheonix_params;
   proxy_pass http://127.0.0.1:8082/dashboard/;
   auth_basic "for glue dashboard!";
   auth_basic_user_file /etc/nginx/.htpasswd;
 }
 ```
+
+### Attributions
+
+All the pixel art except the 'save icon' is drawn by me, I found that on [gifcities](https://gifcities.org/)
