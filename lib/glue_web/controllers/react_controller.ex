@@ -17,7 +17,7 @@ defmodule GlueWeb.ReactController do
   @spec ansi() :: String.t()
   def ansi() do
     figlet =
-      "                        _____ _     _     \n ___  ___  __ _ _ __   |  ___(_)___| |__  \n/ __|/ _ \\/ _` | '_ \\  | |_  | / __| '_ \\ \n\\__ \\  __/ (_| | | | |_|  _| | \\__ \\ | | |\n|___/\\___|\\__,_|_| |_(_)_|   |_|___/_| |_|"
+      "                                       \n _ __  _   _ _ __ __ _ _ __ _   _  ___ \n| '_ \\| | | | '__/ _` | '__| | | |/ _ \\\n| |_) | |_| | | | (_| | |  | |_| |  __/\n| .__/ \\__,_|_|  \\__,_|_|   \\__,_|\\___|\n|_|                                    \n"
 
     welcome =
       "Typically this works as a react app (I would recommend using a browser)
@@ -31,8 +31,8 @@ Favorite XKCDs:\t\thttps://purarue.xyz/xkcd/
 A DVD Logo:\t\thttps://purarue.xyz/dvd/
 Anime Short Films:\thttps://purarue.xyz/animeshorts/\n"
 
-    # IO.ANSI.blue() <> IO.ANSI.italic() <> figlet <> IO.ANSI.reset() <> "\n\n" <> welcome
-    welcome
+    IO.ANSI.blue() <> IO.ANSI.italic() <> figlet <> IO.ANSI.reset() <> "\n\n" <> welcome
+    # welcome
   end
 
   @spec is_curl(Plug.Conn.t()) :: boolean()
