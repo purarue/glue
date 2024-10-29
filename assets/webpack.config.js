@@ -2,7 +2,7 @@ const path = require("path");
 const glob = require("glob");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = (_env, options) => {
@@ -10,7 +10,7 @@ module.exports = (_env, options) => {
 
   return {
     optimization: {
-      minimizer: [new OptimizeCSSAssetsPlugin({}), new TerserPlugin({})],
+      minimizer: [new CssMinimizerPlugin({}), new TerserPlugin({})],
     },
     // not perfect, emits some extra modules (e.g. styles.js), but it works
     // everything hot-reloads in development mode properly, the correct
@@ -19,7 +19,7 @@ module.exports = (_env, options) => {
       app: glob
         .sync("./vendor/**/*.js")
         .concat(["./js/app.js", "./frontend/react.js"]),
-      styles: glob.sync("./css/*.?(s)css"),
+      styles: ["./css/styles.scss", "./css/reset.css"],
     },
     output: {
       // filename: '[name].js',

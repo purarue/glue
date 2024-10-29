@@ -157,13 +157,6 @@ textarea {
 /* shared menu bar styling */
 #menu-bar {
   height: 30px;
-  @include sheight(medium) {
-    height: 40px;
-  }
-  @include sheight(large) {
-    height: 50px;
-  }
-
   /* self flex props */
   flex: 0 1 auto;
 
@@ -172,6 +165,14 @@ textarea {
   align-items: center;
   justify-content: flex-start;
   padding-right: 2%;
+
+  @include sheight(medium) {
+    height: 40px;
+  }
+  @include sheight(large) {
+    height: 50px;
+  }
+
   @include swidth(medium) {
     padding-right: 5%;
   }
@@ -186,6 +187,9 @@ textarea {
     justify-content: center;
     width: 30px;
     height: 30px;
+    margin-right: auto;
+    margin-left: 0;
+
     @include sheight(medium) {
       height: 40px;
     }
@@ -193,11 +197,9 @@ textarea {
       height: 50px;
     }
 
-    margin-right: auto;
-    margin-left: 0;
-
     img {
       width: auto;
+      display: none;
       height: 30px;
       @include sheight(medium) {
         height: 40px;
@@ -205,7 +207,6 @@ textarea {
       @include sheight(large) {
         height: 50px;
       }
-      display: none;
     }
 
     &:hover {
@@ -344,6 +345,7 @@ textarea {
 
     .menu-bar-item {
       height: 30px;
+      box-sizing: border-box;
       line-height: 30px;
       @include sheight(medium) {
         height: 40px;
@@ -353,7 +355,6 @@ textarea {
         height: 50px;
         line-height: 50px;
       }
-      box-sizing: border-box;
     }
   }
 
@@ -428,6 +429,16 @@ textarea {
         // center the figure/text in the container that scales
         margin-top: 2em;
         margin-bottom: 2em;
+        margin-left: auto;
+        margin-right: auto;
+        padding-right: 3em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        // @include swidth(large) {
+        //   flex-basis: 10%;
+        // }
         @include swidth(medium) {
           margin-top: 1.25rem;
           margin-bottom: 1.25rem;
@@ -468,15 +479,6 @@ textarea {
             }
           }
         }
-        margin-left: auto;
-        margin-right: auto;
-        padding-right: 3em;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        // @include swidth(large) {
-        //   flex-basis: 10%;
-        // }
 
         &.selected {
           img {
@@ -527,6 +529,8 @@ textarea {
             padding-right: 1em;
             padding-left: 1em;
             margin-top: 5px;
+            background-color: $offwhite;
+            color: black;
             @include swidth(small) {
               max-width: 50px;
               font-size: 60%;
@@ -539,9 +543,6 @@ textarea {
               font-size: 95%;
               max-width: 125px;
             }
-
-            background-color: $offwhite;
-            color: black;
 
             pre {
               text-align: center;

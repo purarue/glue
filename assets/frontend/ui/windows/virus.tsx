@@ -118,7 +118,7 @@ const VirusBody = ({ height, width }: VirusBodyProps) => {
     // fire off the first randomize
     randomizeMatrix();
     // set an interval to randomize the matrix every 1-2 seconds
-    const interval = setInterval(
+    const interval = window.setInterval(
       () => {
         randomizeMatrix();
       },
