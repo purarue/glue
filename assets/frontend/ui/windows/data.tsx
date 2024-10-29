@@ -9,8 +9,8 @@ import Dialog from "../components/dialog";
 import { launchWindowFunc } from "./actions";
 import TapLink from "./../components/taplink";
 
-const minHeight = 200;
-const minWidth = 200;
+const minHeight = 400;
+const minWidth = 250;
 
 const dataScale = 0.4;
 
