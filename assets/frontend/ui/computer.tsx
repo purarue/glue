@@ -26,8 +26,6 @@ const cpuCount = navigator.hardwareConcurrency ?? "Pass";
 const loadingText: string[] = [
   "Loading...",
   "---------------",
-  // "purarue.xyz OS",
-  // "---------------",
   "Devices",
   "---------------",
   `Language .... ${navigator.language ?? "en"}`,
