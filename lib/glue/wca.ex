@@ -23,7 +23,7 @@ defmodule Glue.WCA do
     {:reply, state[:data], state}
   end
 
-  defp read_json_file(f) when is_nil(f) do
+  defp read_json_file(nil) do
     Logger.warning("No Cubing JSON file!")
     %{}
   end
