@@ -34,7 +34,7 @@ async function handleRequest(
   name: string,
   comment: string,
   setStatus: Dispatch<SetStateAction<Status | undefined>>,
-): Promise<void> {
+): Promise<boolean> {
   const res: Status = await fetch("/api/gb_comment/", {
     method: "post",
     headers: {
@@ -63,7 +63,8 @@ async function handleRequest(
         console.log(data);
         console.log(resp.status);
         if (data.message === undefined) {
-          data.message = "There was an error submitting your comment...";
+          data.message =
+            "There was an error submitting your comment, please try again later or create an issue on https://github.com/purarue/glue if this continues";
         }
         return { success: false, message: data.message };
       }
@@ -77,6 +78,7 @@ async function handleRequest(
   if (setStatus !== undefined) {
     setStatus(res);
   }
+  return res.success;
 }
 
 export function GuestBookWindow(setwMsg: setWindowMsg): launchWindowFunc {
@@ -161,13 +163,17 @@ const GuestBookForm = () => {
   const nameField = useRef<HTMLInputElement>(null);
   const commentField = useRef<HTMLTextAreaElement>(null);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const nameVal = name.toString();
     const commentVal = comment.toString();
     if (validateName() && validateComment()) {
-      setName("");
-      setComment("");
-      handleRequest(nameVal, commentVal, setStatus);
+      // setStatus({ success: true, message: "Submitting..." });
+      handleRequest(nameVal, commentVal, setStatus).then((success: boolean) => {
+        if (success) {
+          setName("");
+          setComment("");
+        }
+      });
     }
   };
 

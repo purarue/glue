@@ -18,5 +18,9 @@ export GUESTBOOK_JSON_PATH PAGE_HITS_OFFSET
 # clean deps
 mix deps.clean glue
 mix ecto.migrate
-setsid -f sh -c 'sleep 1 && openurl http://localhost:4000/'
-exec mix phx.server
+if [[ -z "$1" ]]; then
+	setsid -f sh -c 'sleep 1 && openurl http://localhost:4000/'
+	exec mix phx.server
+else
+	exec mix "$@"
+fi
