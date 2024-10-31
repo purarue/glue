@@ -460,10 +460,12 @@ textarea {
         @include swidth(medium) {
           margin-top: 1.25rem;
           margin-bottom: 1.25rem;
+          padding-right: 2em;
         }
         @include swidth(small) {
           margin-top: 0.75em;
           margin-bottom: 0.75em;
+          padding-right: 1.25em;
         }
         // edge case
         // do some additional height-based checks to resize
@@ -486,7 +488,7 @@ textarea {
           }
           @include sheight(small) {
             margin-top: 1.25rem !important;
-            padding-right: 2em !important;
+            padding-right: 1.25em !important;
             margin-bottom: 1.25rem !important;
             img.icon-img {
               height: 30px !important;

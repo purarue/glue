@@ -16,6 +16,7 @@ if [[ ! -e "${CUBING_JSON}" ]]; then
 	exit 1
 fi
 
+# if there are no extra guestbok comments, just create an file with  '[]' as the contents
 if [[ ! -e "${GUESTBOOK_JSON_PATH}" ]]; then
 	printf "%s JSON file doesn't exist\n" "${GUESTBOOK_JSON_PATH}" 1>&2
 	exit 1
