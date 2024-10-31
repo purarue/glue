@@ -31,8 +31,10 @@ export function LinkWindow(props: ILinkWindow): launchWindowFunc {
         },
         props.setwMsg,
       );
-    const linkDialog = (
-      <>
+    props.setwMsg({
+      spawn: true,
+      windowId: windowId,
+      windowObj: (
         <Dialog
           /* average af the center - minWidth and center - windowWidth
            * seems to work well for this window size on both mobile/desktop */
@@ -44,7 +46,6 @@ export function LinkWindow(props: ILinkWindow): launchWindowFunc {
           minWidth={minWidth}
           title={props.title}
           windowId={windowId}
-          // when close is hit, set the message to kill this window
           hitCloseCallback={closeWindow}
         >
           <div className="linklist">
@@ -64,13 +65,7 @@ export function LinkWindow(props: ILinkWindow): launchWindowFunc {
             ))}
           </div>
         </Dialog>
-      </>
-    );
-    // when the icon is clicked, set the message to spawn this window
-    props.setwMsg({
-      spawn: true,
-      windowId: windowId,
-      windowObj: linkDialog,
+      ),
     });
   };
 }

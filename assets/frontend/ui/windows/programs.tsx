@@ -21,15 +21,17 @@ export function ProgramWindow(setwMsg: setWindowMsg): launchWindowFunc {
         },
         setwMsg,
       );
-    const dialogObj = (
-      <>
+    setwMsg({
+      spawn: true,
+      windowId: windowId,
+      windowObj: (
         <Dialog
           noCenter={true}
           x={x - dialogWidth / 2}
           y={y - dialogHeight / 2}
           width={dialogWidth}
           height={dialogHeight}
-          title="Programs"
+          title="programs"
           windowId={windowId}
           minHeight={minHeight}
           minWidth={minWidth}
@@ -37,13 +39,7 @@ export function ProgramWindow(setwMsg: setWindowMsg): launchWindowFunc {
         >
           <AppBody setwMsg={setwMsg} />
         </Dialog>
-      </>
-    );
-    // when the icon is clicked, set the message to spawn this window
-    setwMsg({
-      spawn: true,
-      windowId: windowId,
-      windowObj: dialogObj,
+      ),
     });
   };
 }

@@ -67,24 +67,23 @@ const MiscLinks: LinkInfo[] = [
   },
 ];
 
-// subwindows:
+// Subwindows:
 //
-// code:
-//
-// Projects
-// Dotfiles
-// Tools
-// Data
+// Code:
+// - Data
+// - Projects
+// - Dotfiles
+// - Tools
 
 // Writing:
-// Blog
-// Notes
+// - Blog
+// - Notes
 
-// Utilities
-// Browser
-// TextEdit
-// Paint
-// Customize
+// Utilities:
+// - Browser
+// - TextEdit
+// - Paint
+// - Customize
 
 const IconData: LinkInfo[] = [
   {

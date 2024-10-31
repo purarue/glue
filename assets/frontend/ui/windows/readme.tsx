@@ -33,9 +33,10 @@ export function ReadmeWindow(setwMsg: setWindowMsg): launchWindowFunc {
         },
         setwMsg,
       );
-
-    const dialogObj = (
-      <>
+    setwMsg({
+      spawn: true,
+      windowId: windowId,
+      windowObj: (
         <Dialog
           x={x - dialogWidth / 2}
           y={y - dialogHeight / 2}
@@ -45,18 +46,11 @@ export function ReadmeWindow(setwMsg: setWindowMsg): launchWindowFunc {
           windowId={windowId}
           minHeight={minHeight}
           minWidth={minWidth}
-          // when close is hit, set the message to kill this window
           hitCloseCallback={closeWindow}
         >
           <ReadmeBody />
         </Dialog>
-      </>
-    );
-    // when the icon is clicked, set the message to spawn this window
-    setwMsg({
-      spawn: true,
-      windowId: windowId,
-      windowObj: dialogObj,
+      ),
     });
   };
 }

@@ -21,11 +21,11 @@ type Message = {
   data: unknown;
 };
 
-const isCurrentSong = (cSong: unknown): cSong is CurrentSong => {
-  if (typeof cSong !== "object" || cSong === null) {
+const isCurrentSong = (cur: unknown): cur is CurrentSong => {
+  if (typeof cur !== "object" || cur === null) {
     return false;
   }
-  return "playing" in cSong;
+  return "playing" in cur;
 };
 
 const isMessage = (msg: unknown): msg is Message => {
