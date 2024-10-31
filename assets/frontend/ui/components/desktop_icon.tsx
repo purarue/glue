@@ -75,7 +75,10 @@ const DesktopIcon = (props: IDesktopIcon) => {
         className="desktop-icon"
         onClick={handleLaunchWindow}
         onTouchStart={mouseEnter}
-        onTouchEnd={mouseLeave}
+        onTouchEnd={() => {
+          mouseLeave();
+          handleLaunchWindow();
+        }}
         onMouseEnter={mouseEnter}
         onMouseLeave={mouseLeave}
       >
