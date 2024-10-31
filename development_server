@@ -7,13 +7,21 @@ set -x
 THIS_DIR="$(realpath "$(dirname "${BASH_SOURCE[0]}")")"
 cd "${THIS_DIR}"
 
-declare CUBING_JSON
+mkdir -p ./data
+
 CUBING_JSON="${THIS_DIR}/data/cubing.json"
-declare -rx CUBING_JSON
+if [[ ! -f "$CUBING_JSON" ]]; then
+	echo "Run ./sync_cubing_json (or similar commands) to generate $CUBING_JSON" >&2
+	exit 1
+fi
 
 GUESTBOOK_JSON_PATH="${THIS_DIR}/data/guestbook.json"
+if [[ ! -f "$GUESTBOOK_JSON_PATH" ]]; then
+	echo '[]' >"$GUESTBOOK_JSON_PATH"
+fi
+
 PAGE_HITS_OFFSET='150'
-export GUESTBOOK_JSON_PATH PAGE_HITS_OFFSET
+export GUESTBOOK_JSON_PATH PAGE_HITS_OFFSET CUBING_JSON
 
 # clean deps
 mix deps.clean glue
