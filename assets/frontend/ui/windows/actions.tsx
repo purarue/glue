@@ -50,20 +50,20 @@ export const fullScreenDialogScale = 0.75;
 // as an argument,  which returns the function that launches this onClick
 // action (open the dialog, does something on the page)
 export const actions: IHashActionFunc = {
-  README: ReadmeWindow,
-  Cubing: CubingWindow,
-  "Media Accts": MediaAccountsWindow,
-  Data: DataWindow,
-  Misc: MiscWindow,
-  Browser: BrowserWindow,
-  "Code📁": CodeWindow,
-  "Writing📁": WritingWindow,
-  "Programs📁": ProgramWindow,
-  TextEdit: TextEditorWindow,
-  Paint: PaintWindow,
-  Customize: CustomizeWindow,
-  "Guest Book": GuestBookWindow,
-  Not_a_Virus: VirusWindow,
+  readme: ReadmeWindow,
+  cubing: CubingWindow,
+  "media accts": MediaAccountsWindow,
+  data: DataWindow,
+  misc: MiscWindow,
+  browser: BrowserWindow,
+  "code📁": CodeWindow,
+  "writing📁": WritingWindow,
+  "programs📁": ProgramWindow,
+  textedit: TextEditorWindow,
+  paint: PaintWindow,
+  customize: CustomizeWindow,
+  "guest book": GuestBookWindow,
+  not_a_virus: VirusWindow,
 };
 
 // returns what this icon does when its clicked

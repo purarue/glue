@@ -50,12 +50,12 @@ const WritingBody = ({ setwMsg }: { setwMsg: setWindowMsg }) => {
       setwMsg={setwMsg}
       icons={[
         {
-          name: "Blog",
+          name: "blog",
           url: "https://purarue.xyz/x/blog/",
           icon: "/images/frontend/feather.png",
         },
         {
-          name: "Notes",
+          name: "notes",
           url: "https://purarue.xyz/x/",
           icon: "/images/frontend/brain.png",
         },
