@@ -4,6 +4,7 @@ import React, {
   useState,
   Dispatch,
   SetStateAction,
+  useRef,
 } from "react";
 
 import {
@@ -71,21 +72,31 @@ const setBackgroundColor = (
 const AppContext = createContext<Context>(initialContext);
 
 const AppContextProvider = ({ children }: IProps): JSX.Element => {
+  const loading = useRef(false);
   const [contextState, setContext] = useState<Context>(initialContext);
 
   // request all data from the API in the background
   // providers wait till they load using the Consumer
   // whenever requests are done
   const loadData = async () => {
-    requestAndSetCubing(setContext);
-    requestAndSetComments(setContext);
-    requestAndSetPageHits(setContext);
-    sendPageHit();
+    await Promise.all([
+      requestAndSetCubing(setContext),
+      requestAndSetComments(setContext),
+      requestAndSetPageHits(setContext),
+      sendPageHit(),
+    ]).then(() => {
+      loading.current = false;
+    });
   };
 
   useEffect(() => {
-    loadData();
-  }, []);
+    if (loading.current === true) {
+      return;
+    } else {
+      loading.current = false;
+      loadData();
+    }
+  }, [loading]);
 
   return (
     <AppContext.Provider value={{ ...contextState, setContext }}>
