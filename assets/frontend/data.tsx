@@ -106,6 +106,11 @@ const IconData: LinkInfo[] = [
     icon: "/images/frontend/camera.png",
   },
   {
+    name: "AMA",
+    icon: "/images/frontend/question.png",
+    url: "https://github.com/purarue/ama",
+  },
+  {
     name: "Media Accts",
     icon: "/images/frontend/musicnote.png",
   },
