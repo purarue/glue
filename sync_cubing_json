@@ -23,7 +23,6 @@ if [[ -z "$WCA_USER_ID" ]]; then
 	exit 1
 fi
 
-
 mkdir -p ./data
 wca_userinfo "$WCA_USER_ID" | jq >./data/cubing.json
 scp ./data/cubing.json vultr:~/code/glue/data/
