@@ -96,8 +96,8 @@ const IconData: LinkInfo[] = [
     icon: "/images/frontend/brain.png",
   },
   {
-    name: "Journal",
-    url: "https://purarue.xyz/x/journal/",
+    name: "Blog",
+    url: "https://purarue.xyz/x/blog/",
     icon: "/images/frontend/feather.png",
   },
   {
