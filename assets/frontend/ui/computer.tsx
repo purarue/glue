@@ -4,9 +4,27 @@ import {
   Context,
   AppContextConsumer,
 } from "../app_provider";
-import GUI from "./gui";
 import unix from "dayjs";
 import { hash } from "../build";
+import Home from "./home";
+
+interface IGUI {
+  backgroundColor: string;
+}
+
+const GUI = ({ backgroundColor }: IGUI) => {
+  return (
+    <div
+      id="gui"
+      className="full-screen root-el"
+      style={{
+        backgroundColor: backgroundColor,
+      }}
+    >
+      <Home />
+    </div>
+  );
+};
 
 // top level of interface
 // renders the the initial loading screen, makes requests off to APi

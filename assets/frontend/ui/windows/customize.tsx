@@ -23,8 +23,10 @@ export function CustomizeWindow(setwMsg: setWindowMsg): launchWindowFunc {
       },
       setwMsg,
     );
-    const dialogObj = (
-      <>
+    setwMsg({
+      spawn: true,
+      windowId: windowId,
+      windowObj: (
         <Dialog
           x={x - minWidth / 2}
           y={y - minHeight / 2}
@@ -35,7 +37,6 @@ export function CustomizeWindow(setwMsg: setWindowMsg): launchWindowFunc {
           minHeight={minHeight}
           minWidth={minWidth}
           disableBodyDragging={true}
-          // when close is hit, set the message to kill this window
           hitCloseCallback={closeWindow}
         >
           <AppContextConsumer>
@@ -44,13 +45,7 @@ export function CustomizeWindow(setwMsg: setWindowMsg): launchWindowFunc {
             }}
           </AppContextConsumer>
         </Dialog>
-      </>
-    );
-    // when the icon is clicked, set the message to spawn this window
-    setwMsg({
-      spawn: true,
-      windowId: windowId,
-      windowObj: dialogObj,
+      ),
     });
   };
 }

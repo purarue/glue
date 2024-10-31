@@ -258,7 +258,7 @@ const Dialog = (props: IDialogProps) => {
                     <span>×</span>
                   </div>
                   <div className="dialog-menu-title">
-                    {/* use the passed title object if one was given, else the default title*/}
+                    {/* use the passed title object if one was given, else the dialog title*/}
                     {props.titleObj ??
                       (dialogTitle && (
                         <div className="dialog-title-text pixel">

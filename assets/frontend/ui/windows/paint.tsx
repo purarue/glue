@@ -27,9 +27,10 @@ export function PaintWindow(setwMsg: setWindowMsg): launchWindowFunc {
         },
         setwMsg,
       );
-
-    const dialogObj = (
-      <>
+    setwMsg({
+      spawn: true,
+      windowId: windowId,
+      windowObj: (
         <Dialog
           x={x - dialogWidth / 2}
           y={y - dialogHeight / 2}
@@ -40,7 +41,6 @@ export function PaintWindow(setwMsg: setWindowMsg): launchWindowFunc {
           minHeight={minHeight}
           minWidth={minWidth}
           disableBodyDragging={true}
-          // when close is hit, set the message to kill this window
           hitCloseCallback={closeWindow}
         >
           <BrowserView>
@@ -59,13 +59,7 @@ export function PaintWindow(setwMsg: setWindowMsg): launchWindowFunc {
             </p>
           </MobileView>
         </Dialog>
-      </>
-    );
-    // when the icon is clicked, set the message to spawn this window
-    setwMsg({
-      spawn: true,
-      windowId: windowId,
-      windowObj: dialogObj,
+      ),
     });
   };
 }
