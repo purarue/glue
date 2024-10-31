@@ -18,6 +18,12 @@ cd "${THIS_DIR}" || exit $?
 
 havecmd wca_userinfo || cargo install --git "https://github.com/purarue/wca_userinfo"
 
+if [[ -z "$WCA_USER_ID" ]]; then
+	echo 'WCA_USER_ID environment variable is not set' >&2
+	exit 1
+fi
+
+
 mkdir -p ./data
-wca_userinfo 2017BREC02 | jq >./data/cubing.json
+wca_userinfo "$WCA_USER_ID" | jq >./data/cubing.json
 scp ./data/cubing.json vultr:~/code/glue/data/
