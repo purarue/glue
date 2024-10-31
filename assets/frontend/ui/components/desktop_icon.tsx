@@ -1,5 +1,6 @@
 import React, { memo, useState } from "react";
 import { launchWindowFunc } from "../windows/actions";
+import TapLink from "./taplink";
 
 // wrap some child element as an 'a' element
 interface ILinkWrap {
@@ -26,6 +27,7 @@ const LinkWrap = memo(({ url, newTab, children }: ILinkWrap) => {
 interface IDesktopIcon {
   caption: string;
   iconurl: string;
+  inFolder?: boolean;
   mouseEnter: () => void;
   mouseLeave: () => void;
   // must specify either an click or a link
@@ -69,6 +71,9 @@ const DesktopIcon = (props: IDesktopIcon) => {
   // if its a link, wraps the image/text in a <a>
   //
   // this is so that control-click works on external links
+  //
+  // TODO: do I even care about control-click, isn't everything
+  // an external or opens in a new tab?
   if (props.click !== undefined) {
     return (
       <figure
@@ -108,20 +113,41 @@ const DesktopIcon = (props: IDesktopIcon) => {
         onMouseEnter={mouseEnter}
         onMouseLeave={mouseLeave}
       >
-        <LinkWrap url={props.url!} newTab={true}>
-          <img
-            src={props.iconurl}
-            alt={props.caption}
-            className="icon-img desktop-icon-interactable"
-          />
-        </LinkWrap>
-        <LinkWrap url={props.url!} newTab={true}>
-          <figcaption className="pixel desktop-icon-interactable">
-            <pre>
-              <code>{props.caption}</code>
-            </pre>
-          </figcaption>
-        </LinkWrap>
+        {props.inFolder === true ? (
+          <>
+            <TapLink href={props.url!} target="_blank">
+              <img
+                src={props.iconurl}
+                alt={props.caption}
+                className="icon-img desktop-icon-interactable"
+              />
+            </TapLink>
+            <TapLink href={props.url!} target="_blank">
+              <figcaption className="pixel desktop-icon-interactable">
+                <pre>
+                  <code>{props.caption}</code>
+                </pre>
+              </figcaption>
+            </TapLink>
+          </>
+        ) : (
+          <>
+            <LinkWrap url={props.url!} newTab={true}>
+              <img
+                src={props.iconurl}
+                alt={props.caption}
+                className="icon-img desktop-icon-interactable"
+              />
+            </LinkWrap>
+            <LinkWrap url={props.url!} newTab={true}>
+              <figcaption className="pixel desktop-icon-interactable">
+                <pre>
+                  <code>{props.caption}</code>
+                </pre>
+              </figcaption>
+            </LinkWrap>
+          </>
+        )}
       </figure>
     );
   } else {
