@@ -26,7 +26,13 @@ defmodule GlueWeb.Cubing do
         }
       end)
 
-    %{cubing: Map.put(wca_data, "events", events)}
+    %{
+      cubing: %{
+        "events" => events,
+        "competitions" => wca_data["competitions"],
+        "completed_solves" => wca_data["completed_solves"]
+      }
+    }
   end
 
   defp format_event(event) do

@@ -3,8 +3,6 @@ import { Context, setContextFunc } from "./app_provider";
 interface CubingData {
   completed_solves: number;
   competitions: number;
-  wca_id: string;
-  gender: string;
   events: CubingRecords[];
 }
 
