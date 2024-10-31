@@ -87,54 +87,54 @@ const MiscLinks: LinkInfo[] = [
 
 const IconData: LinkInfo[] = [
   {
-    name: "README",
+    name: "readme",
     icon: "/images/frontend/notepad.png",
   },
   {
-    name: "Guest Book",
+    name: "guest book",
     icon: "/images/frontend/guestbook.png",
   },
   {
-    name: "Media Feed",
+    name: "media feed",
     icon: "/images/frontend/camerafeed.png",
     url: "https://purarue.xyz/feed/",
   },
   {
-    name: "Code📁",
+    name: "code📁",
     icon: "/images/frontend/laptop.png",
   },
   {
-    name: "Writing📁",
+    name: "writing📁",
     icon: "/images/frontend/feather.png",
   },
   {
-    name: "Programs📁",
+    name: "programs📁",
     icon: "/images/frontend/gear.png",
   },
   {
-    name: "Photography",
+    name: "photography",
     url: "https://purarue.xyz/x/photography/",
     icon: "/images/frontend/camera.png",
   },
   {
-    name: "AMA",
+    name: "ama",
     icon: "/images/frontend/question.png",
     url: "https://github.com/purarue/ama",
   },
   {
-    name: "Media Accts",
+    name: "media accts",
     icon: "/images/frontend/musicnote.png",
   },
   {
-    name: "Misc",
+    name: "misc",
     icon: "/images/frontend/misc.png",
   },
   {
-    name: "Cubing",
+    name: "cubing",
     icon: "/images/frontend/rubikscube.png",
   },
   {
-    name: "Not_a_Virus",
+    name: "not_a_virus",
     icon: "/images/frontend/heart.png",
   },
 ];

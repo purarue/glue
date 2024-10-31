@@ -50,19 +50,19 @@ const AppBody = ({ setwMsg }: { setwMsg: setWindowMsg }) => {
       setwMsg={setwMsg}
       icons={[
         {
-          name: "Browser",
+          name: "browser",
           icon: "/images/frontend/globe.png",
         },
         {
-          name: "TextEdit",
+          name: "textedit",
           icon: "/images/frontend/texteditor.png",
         },
         {
-          name: "Paint",
+          name: "paint",
           icon: "/images/frontend/paint.png",
         },
         {
-          name: "Customize",
+          name: "customize",
           icon: "/images/frontend/hammer_wrench.png",
         },
       ]}

@@ -50,21 +50,21 @@ const CodeBody = ({ setwMsg }: { setwMsg: setWindowMsg }) => {
       setwMsg={setwMsg}
       icons={[
         {
-          name: "Projects",
+          name: "projects",
           url: "https://purarue.xyz/projects",
           icon: "/images/frontend/laptop.png",
         },
         {
-          name: "Data",
+          name: "data",
           icon: "/images/frontend/barchart.png",
         },
         {
-          name: "Dotfiles",
+          name: "dotfiles",
           icon: "/images/frontend/dotfiles.png",
           url: "https://github.com/purarue/dotfiles",
         },
         {
-          name: "Tools",
+          name: "tools",
           icon: "/images/frontend/gear.png",
           url: "https://purarue.xyz/x/notes/tools/",
         },
