@@ -203,8 +203,8 @@ const GuestBookForm = () => {
   function validateComment(fieldValue?: string): boolean {
     let errMsg = "";
     let commentVal = fieldValue ?? comment;
-    if (commentVal.length >= 250) {
-      errMsg = "Comment should be less than 250 characters!";
+    if (commentVal.length >= 750) {
+      errMsg = "Comment should be less than 750 characters!";
     } else if (commentVal.length < 1) {
       errMsg = "Comment should be at least a character long...";
     }

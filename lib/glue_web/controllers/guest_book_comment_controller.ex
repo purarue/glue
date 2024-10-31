@@ -8,7 +8,7 @@ defmodule GlueWeb.GuestBookCommentController do
 
   action_fallback GlueWeb.FallbackController
 
-  @message_limit 250
+  @message_limit 750
 
   def index(conn, _params) do
     # List comments that are approved by me
