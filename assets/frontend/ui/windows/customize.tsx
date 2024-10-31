@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 
 import { setWindowMsg } from "./../home";
-import { jitterCenterLocation } from "./../components/dimensions";
 import Dialog from "../components/dialog";
-import { launchWindowFunc } from "./actions";
+import { dialogInfo, launchWindowFunc } from "./actions";
 import { PaintControls } from "./paint";
 import {
   Context,
@@ -16,8 +15,14 @@ const minWidth = 400;
 
 export function CustomizeWindow(setwMsg: setWindowMsg): launchWindowFunc {
   return () => {
-    const { x, y } = jitterCenterLocation();
-    const windowId = Date.now().toString();
+    const { x, y, windowId, closeWindow } = dialogInfo(
+      1.0,
+      {
+        height: minHeight,
+        width: minWidth,
+      },
+      setwMsg,
+    );
     const dialogObj = (
       <>
         <Dialog
@@ -31,7 +36,7 @@ export function CustomizeWindow(setwMsg: setWindowMsg): launchWindowFunc {
           minWidth={minWidth}
           disableBodyDragging={true}
           // when close is hit, set the message to kill this window
-          hitCloseCallback={() => setwMsg({ spawn: false, windowId: windowId })}
+          hitCloseCallback={closeWindow}
         >
           <AppContextConsumer>
             {(value: Context) => {

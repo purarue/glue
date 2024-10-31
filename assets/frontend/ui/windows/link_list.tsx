@@ -1,14 +1,10 @@
 import React from "react";
 
 import { setWindowMsg } from "./../home";
-import {
-  getWindowDimensions,
-  jitterCenterLocation,
-} from "./../components/dimensions";
 import Dialog from "../components/dialog";
 import TapLink from "../components/taplink";
 import { LinkInfo } from "../../data";
-import { launchWindowFunc } from "./actions";
+import { dialogInfo, launchWindowFunc } from "./actions";
 
 const linkLineHeight = 30;
 const defaultMinWidth = 320;
@@ -26,28 +22,30 @@ export function LinkWindow(props: ILinkWindow): launchWindowFunc {
   // 40 is a buffer for the menu bar
   const minHeight = props.minHeight ?? 40 + props.links.length * linkLineHeight;
   return () => {
-    const { browserWidth, browserHeight } = getWindowDimensions();
-    const { x, y } = jitterCenterLocation();
-    const linkWidth = Math.min(browserWidth * 0.2, minWidth);
-    const linkHeight = Math.min(browserHeight * 0.2, minHeight);
-    const windowId = Date.now().toString();
+    const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =
+      dialogInfo(
+        0.2,
+        {
+          height: minHeight,
+          width: minHeight,
+        },
+        props.setwMsg,
+      );
     const linkDialog = (
       <>
         <Dialog
           /* average af the center - minWidth and center - windowWidth
            * seems to work well for this window size on both mobile/desktop */
-          x={(x - minWidth + (x - linkWidth / 2)) / 2}
-          y={Math.max(y - minHeight, y - linkHeight / 2)}
-          width={linkWidth}
-          height={linkHeight}
+          x={(x - minWidth + (x - dialogWidth / 2)) / 2}
+          y={Math.max(y - minHeight, y - dialogHeight / 2)}
+          width={dialogWidth}
+          height={dialogHeight}
           minHeight={minHeight}
           minWidth={minWidth}
           title={props.title}
           windowId={windowId}
           // when close is hit, set the message to kill this window
-          hitCloseCallback={() =>
-            props.setwMsg({ spawn: false, windowId: windowId })
-          }
+          hitCloseCallback={closeWindow}
         >
           <div className="linklist">
             {props.links.map((el: LinkInfo) => (

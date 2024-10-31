@@ -1,26 +1,27 @@
 import React, { memo } from "react";
 
 import { setWindowMsg } from "./../home";
-import {
-  jitterCenterLocation,
-  getWindowDimensions,
-} from "./../components/dimensions";
 import Dialog from "../components/dialog";
-import { launchWindowFunc } from "./actions";
+import { dialogInfo, launchWindowFunc } from "./actions";
 import TapLink from "./../components/taplink";
 
 const minHeight = 400;
 const minWidth = 250;
 
-const dataScale = 0.4;
+const scale = 0.4;
 
 export function DataWindow(setwMsg: setWindowMsg): launchWindowFunc {
   return () => {
-    const { browserHeight, browserWidth } = getWindowDimensions();
-    const { x, y } = jitterCenterLocation();
-    const dialogWidth = Math.max(minWidth, browserWidth * dataScale);
-    const dialogHeight = Math.max(minHeight, browserHeight * dataScale);
-    const windowId = Date.now().toString();
+    const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =
+      dialogInfo(
+        scale,
+        {
+          height: minHeight,
+          width: minHeight,
+        },
+        setwMsg,
+      );
+
     const dialogObj = (
       <>
         <Dialog
@@ -33,7 +34,7 @@ export function DataWindow(setwMsg: setWindowMsg): launchWindowFunc {
           minHeight={minHeight}
           minWidth={minWidth}
           // when close is hit, set the message to kill this window
-          hitCloseCallback={() => setwMsg({ spawn: false, windowId: windowId })}
+          hitCloseCallback={closeWindow}
         >
           <DataBody />
         </Dialog>

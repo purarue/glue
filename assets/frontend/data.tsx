@@ -67,6 +67,25 @@ const MiscLinks: LinkInfo[] = [
   },
 ];
 
+// subwindows:
+//
+// code:
+//
+// Projects
+// Dotfiles
+// Tools
+// Data
+
+// Writing:
+// Blog
+// Notes
+
+// Utilities
+// Browser
+// TextEdit
+// Paint
+// Customize
+
 const IconData: LinkInfo[] = [
   {
     name: "README",
@@ -82,23 +101,16 @@ const IconData: LinkInfo[] = [
     url: "https://purarue.xyz/feed/",
   },
   {
-    name: "Data",
-    icon: "/images/frontend/barchart.png",
-  },
-  {
-    name: "Projects",
-    url: "https://purarue.xyz/projects",
+    name: "Code📁",
     icon: "/images/frontend/laptop.png",
   },
   {
-    name: "Notes",
-    url: "https://purarue.xyz/x/",
-    icon: "/images/frontend/brain.png",
+    name: "Writing📁",
+    icon: "/images/frontend/feather.png",
   },
   {
-    name: "Blog",
-    url: "https://purarue.xyz/x/blog/",
-    icon: "/images/frontend/feather.png",
+    name: "Programs📁",
+    icon: "/images/frontend/gear.png",
   },
   {
     name: "Photography",
@@ -121,32 +133,6 @@ const IconData: LinkInfo[] = [
   {
     name: "Cubing",
     icon: "/images/frontend/rubikscube.png",
-  },
-  {
-    name: "Dotfiles",
-    icon: "/images/frontend/dotfiles.png",
-    url: "https://github.com/purarue/dotfiles",
-  },
-  {
-    name: "Tools",
-    icon: "/images/frontend/gear.png",
-    url: "https://purarue.xyz/x/notes/tools/",
-  },
-  {
-    name: "Browser",
-    icon: "/images/frontend/globe.png",
-  },
-  {
-    name: "TextEdit",
-    icon: "/images/frontend/texteditor.png",
-  },
-  {
-    name: "Paint",
-    icon: "/images/frontend/paint.png",
-  },
-  {
-    name: "Customize",
-    icon: "/images/frontend/hammer_wrench.png",
   },
   {
     name: "Not_a_Virus",

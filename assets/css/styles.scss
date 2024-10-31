@@ -430,17 +430,49 @@ textarea {
     }
 
     #home-icons-container {
-      display: inline-flex;
-      box-sizing: border-box;
-      flex-flow: column wrap;
-      justify-content: flex-start;
-      align-items: flex-start;
       padding: 1em;
       // allow space for currently-listening music
       height: calc(100% - 2rem);
 
       .home-icon-hide {
         display: none !important;
+      }
+
+      // allow space for currently-listening music
+      height: calc(100% - 2rem);
+    }
+
+    .icon-container {
+      box-sizing: border-box;
+      display: inline-flex;
+      box-sizing: border-box;
+      flex-flow: column wrap;
+      justify-content: flex-start;
+      align-items: flex-start;
+      padding: 1em;
+
+      &.dialog-icon-container {
+        flex-flow: row wrap;
+        .home-icon {
+          margin-top: 0.75em;
+          margin-bottom: 0.75em;
+          padding-right: 1.25em;
+
+          figure.desktop-icon {
+            img.icon-img {
+              height: 20px;
+            }
+
+            figcaption {
+              @include swidth(small) {
+                max-width: 50px;
+                font-size: 60%;
+              }
+              max-width: 70px;
+              font-size: 80%;
+            }
+          }
+        }
       }
 
       .home-icon {
@@ -721,6 +753,7 @@ textarea {
       // regular stuff
       flex: 1 1 auto;
       display: flex;
+      // background-color: #1a331f;
       justify-content: center;
       align-items: center;
       padding: 5px;
@@ -730,6 +763,11 @@ textarea {
       margin-bottom: $dialog_gutter_width;
       overflow-x: auto;
       overflow-y: hidden;
+
+      &.dialog-no-center {
+        justify-content: start;
+        align-items: start;
+      }
 
       .controls-input {
         margin-right: 1em;

@@ -1,15 +1,11 @@
 import React, { memo } from "react";
 
 import { setWindowMsg } from "./../home";
-import {
-  jitterCenterLocation,
-  getWindowDimensions,
-} from "./../components/dimensions";
 import Dialog from "../components/dialog";
-import { launchWindowFunc } from "./actions";
+import { dialogInfo, launchWindowFunc } from "./actions";
 import TapLink from "./../components/taplink";
 
-const minHeight = 500;
+const minHeight = 450;
 const minWidth = 250;
 
 const readmeScale = 0.55;
@@ -20,13 +16,24 @@ function alertDiscordName() {
   window.alert(discordUserName);
 }
 
+function alertEmail() {
+  window.alert(
+    "I don't leave this publicly visible anymore, but you can leave yours in the guestbook (comments are private till I approve them) and I'll get back to you",
+  );
+}
+
 export function ReadmeWindow(setwMsg: setWindowMsg): launchWindowFunc {
   return () => {
-    const { browserHeight, browserWidth } = getWindowDimensions();
-    const { x, y } = jitterCenterLocation();
-    const dialogWidth = Math.max(minWidth, browserWidth * readmeScale);
-    const dialogHeight = Math.max(minHeight, browserHeight * readmeScale);
-    const windowId = Date.now().toString();
+    const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =
+      dialogInfo(
+        readmeScale,
+        {
+          height: minHeight,
+          width: minHeight,
+        },
+        setwMsg,
+      );
+
     const dialogObj = (
       <>
         <Dialog
@@ -39,7 +46,7 @@ export function ReadmeWindow(setwMsg: setWindowMsg): launchWindowFunc {
           minHeight={minHeight}
           minWidth={minWidth}
           // when close is hit, set the message to kill this window
-          hitCloseCallback={() => setwMsg({ spawn: false, windowId: windowId })}
+          hitCloseCallback={closeWindow}
         >
           <ReadmeBody />
         </Dialog>
@@ -57,11 +64,7 @@ export function ReadmeWindow(setwMsg: setWindowMsg): launchWindowFunc {
 const ReadmeBody = memo(() => {
   return (
     <div className="readme-body">
-      <h3 className="hi">Yo!</h3>
-      <p>
-        The Icons here are little applications, links to other places I live on
-        the internet, or some of my writing/projects.
-      </p>
+      <h3 className="hi">Hi!</h3>
       <p>
         The windows here can be resized and dragged around. The top left button
         can be used to close windows; the arrows in the top right can be used to
@@ -70,16 +73,15 @@ const ReadmeBody = memo(() => {
       <hr />
       <h4>Contact</h4>
       <p>
-        I don't use social media all that much, but feel free to contact me
-        using:
+        I don't use social media all that much, but feel free to:
         <ul>
           <li>
             <TapLink
-              href="https://github.com/purarue/"
+              href="https://github.com/purarue/ama"
               target="_blank"
               rel="noreferrer"
             >
-              Github
+              AMA
             </TapLink>
           </li>
           <li>
@@ -88,11 +90,13 @@ const ReadmeBody = memo(() => {
               onClick={alertDiscordName}
               onTouchEnd={alertDiscordName}
             >
-              {`Discord (${discordUserName})`}
+              {`Add me on Discord (${discordUserName})`}
             </a>
           </li>
           <li>
-            <TapLink href="mailto:ssbreckenridge@me.com">Email</TapLink>
+            <a href="#" onClick={alertEmail} onTouchEnd={alertEmail}>
+              Email
+            </a>
           </li>
         </ul>
       </p>

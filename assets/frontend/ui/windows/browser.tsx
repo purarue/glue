@@ -1,23 +1,23 @@
 import React, { useState, useRef } from "react";
 
 import { setWindowMsg } from "./../home";
-import {
-  getWindowDimensions,
-  jitterCenterLocation,
-} from "./../components/dimensions";
 import Dialog from "../components/dialog";
-import { fullScreenDialogScale, launchWindowFunc } from "./actions";
+import { dialogInfo, fullScreenDialogScale, launchWindowFunc } from "./actions";
 
 const minHeight = 400;
 const minWidth = 300;
 
 export function BrowserWindow(setwMsg: setWindowMsg): launchWindowFunc {
   return () => {
-    const { browserWidth, browserHeight } = getWindowDimensions();
-    const { x, y } = jitterCenterLocation();
-    const dialogWidth = browserWidth * fullScreenDialogScale;
-    const dialogHeight = browserHeight * fullScreenDialogScale;
-    const windowId = Date.now().toString();
+    const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =
+      dialogInfo(
+        fullScreenDialogScale,
+        {
+          height: minHeight,
+          width: minWidth,
+        },
+        setwMsg,
+      );
     const dialogObj = (
       <>
         <Dialog
@@ -31,7 +31,7 @@ export function BrowserWindow(setwMsg: setWindowMsg): launchWindowFunc {
           disableBodyDragging={true}
           minWidth={minWidth}
           // when close is hit, set the message to kill this window
-          hitCloseCallback={() => setwMsg({ spawn: false, windowId: windowId })}
+          hitCloseCallback={closeWindow}
         >
           <Browser />
         </Dialog>
