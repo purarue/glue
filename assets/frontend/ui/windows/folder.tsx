@@ -34,6 +34,7 @@ export const AppWindow = (props: IAppWindow) => {
               )}
             >
               <DesktopIcon
+                inFolder={true}
                 url={isURL ? (action as string) : undefined}
                 click={!isURL ? (action as launchWindowFunc) : undefined}
                 mouseEnter={() => setSelectedIcon(el.name)}
