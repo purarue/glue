@@ -115,14 +115,14 @@ const DesktopIcon = (props: IDesktopIcon) => {
       >
         {props.inFolder === true ? (
           <>
-            <TapLink href={props.url!} target="_blank">
+            <TapLink className="unlinkify" href={props.url!} target="_blank">
               <img
                 src={props.iconurl}
                 alt={props.caption}
                 className="icon-img desktop-icon-interactable"
               />
             </TapLink>
-            <TapLink href={props.url!} target="_blank">
+            <TapLink className="unlinkify" href={props.url!} target="_blank">
               <figcaption className="pixel desktop-icon-interactable">
                 <pre>
                   <code>{props.caption}</code>
