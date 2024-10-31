@@ -20,6 +20,7 @@ interface IDialogProps {
   hitCloseCallback: () => void;
   title?: string;
   windowId?: string;
+  noCenter?: boolean;
   // dont allow user to drag while hovering body
   disableBodyDragging?: boolean;
   // have to provide one of these. If msg is not
@@ -321,6 +322,7 @@ const Dialog = (props: IDialogProps) => {
                     "dialog-body",
                     hasMsg && "dialog-message",
                     winShow.showBody || "dialog-part-hidden",
+                    (props.noCenter ?? false) && "dialog-no-center",
                   )}
                   onWheel={(e) => {
                     e.preventDefault();

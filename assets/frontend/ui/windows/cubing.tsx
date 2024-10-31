@@ -4,37 +4,38 @@ import { Context, AppContextConsumer } from "../../app_provider";
 import { CubingData, CubingRecords } from "../../api_model";
 import WrapApiError from "../components/wrap_api_error";
 import { setWindowMsg } from "./../home";
-import {
-  getWindowDimensions,
-  jitterCenterLocation,
-} from "./../components/dimensions";
 import Dialog from "../components/dialog";
 import TapLink from "../components/taplink";
-import { fullScreenDialogScale, launchWindowFunc } from "./actions";
+import { dialogInfo, fullScreenDialogScale, launchWindowFunc } from "./actions";
 
 const minHeight = 400;
 const minWidth = 300;
 
 export function CubingWindow(setwMsg: setWindowMsg): launchWindowFunc {
   return () => {
-    const { browserWidth, browserHeight } = getWindowDimensions();
-    const { x, y } = jitterCenterLocation();
-    const cubingDialogWidth = browserWidth * fullScreenDialogScale;
-    const cubingDialogHeight = browserHeight * 0.6;
-    const windowId = Date.now().toString();
+    const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =
+      dialogInfo(
+        fullScreenDialogScale,
+        {
+          height: minHeight,
+          width: minWidth,
+        },
+        setwMsg,
+      );
+
     const cubingDialog = (
       <>
         <Dialog
-          x={x - cubingDialogWidth / 2}
-          y={y - cubingDialogHeight / 2}
-          width={cubingDialogWidth}
-          height={cubingDialogHeight}
+          x={x - dialogWidth / 2}
+          y={y - dialogHeight / 2}
+          width={dialogWidth}
+          height={dialogHeight}
           title="cubing"
           windowId={windowId}
           minHeight={minHeight}
           minWidth={minWidth}
           // when close is hit, set the message to kill this window
-          hitCloseCallback={() => setwMsg({ spawn: false, windowId: windowId })}
+          hitCloseCallback={closeWindow}
         >
           <Cubing />
         </Dialog>

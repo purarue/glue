@@ -11,6 +11,13 @@ import { VirusWindow } from "./virus";
 import { LinkInfo } from "../../data";
 import { setWindowMsg } from "./../home";
 import { DataWindow } from "./data";
+import { CodeWindow } from "./code";
+import { WritingWindow } from "./writing";
+import { ProgramWindow } from "./programs";
+import {
+  getWindowDimensions,
+  jitterCenterLocation,
+} from "../components/dimensions";
 
 // pass it the setWindowMsg function, it returns a function which opens
 // the window, and returns nothing
@@ -49,6 +56,9 @@ export const actions: IHashActionFunc = {
   Data: DataWindow,
   Misc: MiscWindow,
   Browser: BrowserWindow,
+  "Code📁": CodeWindow,
+  "Writing📁": WritingWindow,
+  "Programs📁": ProgramWindow,
   TextEdit: TextEditorWindow,
   Paint: PaintWindow,
   Customize: CustomizeWindow,
@@ -75,4 +85,42 @@ export function getAction(
   }
   return () =>
     window.alert("No URL or action defined for " + JSON.stringify(el));
+}
+
+interface MinSize {
+  width: number;
+  height: number;
+}
+
+export interface DialogInfo {
+  browserHeight: number;
+  browserWidth: number;
+  x: number;
+  y: number;
+  dialogHeight: number;
+  dialogWidth: number;
+  windowId: string;
+  closeWindow: () => void;
+}
+
+export function dialogInfo(
+  scale: number,
+  minSize: MinSize,
+  setwMsg: setWindowMsg,
+): DialogInfo {
+  const { browserHeight, browserWidth } = getWindowDimensions();
+  const { x, y } = jitterCenterLocation();
+  const dialogWidth = Math.max(minSize.width, browserWidth * scale);
+  const dialogHeight = Math.max(minSize.height, browserHeight * scale);
+  const windowId = Date.now().toString();
+  return {
+    x,
+    y,
+    dialogWidth,
+    dialogHeight,
+    browserHeight,
+    browserWidth,
+    windowId,
+    closeWindow: () => setwMsg({ spawn: false, windowId: windowId }),
+  };
 }

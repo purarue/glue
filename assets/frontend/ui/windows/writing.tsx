@@ -1,41 +1,41 @@
-// this isn't used for any page, its the file I copy/paste when starting a new window
 import React from "react";
 
 import { setWindowMsg } from "./../home";
 import Dialog from "../components/dialog";
 import { dialogInfo, launchWindowFunc } from "./actions";
+import { AppWindow } from "./folder";
 
-const minHeight = 150;
-const minWidth = 250;
+const minHeight = 180;
+const minWidth = 300;
 
-const scale = 0.5;
+const scale = 0.3;
 
-export function Window(setwMsg: setWindowMsg): launchWindowFunc {
+export function WritingWindow(setwMsg: setWindowMsg): launchWindowFunc {
   return () => {
     const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =
       dialogInfo(
         scale,
         {
           height: minHeight,
-          width: minHeight,
+          width: minWidth,
         },
         setwMsg,
       );
     const dialogObj = (
       <>
         <Dialog
+          noCenter={true}
           x={x - dialogWidth / 2}
           y={y - dialogHeight / 2}
-          width={minWidth}
-          height={minHeight}
-          title="title"
+          width={dialogWidth}
+          height={dialogHeight}
+          title="Writing"
           windowId={windowId}
           minHeight={minHeight}
           minWidth={minWidth}
-          // when close is hit, set the message to kill this window
           hitCloseCallback={closeWindow}
         >
-          <Body />
+          <WritingBody setwMsg={setwMsg} />
         </Dialog>
       </>
     );
@@ -48,6 +48,22 @@ export function Window(setwMsg: setWindowMsg): launchWindowFunc {
   };
 }
 
-const Body = () => {
-  return <></>;
+const WritingBody = ({ setwMsg }: { setwMsg: setWindowMsg }) => {
+  return (
+    <AppWindow
+      setwMsg={setwMsg}
+      icons={[
+        {
+          name: "Blog",
+          url: "https://purarue.xyz/x/blog/",
+          icon: "/images/frontend/feather.png",
+        },
+        {
+          name: "Notes",
+          url: "https://purarue.xyz/x/",
+          icon: "/images/frontend/brain.png",
+        },
+      ]}
+    />
+  );
 };

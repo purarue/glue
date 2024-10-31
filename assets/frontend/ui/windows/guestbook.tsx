@@ -9,12 +9,8 @@ import React, {
 import { setWindowMsg } from "./../home";
 import { GuestBookComments, GuestBookComment } from "../../api_model";
 import WrapApiError from "../components/wrap_api_error";
-import {
-  jitterCenterLocation,
-  getWindowDimensions,
-} from "./../components/dimensions";
 import Dialog from "../components/dialog";
-import { launchWindowFunc } from "./actions";
+import { dialogInfo, launchWindowFunc } from "./actions";
 import { Context, AppContextConsumer } from "../../app_provider";
 import dayjs, { unix } from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -83,11 +79,15 @@ async function handleRequest(
 
 export function GuestBookWindow(setwMsg: setWindowMsg): launchWindowFunc {
   return () => {
-    const { x, y } = jitterCenterLocation();
-    const { browserWidth, browserHeight } = getWindowDimensions();
-    const dialogWidth = browserWidth * dialogScale;
-    const dialogHeight = browserHeight * dialogScale;
-    const windowId = Date.now().toString();
+    const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =
+      dialogInfo(
+        dialogScale,
+        {
+          height: minHeight,
+          width: minHeight,
+        },
+        setwMsg,
+      );
     const dialogObj = (
       <>
         <Dialog
@@ -101,7 +101,7 @@ export function GuestBookWindow(setwMsg: setWindowMsg): launchWindowFunc {
           minWidth={minWidth}
           disableBodyDragging={true}
           // when close is hit, set the message to kill this window
-          hitCloseCallback={() => setwMsg({ spawn: false, windowId: windowId })}
+          hitCloseCallback={closeWindow}
         >
           <div className="guestbook-body">
             <AppContextConsumer>

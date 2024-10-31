@@ -214,7 +214,7 @@ function Home() {
               ))}
             </div>
             {dragRect !== undefined ? <DragRect {...dragRect} /> : <></>}
-            <div id="home-icons-container">
+            <div id="home-icons-container" className="icon-container">
               {IconData.map((el, i) => {
                 const action: string | launchWindowFunc = getAction(
                   el,
