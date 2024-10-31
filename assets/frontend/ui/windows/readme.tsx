@@ -18,7 +18,7 @@ function alertDiscordName() {
 
 function alertEmail() {
   window.alert(
-    "I don't leave this publicly visible anymore, but you can leave yours in the guestbook (comments are private till I approve them) and I'll get back to you",
+    "I don't leave my email publicly visible anymore, but you can leave yours in the guestbook (comments are private till I approve them) and I'll get back to you!",
   );
 }
 
@@ -73,8 +73,18 @@ const ReadmeBody = memo(() => {
       <hr />
       <h4>Contact</h4>
       <p>
-        I don't use social media all that much, but feel free to:
+        I don't use social media all that much, but you can:
         <ul>
+          <li>
+            {"Add me on "}
+            <a
+              style={{ cursor: "pointer" }}
+              onClick={alertDiscordName}
+              onTouchEnd={alertDiscordName}
+            >
+              {`Discord (${discordUserName})`}
+            </a>
+          </li>
           <li>
             <TapLink
               href="https://github.com/purarue/ama"
@@ -85,18 +95,10 @@ const ReadmeBody = memo(() => {
             </TapLink>
           </li>
           <li>
-            <a
-              style={{ cursor: "pointer" }}
-              onClick={alertDiscordName}
-              onTouchEnd={alertDiscordName}
-            >
-              {`Add me on Discord (${discordUserName})`}
-            </a>
-          </li>
-          <li>
             <a href="#" onClick={alertEmail} onTouchEnd={alertEmail}>
               Email
             </a>
+            {" me"}
           </li>
         </ul>
       </p>
