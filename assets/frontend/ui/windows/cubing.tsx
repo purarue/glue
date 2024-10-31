@@ -68,15 +68,7 @@ const CubingBody = memo(({ data }: ICubingBody) => {
   return (
     <div className="cubing-body">
       <p>
-        These are{" "}
-        <TapLink
-          href="https://www.worldcubeassociation.org/persons/2017BREC02"
-          target="_blank"
-          rel="noreferrer"
-        >
-          my records
-        </TapLink>{" "}
-        from{" "}
+        These are my records from{" "}
         <TapLink
           href="https://www.worldcubeassociation.org/"
           target="_blank"
