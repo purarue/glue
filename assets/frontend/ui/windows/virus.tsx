@@ -53,10 +53,12 @@ export function VirusWindow(setwMsg: setWindowMsg): launchWindowFunc {
           height={minHeight}
           minHeight={minHeight}
           minWidth={minWidth}
-          title="virus"
+          UI={{
+            title: "virus",
+            titleObj: <VirusTitle />,
+          }}
           windowId={windowId}
           hitCloseCallback={() => VirusWindow(setwMsg)()}
-          titleObj={<VirusTitle />}
         >
           <VirusBodyMemo height={minHeight} width={minWidth} />
         </Dialog>

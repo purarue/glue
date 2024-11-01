@@ -1,4 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  SetStateAction,
+  Dispatch,
+} from "react";
 import clsx from "clsx";
 import Repeatable from "react-repeatable";
 import { Rnd } from "react-rnd";
@@ -8,37 +14,6 @@ import {
   setSelectedWindow,
   Context,
 } from "../../app_provider";
-
-interface IDialogProps {
-  x: number;
-  y: number;
-  width?: number;
-  height?: number;
-  minWidth?: number;
-  minHeight?: number;
-  isErr?: boolean;
-  hitCloseCallback: () => void;
-  title?: string;
-  windowId?: string;
-  noCenter?: boolean;
-  // dont allow user to drag while hovering body
-  disableBodyDragging?: boolean;
-  // have to provide one of these. If msg is not
-  // provided, uses children
-  // If both are provided, renders message in a div.dialog-message
-  // div, then the children
-  msg?: string;
-  children?: any;
-  titleObj?: any;
-}
-
-export const defaultDialogWidth = 200;
-export const defaultDialogHeight = 100;
-
-// set the current window we are using as the 'top' window in global AppContext
-function setSelfSelected(ctx: Context, windowId?: string) {
-  setSelectedWindow(ctx.setContext, windowId);
-}
 
 interface windowData {
   height: number;
@@ -64,83 +39,30 @@ const windowPartsDefault = {
   showScrollButtons: false,
 };
 
-const Dialog = (props: IDialogProps) => {
-  // dialog related
-  const dialogWidth = props.width ?? defaultDialogWidth;
-  const dialogHeight = props.height ?? defaultDialogHeight;
-  const errorDialog = props.isErr ?? false;
-  const dialogTitle: string | null =
-    props.title ?? (errorDialog ? "ERROR" : null);
-  const hasMsg = props.msg !== undefined;
-  const disableBodyDragging = props.disableBodyDragging ?? false;
+interface UIWIndowProps {
+  errorDialog: boolean;
+  title?: any;
+  dialogWidth: number;
+  dialogHeight: number;
+  disableBodyDragging: boolean;
+  winData: windowData;
+  scrollOffset: number;
+  setDragDisable: Dispatch<SetStateAction<boolean>>;
+  setSelfSelectedCtx: () => void;
+  hitCloseCallback: () => void;
+  handleEnableRND: () => void;
+  handleDisableRND: () => void;
+  handleScrollUp: () => void;
+  handleScrollDown: () => void;
+  scrollRef: any;
+  noCenter: boolean;
+  msg: string | undefined;
+  children: any | undefined;
+}
 
-  const defaultWindowData: windowData = {
-    width: dialogWidth,
-    height: dialogHeight,
-    fullY: 0,
-  };
-
-  // scroll related
-  const [scrollOffset, setScrollOffset] = useState<number>(0);
-  const [winData, setWinData] = useState(defaultWindowData);
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  // disable dragging/resizing while mousing over buttons
-  const [dragDisable, setDragDisable] = useState<boolean>(false);
-  const [resizable, setResizable] = useState<boolean>(true);
-
+const UIWindow = (props: UIWIndowProps) => {
   // animate windows
   const [winShow, setWinShow] = useState<windowParts>(windowPartsDefault);
-
-  const scrollTo = (height: number) => {
-    const el: HTMLDivElement | null = scrollRef.current;
-    if (el === null) {
-      return;
-    }
-    el.scrollTo({ top: height });
-    setScrollOffset(height);
-  };
-
-  const handleScrollUp = () => {
-    scrollTo(Math.max(0, scrollOffset - winData.height / 3));
-  };
-
-  const handleScrollDown = () => {
-    scrollTo(
-      Math.min(
-        winData.fullY - winData.height,
-        scrollOffset + winData.height / 3,
-      ),
-    );
-  };
-
-  const handleEnableRND = () => {
-    // in case the x button was clicked, make sure element still exists
-    if (scrollRef) {
-      setDragDisable(false);
-      setResizable(true);
-    }
-  };
-
-  const handleDisableRND = () => {
-    if (scrollRef) {
-      setDragDisable(true);
-      setResizable(false);
-    }
-  };
-
-  const saveElementData = () => {
-    const el: HTMLDivElement | null = scrollRef.current;
-    if (el === null) {
-      return;
-    }
-    const elData: DOMRect = scrollRef.current!.getBoundingClientRect();
-    setWinData({
-      height: elData.height,
-      width: elData.width,
-      fullY: el.scrollHeight,
-    });
-  };
 
   // do some setTimeOuts to load the menu bar/dialog body
   const showWindowParts = () => {
@@ -183,10 +105,275 @@ const Dialog = (props: IDialogProps) => {
   };
 
   useEffect(() => {
-    // onload, save element attributes
-    saveElementData();
     // start animation for diffierent parts of the window
     showWindowParts();
+  }, []);
+
+  return (
+    <div className={clsx("dialog", props.errorDialog && "error")}>
+      <div
+        className={clsx(
+          "dialog-loading-container",
+          winShow.showBackground || "dialog-part-hidden",
+        )}
+      >
+        <div
+          className={clsx(
+            "dialog-menu-bar-container",
+            winShow.showMenuBar || "dialog-part-hidden",
+          )}
+        >
+          <div
+            className={clsx(
+              "dialog-menu-button dialog-exit-button",
+              winShow.showExitButton || "dialog-part-hidden",
+            )}
+            onClick={props.hitCloseCallback}
+            onTouchEnd={props.hitCloseCallback} // also close on touch events
+            onMouseEnter={props.handleDisableRND}
+            onMouseLeave={props.handleEnableRND}
+          >
+            <span>×</span>
+          </div>
+          {props.title}
+          <div
+            className={clsx(
+              "dialog-menu-button dialog-up-button",
+              winShow.showScrollButtons || "dialog-part-hidden",
+            )}
+            onTouchStart={props.handleDisableRND} // disable dragging when user starts touching
+            onTouchEnd={() => {
+              props.handleEnableRND();
+              props.handleScrollUp(); // scroll on touch end, else you have to do weird double clicks
+            }}
+            onMouseEnter={props.handleDisableRND}
+            onMouseLeave={props.handleEnableRND}
+            onClick={props.handleScrollUp}
+          >
+            <Repeatable
+              tag="button"
+              type="button"
+              repeatInterval={100}
+              repeatCount={9999}
+              onHold={props.handleScrollUp}
+            >
+              ▲
+            </Repeatable>
+          </div>
+          <div
+            className={clsx(
+              "dialog-menu-button dialog-down-button",
+              winShow.showScrollButtons || "dialog-part-hidden",
+            )}
+            onTouchStart={props.handleDisableRND}
+            onTouchEnd={() => {
+              props.handleEnableRND();
+              props.handleScrollDown();
+            }}
+            onMouseEnter={props.handleDisableRND}
+            onMouseLeave={props.handleEnableRND}
+            onClick={props.handleScrollDown}
+          >
+            <Repeatable
+              tag="button"
+              type="button"
+              repeatInterval={100}
+              repeatCount={9999}
+              onHold={props.handleScrollDown}
+            >
+              ▼
+            </Repeatable>
+          </div>
+        </div>
+        <div
+          ref={props.scrollRef}
+          className={clsx(
+            "dialog-body",
+            props.msg !== undefined && "dialog-message",
+            winShow.showBody || "dialog-part-hidden",
+            props.noCenter && "dialog-no-center",
+          )}
+          onWheel={(e) => {
+            e.preventDefault();
+            let targetScrollHeight: number = props.scrollOffset + e.deltaY;
+
+            // make sure this is within bounds, else default
+            if (targetScrollHeight < 0) {
+              targetScrollHeight = 0;
+            } else {
+              const maxScrollHeight =
+                props.winData.fullY - props.winData.height;
+              if (targetScrollHeight > maxScrollHeight) {
+                targetScrollHeight = maxScrollHeight;
+              }
+            }
+            scrollTo({ top: targetScrollHeight });
+          }}
+          // for elements that want it, disable/enable
+          // dragging on the body when hovered
+          onMouseEnter={() => {
+            props.setDragDisable(props.disableBodyDragging);
+          }}
+          onClick={() => {
+            props.setDragDisable(props.disableBodyDragging);
+          }}
+          onMouseLeave={props.handleEnableRND}
+        >
+          {
+            // if the user provided a message, render it *and* the children
+            props.msg !== undefined ? (
+              <>
+                {props.msg}
+                {props.children}
+              </>
+            ) : (
+              // else just render the children
+              <> {props.children} </>
+            )
+          }
+          {/* a dummy element that receives the context, with a useEffect hook
+                    that selects this when its launched */}
+          <AutoFocusDialog setSelfFunc={props.setSelfSelectedCtx} />
+        </div>
+        {/* TODO: add scrollbar on the right offset, use scrollOffset, winData.x and winData.fullY to create the rect */}
+        <div className="dialog-bottom-right-icon"></div>
+      </div>
+    </div>
+  );
+};
+
+interface UIDialogProps {
+  title?: string;
+  titleObj?: any;
+  // dont center icons
+  noCenter?: boolean;
+  isErr?: boolean;
+  msg?: string;
+}
+
+interface IDialogProps {
+  x: number;
+  y: number;
+  width?: number;
+  height?: number;
+  minWidth?: number;
+  minHeight?: number;
+  hitCloseCallback: () => void;
+  windowId?: string;
+  // dont allow user to drag while hovering body
+  disableBodyDragging?: boolean;
+  UI?: UIDialogProps;
+  widget?: {
+    closable: boolean;
+  };
+  children?: any;
+}
+
+export const defaultDialogWidth = 200;
+export const defaultDialogHeight = 100;
+
+// set the current window we are using as the 'top' window in global AppContext
+function setSelfSelected(ctx: Context, windowId?: string) {
+  setSelectedWindow(ctx.setContext, windowId);
+}
+
+interface UIDialogTitleProps {
+  isErr?: boolean;
+  titleObj?: any;
+  title?: string;
+}
+
+const UIDialogTitle = (props: UIDialogTitleProps) => {
+  const dialogTitle: string | null =
+    props.title ?? (props.isErr ? "ERROR" : null);
+
+  return (
+    <div className="dialog-menu-title">
+      {/* use the passed title object if one was given, else the dialog title*/}
+      {props.titleObj ??
+        (dialogTitle && (
+          <div className="dialog-title-text pixel"> {dialogTitle} </div>
+        ))}
+    </div>
+  );
+};
+
+const Dialog = (props: IDialogProps) => {
+  // dialog related
+  const dialogWidth = props.width ?? defaultDialogWidth;
+  const dialogHeight = props.height ?? defaultDialogHeight;
+
+  const disableBodyDragging = props.disableBodyDragging ?? false;
+
+  // disable dragging/resizing while mousing over buttons
+  const [dragDisable, setDragDisable] = useState<boolean>(false);
+  const [resizable, setResizable] = useState<boolean>(true);
+
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const handleEnableRND = () => {
+    // in case the x button was clicked, make sure element still exists
+    if (scrollRef) {
+      setDragDisable(false);
+      setResizable(true);
+    }
+  };
+
+  const handleDisableRND = () => {
+    if (scrollRef) {
+      setDragDisable(true);
+      setResizable(false);
+    }
+  };
+
+  const defaultWindowData: windowData = {
+    width: dialogWidth,
+    height: dialogHeight,
+    fullY: 0,
+  };
+
+  // scroll related
+  const [scrollOffset, setScrollOffset] = useState<number>(0);
+  const [winData, setWinData] = useState(defaultWindowData);
+
+  const scrollTo = (height: number) => {
+    const el: HTMLDivElement | null = scrollRef.current;
+    if (el === null) {
+      return;
+    }
+    el.scrollTo({ top: height });
+    setScrollOffset(height);
+  };
+
+  const handleScrollUp = () => {
+    scrollTo(Math.max(0, scrollOffset - winData.height / 3));
+  };
+
+  const handleScrollDown = () => {
+    scrollTo(
+      Math.min(
+        winData.fullY - winData.height,
+        scrollOffset + winData.height / 3,
+      ),
+    );
+  };
+
+  const saveElementData = () => {
+    const el: HTMLDivElement | null = scrollRef.current;
+    if (el === null) {
+      return;
+    }
+    const elData: DOMRect = el.getBoundingClientRect();
+    setWinData({
+      height: elData.height,
+      width: elData.width,
+      fullY: el.scrollHeight,
+    });
+  };
+
+  useEffect(() => {
+    // onload, save element attributes
+    saveElementData();
     // if this is only meant to be dragged by the title, disable dragging here
     // the arrow functions in the body check if this is disabled before firing the handleEnableRND
     if (disableBodyDragging) {
@@ -226,149 +413,42 @@ const Dialog = (props: IDialogProps) => {
               // dont draw rectangles on the desktop
               event.stopPropagation();
             }}
+            // these are unset if another window sets itself as the selected window
             className={clsx(
               "rnd",
               value.selectedWindow === props.windowId && "top-dialog",
             )}
-            // these are unset if another window sets itself as the selected window
           >
-            <div className={clsx("dialog", errorDialog && "error")}>
-              <div
-                className={clsx(
-                  "dialog-loading-container",
-                  winShow.showBackground || "dialog-part-hidden",
-                )}
-              >
-                <div
-                  className={clsx(
-                    "dialog-menu-bar-container",
-                    winShow.showMenuBar || "dialog-part-hidden",
-                  )}
-                >
-                  <div
-                    className={clsx(
-                      "dialog-menu-button dialog-exit-button",
-                      winShow.showExitButton || "dialog-part-hidden",
-                    )}
-                    onClick={props.hitCloseCallback}
-                    onTouchEnd={props.hitCloseCallback} // also close on touch events
-                    onMouseEnter={handleDisableRND}
-                    onMouseLeave={handleEnableRND}
-                  >
-                    <span>×</span>
-                  </div>
-                  <div className="dialog-menu-title">
-                    {/* use the passed title object if one was given, else the dialog title*/}
-                    {props.titleObj ??
-                      (dialogTitle && (
-                        <div className="dialog-title-text pixel">
-                          {" "}
-                          {dialogTitle}{" "}
-                        </div>
-                      ))}
-                  </div>
-                  <div
-                    className={clsx(
-                      "dialog-menu-button dialog-up-button",
-                      winShow.showScrollButtons || "dialog-part-hidden",
-                    )}
-                    onTouchStart={handleDisableRND} // disable dragging when user starts touching
-                    onTouchEnd={() => {
-                      handleEnableRND();
-                      handleScrollUp(); // scroll on touch end, else you have to do weird double clicks
-                    }}
-                    onMouseEnter={handleDisableRND}
-                    onMouseLeave={handleEnableRND}
-                    onClick={handleScrollUp}
-                  >
-                    <Repeatable
-                      tag="button"
-                      type="button"
-                      repeatInterval={100}
-                      repeatCount={9999}
-                      onHold={handleScrollUp}
-                    >
-                      ▲
-                    </Repeatable>
-                  </div>
-                  <div
-                    className={clsx(
-                      "dialog-menu-button dialog-down-button",
-                      winShow.showScrollButtons || "dialog-part-hidden",
-                    )}
-                    onTouchStart={handleDisableRND}
-                    onTouchEnd={() => {
-                      handleEnableRND();
-                      handleScrollDown();
-                    }}
-                    onMouseEnter={handleDisableRND}
-                    onMouseLeave={handleEnableRND}
-                    onClick={handleScrollDown}
-                  >
-                    <Repeatable
-                      tag="button"
-                      type="button"
-                      repeatInterval={100}
-                      repeatCount={9999}
-                      onHold={handleScrollDown}
-                    >
-                      ▼
-                    </Repeatable>
-                  </div>
-                </div>
-                <div
-                  ref={scrollRef}
-                  className={clsx(
-                    "dialog-body",
-                    hasMsg && "dialog-message",
-                    winShow.showBody || "dialog-part-hidden",
-                    (props.noCenter ?? false) && "dialog-no-center",
-                  )}
-                  onWheel={(e) => {
-                    e.preventDefault();
-                    let targetScrollHeight: number = scrollOffset + e.deltaY;
-
-                    // make sure this is within bounds, else default
-                    if (targetScrollHeight < 0) {
-                      targetScrollHeight = 0;
-                    } else {
-                      const maxScrollHeight = winData.fullY - winData.height;
-                      if (targetScrollHeight > maxScrollHeight) {
-                        targetScrollHeight = maxScrollHeight;
-                      }
-                    }
-                    scrollTo(targetScrollHeight);
-                  }}
-                  // for elements that want it, disable/enable
-                  // dragging on the body when hovered
-                  onMouseEnter={() => {
-                    setDragDisable(disableBodyDragging);
-                  }}
-                  onClick={() => {
-                    setDragDisable(disableBodyDragging);
-                  }}
-                  onMouseLeave={handleEnableRND}
-                >
-                  {
-                    // if the user provided a message, render it *and* the children
-                    hasMsg ? (
-                      <>
-                        {props.msg}
-                        {props.children}
-                      </>
-                    ) : (
-                      // else just render the children
-                      <> {props.children} </>
-                    )
-                  }
-                  {/* a dummy element that receives the context, with a useEffect hook
-                    that selects this when its launched */}
-                  <AutoFocusDialog setSelfFunc={setSelfSelectedCtx} />
-                </div>
-                {/* TODO: add scrollbar on the right offset, use scrollOffset, winData.x and winData.fullY to create the rect */}
-                <div className="dialog-bottom-right-icon"></div>
-              </div>
-            </div>
+            {props.UI !== undefined ? (
+              <UIWindow
+                scrollRef={scrollRef}
+                msg={props.UI.msg}
+                children={props.children}
+                noCenter={props.UI.noCenter ?? false}
+                errorDialog={props.UI.isErr ?? false}
+                dialogWidth={dialogWidth}
+                dialogHeight={dialogHeight}
+                disableBodyDragging={disableBodyDragging}
+                hitCloseCallback={props.hitCloseCallback}
+                handleEnableRND={handleEnableRND}
+                handleDisableRND={handleDisableRND}
+                handleScrollUp={handleScrollUp}
+                handleScrollDown={handleScrollDown}
+                winData={winData}
+                scrollOffset={scrollOffset}
+                setDragDisable={setDragDisable}
+                setSelfSelectedCtx={setSelfSelectedCtx}
+                title={
+                  <UIDialogTitle
+                    titleObj={props.UI.titleObj}
+                    title={props.UI.title}
+                    isErr={props.UI.isErr}
+                  />
+                }
+              />
+            ) : (
+              <div className="widget-container">{props.children}</div>
+            )}
           </Rnd>
         );
       }}

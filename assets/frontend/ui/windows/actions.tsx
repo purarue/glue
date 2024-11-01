@@ -103,15 +103,25 @@ export interface DialogInfo {
   closeWindow: () => void;
 }
 
-export function dialogInfo(
-  scale: number,
-  minSize: MinSize,
-  setwMsg: setWindowMsg,
-): DialogInfo {
+export function dialogInfo({
+  minSize,
+  setwMsg,
+  scale,
+}: {
+  minSize: MinSize;
+  setwMsg: setWindowMsg;
+  scale?: number;
+}): DialogInfo {
   const { browserHeight, browserWidth } = getWindowDimensions();
   const { x, y } = jitterCenterLocation();
-  const dialogWidth = Math.max(minSize.width, browserWidth * scale);
-  const dialogHeight = Math.max(minSize.height, browserHeight * scale);
+  const dialogWidth =
+    scale === undefined
+      ? minSize.width
+      : Math.max(minSize.width, browserWidth * scale);
+  const dialogHeight =
+    scale === undefined
+      ? minSize.height
+      : Math.max(minSize.height, browserHeight * scale);
   const windowId = Date.now().toString();
   return {
     x,

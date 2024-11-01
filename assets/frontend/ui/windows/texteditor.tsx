@@ -11,14 +11,14 @@ const minWidth = 300;
 export function TextEditorWindow(setwMsg: setWindowMsg): launchWindowFunc {
   return () => {
     const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =
-      dialogInfo(
-        fullScreenDialogScale,
-        {
+      dialogInfo({
+        scale: fullScreenDialogScale,
+        minSize: {
           height: minHeight,
           width: minHeight,
         },
         setwMsg,
-      );
+      });
     setwMsg({
       spawn: true,
       windowId: windowId,
@@ -28,7 +28,9 @@ export function TextEditorWindow(setwMsg: setWindowMsg): launchWindowFunc {
           y={y - dialogHeight / 2}
           width={dialogWidth}
           height={dialogHeight}
-          title="textedit"
+          UI={{
+            title: "textedit",
+          }}
           windowId={windowId}
           minHeight={minHeight}
           minWidth={minWidth}

@@ -615,6 +615,10 @@ textarea {
     }
   }
 
+  .widget-container {
+    background-color: $bg;
+  }
+
   $dialog_exit_button_width: 25px;
   $dialog_gutter_width: 10px;
 

@@ -13,14 +13,14 @@ const scale = 0.5;
 export function Window(setwMsg: setWindowMsg): launchWindowFunc {
   return () => {
     const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =
-      dialogInfo(
-        scale,
-        {
+      dialogInfo({
+        scale: scale,
+        minSize: {
           height: minHeight,
           width: minHeight,
         },
         setwMsg,
-      );
+      });
     setwMsg({
       spawn: true,
       windowId: windowId,
@@ -30,7 +30,9 @@ export function Window(setwMsg: setWindowMsg): launchWindowFunc {
           y={y - dialogHeight / 2}
           width={minWidth}
           height={minHeight}
-          title="title"
+          UI={{
+            title: "title",
+          }}
           windowId={windowId}
           minHeight={minHeight}
           minWidth={minWidth}

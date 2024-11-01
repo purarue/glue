@@ -1,4 +1,10 @@
-import React, { useEffect, Dispatch, SetStateAction, useState } from "react";
+import React, {
+  useEffect,
+  Dispatch,
+  SetStateAction,
+  useState,
+  useRef,
+} from "react";
 import clsx from "clsx";
 
 import { Context, AppContextConsumer } from "../app_provider";
@@ -13,6 +19,7 @@ import { hash } from "../build";
 import useCurrentlyListening, {
   CurrentlyListeningNotification,
 } from "./../currently_listening";
+import { AUTOLAUNCH_WIDGETS } from "./widgets/launch";
 
 // represents the current windows on the screen
 // windowId is epoch time/some unique integer
@@ -108,6 +115,29 @@ function Home() {
   useEffect(() => {
     renderDesktopIconFrame(loading, IconData.length, setLoading);
   }, []);
+
+  const launchWidgets = useRef<boolean | undefined>(undefined);
+
+  useEffect(() => {
+    if (launchWidgets.current === false) {
+      return;
+    }
+
+    if (loading >= IconData.length) {
+      launchWidgets.current = false;
+
+      // launch widgets, with some time between
+      // TODO: maybe jitter
+      AUTOLAUNCH_WIDGETS.forEach((w, i) => {
+        setTimeout(
+          () => {
+            w(setwMsg)();
+          },
+          (i + 1) * 300,
+        );
+      });
+    }
+  }, [launchWidgets.current, loading]);
 
   // handle window spawn/kill
   useEffect(() => {

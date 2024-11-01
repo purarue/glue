@@ -80,14 +80,14 @@ async function handleRequest(
 export function GuestBookWindow(setwMsg: setWindowMsg): launchWindowFunc {
   return () => {
     const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =
-      dialogInfo(
-        dialogScale,
-        {
+      dialogInfo({
+        scale: dialogScale,
+        minSize: {
           height: minHeight,
           width: minHeight,
         },
         setwMsg,
-      );
+      });
     setwMsg({
       spawn: true,
       windowId: windowId,
@@ -97,7 +97,9 @@ export function GuestBookWindow(setwMsg: setWindowMsg): launchWindowFunc {
           y={y - dialogHeight / 2}
           width={dialogWidth}
           height={dialogHeight}
-          title="guest book"
+          UI={{
+            title: "guest book",
+          }}
           windowId={windowId}
           minHeight={minHeight}
           minWidth={minWidth}

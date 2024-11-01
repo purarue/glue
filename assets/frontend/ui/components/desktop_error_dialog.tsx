@@ -25,10 +25,12 @@ const DesktopErrorDialog = (props: IDesktopErrorDialogProps) => {
 
   return (
     <Dialog
-      msg={props.msg}
+      UI={{
+        msg: props.msg,
+        isErr: true,
+      }}
       x={xPos}
       y={yPos}
-      isErr={true}
       height={dialogHeight}
       width={dialogWidth}
       hitCloseCallback={props.closeDialog}
