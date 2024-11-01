@@ -23,14 +23,14 @@ export function LinkWindow(props: ILinkWindow): launchWindowFunc {
   const minHeight = props.minHeight ?? 40 + props.links.length * linkLineHeight;
   return () => {
     const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =
-      dialogInfo(
-        0.2,
-        {
+      dialogInfo({
+        scale: 0.2,
+        minSize: {
           height: minHeight,
           width: minHeight,
         },
-        props.setwMsg,
-      );
+        setwMsg: props.setwMsg,
+      });
     props.setwMsg({
       spawn: true,
       windowId: windowId,
@@ -44,7 +44,9 @@ export function LinkWindow(props: ILinkWindow): launchWindowFunc {
           height={dialogHeight}
           minHeight={minHeight}
           minWidth={minWidth}
-          title={props.title}
+          UI={{
+            title: props.title,
+          }}
           windowId={windowId}
           hitCloseCallback={closeWindow}
         >

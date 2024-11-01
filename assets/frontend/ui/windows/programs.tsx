@@ -13,25 +13,27 @@ const scale = 0.38;
 export function ProgramWindow(setwMsg: setWindowMsg): launchWindowFunc {
   return () => {
     const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =
-      dialogInfo(
-        scale,
-        {
+      dialogInfo({
+        scale: scale,
+        minSize: {
           height: minHeight,
           width: minWidth,
         },
         setwMsg,
-      );
+      });
     setwMsg({
       spawn: true,
       windowId: windowId,
       windowObj: (
         <Dialog
-          noCenter={true}
           x={x - dialogWidth / 2}
           y={y - dialogHeight / 2}
           width={dialogWidth}
           height={dialogHeight}
-          title="programs"
+          UI={{
+            noCenter: true,
+            title: "programs",
+          }}
           windowId={windowId}
           minHeight={minHeight}
           minWidth={minWidth}

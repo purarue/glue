@@ -14,14 +14,14 @@ const minWidth = 300;
 export function CubingWindow(setwMsg: setWindowMsg): launchWindowFunc {
   return () => {
     const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =
-      dialogInfo(
-        fullScreenDialogScale,
-        {
+      dialogInfo({
+        scale: fullScreenDialogScale,
+        minSize: {
           height: minHeight,
           width: minWidth,
         },
         setwMsg,
-      );
+      });
     setwMsg({
       spawn: true,
       windowId: windowId,
@@ -31,7 +31,9 @@ export function CubingWindow(setwMsg: setWindowMsg): launchWindowFunc {
           y={y - dialogHeight / 2}
           width={dialogWidth}
           height={dialogHeight}
-          title="cubing"
+          UI={{
+            title: "cubing",
+          }}
           windowId={windowId}
           minHeight={minHeight}
           minWidth={minWidth}

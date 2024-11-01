@@ -13,25 +13,27 @@ const scale = 0.3;
 export function WritingWindow(setwMsg: setWindowMsg): launchWindowFunc {
   return () => {
     const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =
-      dialogInfo(
-        scale,
-        {
+      dialogInfo({
+        scale: scale,
+        minSize: {
           height: minHeight,
           width: minWidth,
         },
         setwMsg,
-      );
+      });
     setwMsg({
       spawn: true,
       windowId: windowId,
       windowObj: (
         <Dialog
-          noCenter={true}
+          UI={{
+            noCenter: true,
+            title: "writing",
+          }}
           x={x - dialogWidth / 2}
           y={y - dialogHeight / 2}
           width={dialogWidth}
           height={dialogHeight}
-          title="writing"
           windowId={windowId}
           minHeight={minHeight}
           minWidth={minWidth}

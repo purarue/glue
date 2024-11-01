@@ -15,14 +15,14 @@ const minWidth = 400;
 
 export function CustomizeWindow(setwMsg: setWindowMsg): launchWindowFunc {
   return () => {
-    const { x, y, windowId, closeWindow } = dialogInfo(
-      1.0,
-      {
+    const { x, y, windowId, closeWindow } = dialogInfo({
+      scale: 1.0,
+      minSize: {
         height: minHeight,
         width: minWidth,
       },
       setwMsg,
-    );
+    });
     setwMsg({
       spawn: true,
       windowId: windowId,
@@ -32,11 +32,12 @@ export function CustomizeWindow(setwMsg: setWindowMsg): launchWindowFunc {
           y={y - minHeight / 2}
           width={minWidth}
           height={minHeight}
-          title="customize"
+          UI={{
+            title: "customize",
+          }}
           windowId={windowId}
           minHeight={minHeight}
           minWidth={minWidth}
-          disableBodyDragging={true}
           hitCloseCallback={closeWindow}
         >
           <AppContextConsumer>

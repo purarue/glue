@@ -13,25 +13,27 @@ const scale = 0.36;
 export function CodeWindow(setwMsg: setWindowMsg): launchWindowFunc {
   return () => {
     const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =
-      dialogInfo(
-        scale,
-        {
+      dialogInfo({
+        scale: scale,
+        minSize: {
           height: minHeight,
           width: minWidth,
         },
         setwMsg,
-      );
+      });
     setwMsg({
       spawn: true,
       windowId: windowId,
       windowObj: (
         <Dialog
-          noCenter={true}
           x={x - dialogWidth / 2}
           y={y - dialogHeight / 2}
           width={dialogWidth}
           height={dialogHeight}
-          title="code"
+          UI={{
+            title: "code",
+            noCenter: true,
+          }}
           windowId={windowId}
           minHeight={minHeight}
           minWidth={minWidth}
