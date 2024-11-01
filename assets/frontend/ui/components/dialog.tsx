@@ -47,6 +47,7 @@ interface UIWIndowProps {
   disableBodyDragging: boolean;
   winData: windowData;
   scrollOffset: number;
+  setScrollOffset: Dispatch<SetStateAction<number>>;
   setDragDisable: Dispatch<SetStateAction<boolean>>;
   setSelfSelectedCtx: () => void;
   hitCloseCallback: () => void;
@@ -194,20 +195,26 @@ const UIWindow = (props: UIWIndowProps) => {
             props.noCenter && "dialog-no-center",
           )}
           onWheel={(e) => {
+            // console.log(e);
             e.preventDefault();
             let targetScrollHeight: number = props.scrollOffset + e.deltaY;
+            // console.log(targetScrollHeight);
 
             // make sure this is within bounds, else default
             if (targetScrollHeight < 0) {
               targetScrollHeight = 0;
+              // console.log("targetScrollHeight < 0");
             } else {
               const maxScrollHeight =
                 props.winData.fullY - props.winData.height;
               if (targetScrollHeight > maxScrollHeight) {
                 targetScrollHeight = maxScrollHeight;
+                // console.log("targetScrollHeight > maxScrollHeight");
               }
             }
-            scrollTo({ top: targetScrollHeight });
+            // console.log("scrolling", targetScrollHeight);
+            props.scrollRef.current.scrollTo({ top: targetScrollHeight });
+            props.setScrollOffset(targetScrollHeight);
           }}
           // for elements that want it, disable/enable
           // dragging on the body when hovered
@@ -337,11 +344,10 @@ const Dialog = (props: IDialogProps) => {
   const [winData, setWinData] = useState(defaultWindowData);
 
   const scrollTo = (height: number) => {
-    const el: HTMLDivElement | null = scrollRef.current;
-    if (el === null) {
+    if (scrollRef.current === null) {
       return;
     }
-    el.scrollTo({ top: height });
+    scrollRef.current.scrollTo({ top: height });
     setScrollOffset(height);
   };
 
@@ -436,6 +442,7 @@ const Dialog = (props: IDialogProps) => {
                 handleScrollDown={handleScrollDown}
                 winData={winData}
                 scrollOffset={scrollOffset}
+                setScrollOffset={setScrollOffset}
                 setDragDisable={setDragDisable}
                 setSelfSelectedCtx={setSelfSelectedCtx}
                 title={
