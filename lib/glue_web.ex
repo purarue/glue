@@ -22,7 +22,7 @@ defmodule GlueWeb do
       use Phoenix.Controller, namespace: GlueWeb
 
       import Plug.Conn
-      import GlueWeb.Gettext
+      use Gettext, backend: GlueWeb.Gettext
       alias GlueWeb.Router.Helpers, as: Routes
     end
   end
@@ -54,7 +54,7 @@ defmodule GlueWeb do
   def channel do
     quote do
       use Phoenix.Channel
-      import GlueWeb.Gettext
+      use Gettext, backend: GlueWeb.Gettext
     end
   end
 
@@ -67,7 +67,7 @@ defmodule GlueWeb do
       import Phoenix.View
 
       import GlueWeb.ErrorHelpers
-      import GlueWeb.Gettext
+      use Gettext, backend: GlueWeb.Gettext
       alias GlueWeb.Router.Helpers, as: Routes
     end
   end
