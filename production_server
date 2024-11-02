@@ -9,6 +9,8 @@ declare CUBING_JSON GUESTBOOK_JSON_PATH
 CUBING_JSON="${THIS_DIR}/data/cubing.json"
 GUESTBOOK_JSON_PATH="${THIS_DIR}/data/guestbook.json"
 
+./generate_build_hash || exit $?
+
 declare -rx CUBING_JSON GUESTBOOK_JSON_PATH
 
 if [[ ! -e "${CUBING_JSON}" ]]; then
