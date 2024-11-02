@@ -4,4 +4,4 @@ THIS_DIR="$(realpath "$(dirname "${BASH_SOURCE[0]}")")"
 cd "${THIS_DIR}" || exit $?
 
 HASH="$(git rev-parse HEAD | cut -c -8)"
-printf 'export const hash = "%s"' "${HASH}" >./assets/frontend/build.tsx
+printf 'export const hash = "%s"\n' "${HASH}" >./assets/frontend/build.tsx
