@@ -42,7 +42,9 @@ export function Clock(setwMsg: setWindowMsg): launchWindowFunc {
 
 // want to render something that looks pixelated,
 // maybe split it into a grid and then do some
-// math to render clock hands nicely?
+// create a small image in a canvas and then scale up
+// https://stackoverflow.com/questions/19129644/how-to-pixelate-an-image-with-canvas-and-javascript
+// https://developer.mozilla.org/en-US/docs/Games/Techniques/Crisp_pixel_art_look
 const ClockBody = () => {
   return (
     <div
