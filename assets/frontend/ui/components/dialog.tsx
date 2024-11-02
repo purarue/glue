@@ -256,6 +256,8 @@ interface UIDialogProps {
   msg?: string;
 }
 
+interface WidgetDialogProps {}
+
 interface IDialogProps {
   x: number;
   y: number;
@@ -269,9 +271,7 @@ interface IDialogProps {
   disableBodyDragging?: boolean;
   isResizable?: boolean;
   UI?: UIDialogProps;
-  widget?: {
-    closable: boolean;
-  };
+  Widget?: WidgetDialogProps;
   children?: any;
 }
 
@@ -312,7 +312,7 @@ const TopRightClose = (props: { hitCloseCallback: () => void }) => {
         props.hitCloseCallback();
       }}
     >
-      <div className="top-right-close">x</div>
+      <div className={"top-right-close pixel"}>x</div>
     </div>
   );
 };
