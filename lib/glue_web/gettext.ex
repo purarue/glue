@@ -5,7 +5,7 @@ defmodule GlueWeb.Gettext do
   By using [Gettext](https://hexdocs.pm/gettext),
   your module gains a set of macros for translations, for example:
 
-      import GlueWeb.Gettext
+      use Gettext, backend: GlueWeb.Gettext
 
       # Simple translation
       gettext("Here is the string to translate")
@@ -20,5 +20,5 @@ defmodule GlueWeb.Gettext do
 
   See the [Gettext Docs](https://hexdocs.pm/gettext) for detailed usage.
   """
-  use Gettext, otp_app: :glue
+  use Gettext.Backend, otp_app: :glue
 end
