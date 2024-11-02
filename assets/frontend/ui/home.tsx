@@ -4,6 +4,7 @@ import React, {
   SetStateAction,
   useState,
   useRef,
+  useMemo,
 } from "react";
 import clsx from "clsx";
 
@@ -89,6 +90,50 @@ function renderDesktopIconFrame(
   }
 }
 
+const Geocities = () => {
+  // a hidden icon (easter egg) which when clicked takes you to my old site
+  //
+  // every minute or so, show the image for a second
+  // if hovering, always show the image
+  const [timerShow, setTimerShow] = useState(false);
+  const [hovering, setHovering] = useState(false);
+
+  const scheduleLoop = () => {
+    // some amount of MS between 15 and 45 seconds
+    const ms = (30 * Math.random() + 15) * 1000;
+    setTimeout(() => {
+      setTimerShow(true);
+      setTimeout(() => {
+        setTimerShow(false);
+        scheduleLoop();
+      }, 4000);
+    }, ms);
+  };
+
+  useEffect(() => {
+    scheduleLoop();
+  }, []);
+
+  return (
+    <TapLink
+      href="https://purarue.xyz/geocities/"
+      className="menu-toolbar-item menu-bar-item unlinkify geocities"
+      aria-hidden="true"
+      onMouseEnter={() => setHovering(true)}
+      onMouseLeave={() => setHovering(false)}
+    >
+      <img
+        src="/images/frontend/geocities.gif"
+        alt="geocities"
+        width="3rem"
+        style={{
+          display: hovering || timerShow ? "inline-block" : "none",
+        }}
+      />
+    </TapLink>
+  );
+};
+
 function Home() {
   // currently displayed floating windows
   const [guiWindows, setWindows] = useState(windowDefault);
@@ -119,10 +164,12 @@ function Home() {
   const launchWidgets = useRef<boolean | undefined>(undefined);
 
   useEffect(() => {
+    // they've already been launched
     if (launchWidgets.current === false) {
       return;
     }
 
+    // once all the icons have loaded, then launch widgets
     if (loading >= IconData.length) {
       launchWidgets.current = false;
 
@@ -207,18 +254,7 @@ function Home() {
         >
           <h1>purarue</h1>
         </TapLink>
-        {/* a hidden icon (easter egg) which when clicked takes you to my old site */}
-        <TapLink
-          href="https://purarue.xyz/geocities/"
-          className="menu-toolbar-item menu-bar-item unlinkify geocities"
-          aria-hidden="true"
-        >
-          <img
-            src="/images/frontend/geocities.gif"
-            alt="geocities"
-            width="3rem"
-          />
-        </TapLink>
+        <Geocities />
         <HeaderRight />
       </div>
       <div id="window-body">
