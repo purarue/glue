@@ -18,7 +18,7 @@ module.exports = (_env, options) => {
     entry: {
       app: glob
         .sync("./vendor/**/*.js")
-        .concat(["./js/app.js", "./frontend/react.js"]),
+        .concat(["./frontend/react.js"]),
       styles: ["./css/styles.scss", "./css/reset.css"],
     },
     output: {
