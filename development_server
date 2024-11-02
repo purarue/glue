@@ -7,6 +7,8 @@ set -x
 THIS_DIR="$(realpath "$(dirname "${BASH_SOURCE[0]}")")"
 cd "${THIS_DIR}"
 
+./generate_build_hash
+
 mkdir -p ./data
 
 CUBING_JSON="${THIS_DIR}/data/cubing.json"
