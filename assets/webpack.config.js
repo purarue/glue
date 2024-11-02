@@ -16,9 +16,7 @@ module.exports = (_env, options) => {
     // everything hot-reloads in development mode properly, the correct
     // filepaths are set in the html eex layout file
     entry: {
-      app: glob
-        .sync("./vendor/**/*.js")
-        .concat(["./frontend/react.js"]),
+      app: glob.sync("./vendor/**/*.js").concat(["./frontend/react.js"]),
       styles: ["./css/styles.scss", "./css/reset.css"],
     },
     output: {
