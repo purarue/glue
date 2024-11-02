@@ -135,7 +135,7 @@ const ClockBody = () => {
 
       // center square
       ctx.beginPath();
-      const sideLength = radius * 0.2;
+      const sideLength = radius * 0.15;
       ctx.rect(-sideLength / 2, -sideLength / 2, sideLength, sideLength);
       // ctx.arc(0, 0, radius * 0.1, 0, 2 * Math.PI);
       ctx.fillStyle = "#333";
