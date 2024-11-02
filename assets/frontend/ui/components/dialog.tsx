@@ -238,8 +238,6 @@ const UIWindow = (props: UIWIndowProps) => {
               <> {props.children} </>
             )
           }
-          {/* a dummy element that receives the context, with a useEffect hook
-                    that selects this when its launched */}
           <AutoFocusDialog setSelfFunc={props.setSelfSelectedCtx} />
         </div>
         {/* TODO: add scrollbar on the right offset, use scrollOffset, winData.x and winData.fullY to create the rect */}
@@ -269,6 +267,7 @@ interface IDialogProps {
   windowId?: string;
   // dont allow user to drag while hovering body
   disableBodyDragging?: boolean;
+  isResizable?: boolean;
   UI?: UIDialogProps;
   widget?: {
     closable: boolean;
@@ -305,12 +304,50 @@ const UIDialogTitle = (props: UIDialogTitleProps) => {
   );
 };
 
+const TopRightClose = (props: { hitCloseCallback: () => void }) => {
+  return (
+    <div
+      className="top-right-close-container"
+      onClick={(_e) => {
+        props.hitCloseCallback();
+      }}
+    >
+      <div className="top-right-close">x</div>
+    </div>
+  );
+};
+
+interface IWidgetTopRightClose {
+  hitCloseCallback: () => void;
+  disableBodyDragging: boolean;
+  setDragDisable: Dispatch<SetStateAction<boolean>>;
+  setSelfSelectedCtx: () => void;
+  children: React.ReactNode;
+}
+
+export const WidgetTopRightClose = (props: IWidgetTopRightClose) => {
+  return (
+    <div className="widget-container">
+      <div
+        className="widget-body"
+        // onMouseEnter={() => props.setDragDisable(props.disableBodyDragging)}
+        // onMouseLeave={() => props.setDragDisable(props.disableBodyDragging)}
+      >
+        <TopRightClose hitCloseCallback={props.hitCloseCallback} />
+        {props.children}
+      </div>
+      <AutoFocusDialog setSelfFunc={props.setSelfSelectedCtx} />
+    </div>
+  );
+};
+
 const Dialog = (props: IDialogProps) => {
   // dialog related
   const dialogWidth = props.width ?? defaultDialogWidth;
   const dialogHeight = props.height ?? defaultDialogHeight;
 
   const disableBodyDragging = props.disableBodyDragging ?? false;
+  const canResize = props.isResizable ?? true;
 
   // disable dragging/resizing while mousing over buttons
   const [dragDisable, setDragDisable] = useState<boolean>(false);
@@ -408,7 +445,7 @@ const Dialog = (props: IDialogProps) => {
             minHeight={props.minHeight}
             minWidth={props.minWidth}
             disableDragging={dragDisable}
-            enableResizing={resizable}
+            enableResizing={canResize ? resizable : false}
             // onClick/Drag/Touch, increase z-index of this window
             onClick={setSelfSelectedCtx}
             onDragStart={setSelfSelectedCtx}
@@ -454,7 +491,13 @@ const Dialog = (props: IDialogProps) => {
                 }
               />
             ) : (
-              <div className="widget-container">{props.children}</div>
+              <WidgetTopRightClose
+                hitCloseCallback={props.hitCloseCallback}
+                disableBodyDragging={disableBodyDragging}
+                setDragDisable={setDragDisable}
+                setSelfSelectedCtx={setSelfSelectedCtx}
+                children={props.children}
+              />
             )}
           </Rnd>
         );
@@ -463,15 +506,13 @@ const Dialog = (props: IDialogProps) => {
   );
 };
 
-interface IAutoFocusDialog {
-  setSelfFunc: () => void;
-}
-
-const AutoFocusDialog = ({ setSelfFunc }: IAutoFocusDialog) => {
+// empty element that receives the context, with a useEffect hook
+// that selects this when its launched
+const AutoFocusDialog = ({ setSelfFunc }: { setSelfFunc: () => void }) => {
   useEffect(() => {
     setSelfFunc();
   }, []);
-  return <></>;
+  return null;
 };
 
 export default Dialog;

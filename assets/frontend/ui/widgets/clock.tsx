@@ -1,4 +1,3 @@
-// this isn't used for any page, its the file I copy/paste when starting a new window
 import React from "react";
 
 import { setWindowMsg } from "./../home";
@@ -30,6 +29,8 @@ export function Clock(setwMsg: setWindowMsg): launchWindowFunc {
           windowId={windowId}
           minHeight={minHeight}
           minWidth={minWidth}
+          isResizable={false}
+          // disableBodyDragging={true}
           hitCloseCallback={closeWindow}
         >
           <ClockBody />
@@ -42,14 +43,13 @@ export function Clock(setwMsg: setWindowMsg): launchWindowFunc {
 // want to render something that looks pixelated,
 // maybe split it into a grid and then do some
 // math to render clock hands nicely?
-
 const ClockBody = () => {
   return (
     <div
+      className="clock"
       style={{
-        width: minWidth,
-        height: minHeight,
-        border: "3px solid red",
+        width: minWidth - 5,
+        height: minHeight - 5,
       }}
     >
       CLOCK
