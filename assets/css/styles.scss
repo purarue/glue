@@ -759,6 +759,14 @@ textarea {
           color: black;
           font-family: Arial, sans-serif;
         }
+
+        button {
+          border: none;
+        }
+      }
+
+      .dialog-up-button, .dialog-down-button {
+        border-top: 1px solid black;
       }
 
       .dialog-exit-button {
