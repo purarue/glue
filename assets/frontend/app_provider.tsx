@@ -16,6 +16,7 @@ import {
   RPageHits,
   RGuestBookComments,
 } from "./api_model";
+import useWindowDimensions, { Dimensions } from "./ui/components/dimensions";
 
 // defines the connection with the API, exposes that context/state
 // using hooks to the rest of the application
@@ -36,6 +37,7 @@ type Context = {
   backgroundColor: string;
   // setContext: Dispatch<SetStateAction<Context>>;
   setContext: setContextFunc;
+  dimensions?: Dimensions;
 };
 
 type setContextFunc = Dispatch<SetStateAction<Context>>;
@@ -74,6 +76,19 @@ const AppContext = createContext<Context>(initialContext);
 const AppContextProvider = ({ children }: IProps): JSX.Element => {
   const loading = useRef(false);
   const [contextState, setContext] = useState<Context>(initialContext);
+  const win = useWindowDimensions();
+
+  useEffect(() => {
+    setContext((oldData: Context): Context => {
+      return {
+        ...oldData,
+        dimensions: {
+          browserWidth: win.browserWidth,
+          browserHeight: win.browserHeight,
+        },
+      };
+    });
+  }, [win.browserWidth, win.browserHeight]);
 
   // request all data from the API in the background
   // providers wait till they load using the Consumer

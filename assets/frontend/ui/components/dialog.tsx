@@ -14,6 +14,7 @@ import {
   setSelectedWindow,
   Context,
 } from "../../app_provider";
+import { Dimensions, Point } from "./dimensions";
 
 interface windowData {
   height: number;
@@ -47,6 +48,7 @@ interface UIWIndowProps {
   disableBodyDragging: boolean;
   winData: windowData;
   scrollOffset: number;
+  snapInfo: SnapInfo;
   setScrollOffset: Dispatch<SetStateAction<number>>;
   setDragDisable: Dispatch<SetStateAction<boolean>>;
   setSelfSelectedCtx: () => void;
@@ -238,7 +240,10 @@ const UIWindow = (props: UIWIndowProps) => {
               <> {props.children} </>
             )
           }
-          <AutoFocusDialog setSelfFunc={props.setSelfSelectedCtx} />
+          <DialogEvents
+            setSelfFunc={props.setSelfSelectedCtx}
+            snapInfo={props.snapInfo}
+          />
         </div>
         {/* TODO: add scrollbar on the right offset, use scrollOffset, winData.x and winData.fullY to create the rect */}
         <div className="dialog-bottom-right-icon"></div>
@@ -323,6 +328,7 @@ interface IWidgetTopRightClose {
   setDragDisable: Dispatch<SetStateAction<boolean>>;
   setSelfSelectedCtx: () => void;
   children: React.ReactNode;
+  snapInfo: SnapInfo;
 }
 
 export const WidgetTopRightClose = (props: IWidgetTopRightClose) => {
@@ -336,10 +342,18 @@ export const WidgetTopRightClose = (props: IWidgetTopRightClose) => {
         <TopRightClose hitCloseCallback={props.hitCloseCallback} />
         {props.children}
       </div>
-      <AutoFocusDialog setSelfFunc={props.setSelfSelectedCtx} />
+      <DialogEvents
+        setSelfFunc={props.setSelfSelectedCtx}
+        snapInfo={props.snapInfo}
+      />
     </div>
   );
 };
+
+interface Size {
+  width: number | string;
+  height: number | string;
+}
 
 const Dialog = (props: IDialogProps) => {
   // dialog related
@@ -352,6 +366,14 @@ const Dialog = (props: IDialogProps) => {
   // disable dragging/resizing while mousing over buttons
   const [dragDisable, setDragDisable] = useState<boolean>(false);
   const [resizable, setResizable] = useState<boolean>(true);
+
+  // store location, so we can snap it to inside the bounds
+  // when the window is resized
+  const [position, setPosition] = useState<Point>({ x: props.x, y: props.y });
+  const [size, setSize] = useState<Size>({
+    width: dialogWidth,
+    height: dialogHeight,
+  });
 
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -439,9 +461,18 @@ const Dialog = (props: IDialogProps) => {
               width: dialogWidth,
               height: dialogHeight,
             }}
+            position={position}
+            size={size}
+            onDragStop={(_e, d) => {
+              saveElementData();
+              setPosition({ x: d.x, y: d.y });
+            }}
             bounds="#desktop-body"
-            onResizeStop={saveElementData}
-            onDragStop={saveElementData}
+            onResizeStop={(_e, _direction, ref, _delta, position) => {
+              saveElementData();
+              setPosition({ x: position.x, y: position.y });
+              setSize({ width: ref.style.width, height: ref.style.height });
+            }}
             minHeight={props.minHeight}
             minWidth={props.minWidth}
             disableDragging={dragDisable}
@@ -469,6 +500,12 @@ const Dialog = (props: IDialogProps) => {
                 children={props.children}
                 noCenter={props.UI.noCenter ?? false}
                 errorDialog={props.UI.isErr ?? false}
+                snapInfo={{
+                  windowDimensions: value.dimensions,
+                  size: size,
+                  position: position,
+                  setPosition: setPosition,
+                }}
                 dialogWidth={dialogWidth}
                 dialogHeight={dialogHeight}
                 disableBodyDragging={disableBodyDragging}
@@ -492,6 +529,12 @@ const Dialog = (props: IDialogProps) => {
               />
             ) : (
               <WidgetTopRightClose
+                snapInfo={{
+                  setPosition: setPosition,
+                  windowDimensions: value.dimensions,
+                  size: size,
+                  position: position,
+                }}
                 hitCloseCallback={props.hitCloseCallback}
                 disableBodyDragging={disableBodyDragging}
                 setDragDisable={setDragDisable}
@@ -506,12 +549,74 @@ const Dialog = (props: IDialogProps) => {
   );
 };
 
+interface SnapInfo {
+  setPosition: Dispatch<SetStateAction<Point>>;
+  windowDimensions?: Dimensions;
+  size: Size;
+  position: Point;
+}
+
+interface IDialogEvents {
+  setSelfFunc: () => void;
+  snapInfo: SnapInfo;
+}
+
+const clamp = (num: number, min: number, max: number) => {
+  if (num < min) {
+    return min;
+  }
+  if (num > max) {
+    return max;
+  }
+};
+
+const toNum = (val: string | number) => {
+  if (typeof val === "number") {
+    return val;
+  }
+  return Number.parseFloat(val);
+};
+
 // empty element that receives the context, with a useEffect hook
 // that selects this when its launched
-const AutoFocusDialog = ({ setSelfFunc }: { setSelfFunc: () => void }) => {
+const DialogEvents = (props: IDialogEvents) => {
   useEffect(() => {
-    setSelfFunc();
+    props.setSelfFunc();
   }, []);
+
+  useEffect(() => {
+    console.log("window dimensions changed...");
+    // if window is resized, update the x/y positions so that they're inside
+    // +5 pixels of the window size
+    if (!props.snapInfo.windowDimensions) {
+      return;
+    }
+    let right = toNum(props.snapInfo.size.width) + props.snapInfo.position.x;
+    let bottom = toNum(props.snapInfo.size.height) + props.snapInfo.position.y;
+
+    if (right > props.snapInfo.windowDimensions.browserWidth - 5) {
+      right =
+        props.snapInfo.windowDimensions.browserWidth -
+        5 -
+        toNum(props.snapInfo.size.width);
+    }
+
+    if (bottom > props.snapInfo.windowDimensions.browserHeight - 5) {
+      bottom =
+        props.snapInfo.windowDimensions.browserHeight -
+        5 -
+        toNum(props.snapInfo.size.height);
+    }
+
+    if (
+      right !== props.snapInfo.position.x ||
+      bottom !== props.snapInfo.position.y
+    ) {
+      console.log(`moving to ${right},${bottom}`);
+      props.snapInfo.setPosition({ x: right, y: bottom });
+    }
+  }, [props.snapInfo.windowDimensions]);
+
   return null;
 };
 
