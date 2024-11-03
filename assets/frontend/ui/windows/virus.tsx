@@ -70,7 +70,7 @@ export function VirusWindow(setwMsg: setWindowMsg): launchWindowFunc {
       () => {
         VirusWindow(setwMsg)();
       },
-      randInt(2000, 5000),
+      randInt(250, 1000),
     );
   };
 }
