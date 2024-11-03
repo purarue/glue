@@ -61,7 +61,6 @@ const ClockBody = () => {
 
     // referenced:
     // https://www.w3schools.com/graphics/canvas_clock.asp
-
     const ctx = offCanvas.getContext("2d")!;
     let radius = offCanvas.height / 2;
     // remap the current drawing context to the middle of
