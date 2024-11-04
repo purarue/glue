@@ -1,5 +1,4 @@
-import React from "react";
-import Dialog from "./dialog";
+import React, { lazy, Suspense } from "react";
 import useWindowDimensions from "./dimensions";
 
 interface IDesktopErrorDialogProps {
@@ -11,6 +10,8 @@ interface IDesktopErrorDialogProps {
 }
 
 const DesktopErrorDialog = (props: IDesktopErrorDialogProps) => {
+  const Dialog = lazy(() => import("../components/dialog"));
+
   const { browserHeight, browserWidth } = useWindowDimensions();
 
   const dialogHeight = props.height ?? 140;
@@ -24,26 +25,31 @@ const DesktopErrorDialog = (props: IDesktopErrorDialogProps) => {
   const yPos = browserHeight / 3 - dialogHeight / 2;
 
   return (
-    <Dialog
-      UI={{
-        msg: props.msg,
-        isErr: true,
-      }}
-      x={xPos}
-      y={yPos}
-      height={dialogHeight}
-      width={dialogWidth}
-      hitCloseCallback={props.closeDialog}
-    >
-      {/* there was an error!, include the stacktrace as children, in addition to the message*/}
-      {
-        props.err !== undefined ? (
-          <div className="dialog-error-stacktrace"> {props.err!.message} </div>
-        ) : (
-          <></>
-        ) // empty children if no error. seems to be required
-      }
-    </Dialog>
+    <Suspense fallback={null}>
+      <Dialog
+        UI={{
+          msg: props.msg,
+          isErr: true,
+        }}
+        x={xPos}
+        y={yPos}
+        height={dialogHeight}
+        width={dialogWidth}
+        hitCloseCallback={props.closeDialog}
+      >
+        {/* there was an error!, include the stacktrace as children, in addition to the message*/}
+        {
+          props.err !== undefined ? (
+            <div className="dialog-error-stacktrace">
+              {" "}
+              {props.err!.message}{" "}
+            </div>
+          ) : (
+            <></>
+          ) // empty children if no error. seems to be required
+        }
+      </Dialog>
+    </Suspense>
   );
 };
 

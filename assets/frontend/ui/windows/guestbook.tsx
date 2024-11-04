@@ -4,12 +4,13 @@ import React, {
   ChangeEvent,
   Dispatch,
   SetStateAction,
+  lazy,
+  Suspense,
 } from "react";
 
 import { setWindowMsg } from "./../home";
 import { GuestBookComments, GuestBookComment } from "../../api_model";
 import WrapApiError from "../components/wrap_api_error";
-import Dialog from "../components/dialog";
 import { dialogInfo, launchWindowFunc } from "./actions";
 import { Context, AppContextConsumer } from "../../app_provider";
 import dayjs, { unix } from "dayjs";
@@ -78,6 +79,8 @@ async function handleRequest(
 }
 
 export function GuestBookWindow(setwMsg: setWindowMsg): launchWindowFunc {
+  const Dialog = lazy(() => import("../components/dialog"));
+
   return () => {
     const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =
       dialogInfo({
@@ -92,34 +95,36 @@ export function GuestBookWindow(setwMsg: setWindowMsg): launchWindowFunc {
       spawn: true,
       windowId: windowId,
       windowObj: (
-        <Dialog
-          x={x - dialogWidth / 2}
-          y={y - dialogHeight / 2}
-          width={dialogWidth}
-          height={dialogHeight}
-          UI={{
-            title: "guest book",
-          }}
-          windowId={windowId}
-          minHeight={minHeight}
-          minWidth={minWidth}
-          disableBodyDragging={true}
-          hitCloseCallback={closeWindow}
-        >
-          <div className="guestbook-body">
-            <AppContextConsumer>
-              {(value: Context) => {
-                return (
-                  <WrapApiError data={value.comments}>
-                    <GuestBook
-                      comments={value.comments! as GuestBookComments}
-                    />
-                  </WrapApiError>
-                );
-              }}
-            </AppContextConsumer>
-          </div>
-        </Dialog>
+        <Suspense fallback={null}>
+          <Dialog
+            x={x - dialogWidth / 2}
+            y={y - dialogHeight / 2}
+            width={dialogWidth}
+            height={dialogHeight}
+            UI={{
+              title: "guest book",
+            }}
+            windowId={windowId}
+            minHeight={minHeight}
+            minWidth={minWidth}
+            disableBodyDragging={true}
+            hitCloseCallback={closeWindow}
+          >
+            <div className="guestbook-body">
+              <AppContextConsumer>
+                {(value: Context) => {
+                  return (
+                    <WrapApiError data={value.comments}>
+                      <GuestBook
+                        comments={value.comments! as GuestBookComments}
+                      />
+                    </WrapApiError>
+                  );
+                }}
+              </AppContextConsumer>
+            </div>
+          </Dialog>
+        </Suspense>
       ),
     });
   };

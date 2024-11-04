@@ -275,8 +275,8 @@ interface IDialogProps {
   children?: any;
 }
 
-export const defaultDialogWidth = 200;
-export const defaultDialogHeight = 100;
+const defaultDialogWidth = 200;
+const defaultDialogHeight = 100;
 
 // set the current window we are using as the 'top' window in global AppContext
 function setSelfSelected(ctx: Context, windowId?: string) {
@@ -325,7 +325,7 @@ interface IWidgetTopRightClose {
   children: React.ReactNode;
 }
 
-export const WidgetTopRightClose = (props: IWidgetTopRightClose) => {
+const WidgetTopRightClose = (props: IWidgetTopRightClose) => {
   return (
     <div className="widget-container">
       <div

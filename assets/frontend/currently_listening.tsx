@@ -39,7 +39,7 @@ type CurrentPlayingOptions = {
   socketUrl?: string;
 };
 
-const useCurrentyListening = (options: CurrentPlayingOptions) => {
+export const useCurrentlyListening = (options: CurrentPlayingOptions) => {
   const { sendMessage, lastMessage, lastJsonMessage, readyState } =
     useWebSocket(options.socketUrl ?? defaultSocketUrl);
   const [currentSong, setCurrentSong] = useState<CurrentSong>({
@@ -97,7 +97,7 @@ type CurrentlyListeningNotificationProps = {
   style?: React.CSSProperties;
 };
 
-export const CurrentlyListeningNotification = ({
+const CurrentlyListeningNotification = ({
   song,
   listening,
   style,
@@ -187,4 +187,9 @@ export const CurrentlyListeningNotification = ({
   );
 };
 
-export default useCurrentyListening;
+const CurrentlyListening = () => {
+  const { listening, song } = useCurrentlyListening({});
+  return <CurrentlyListeningNotification listening={listening} song={song} />;
+};
+
+export default CurrentlyListening;

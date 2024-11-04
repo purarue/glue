@@ -1,7 +1,6 @@
-import React, { memo } from "react";
+import React, { lazy, memo, Suspense } from "react";
 
 import { setWindowMsg } from "./../home";
-import Dialog from "../components/dialog";
 import { dialogInfo, launchWindowFunc } from "./actions";
 import TapLink from "./../components/taplink";
 
@@ -23,6 +22,8 @@ function alertEmail() {
 }
 
 export function ReadmeWindow(setwMsg: setWindowMsg): launchWindowFunc {
+  const Dialog = lazy(() => import("../components/dialog"));
+
   return () => {
     const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =
       dialogInfo({
@@ -37,21 +38,23 @@ export function ReadmeWindow(setwMsg: setWindowMsg): launchWindowFunc {
       spawn: true,
       windowId: windowId,
       windowObj: (
-        <Dialog
-          x={x - dialogWidth / 2}
-          y={y - dialogHeight / 2}
-          width={dialogWidth}
-          height={dialogHeight}
-          UI={{
-            title: "readme",
-          }}
-          windowId={windowId}
-          minHeight={minHeight}
-          minWidth={minWidth}
-          hitCloseCallback={closeWindow}
-        >
-          <ReadmeBody />
-        </Dialog>
+        <Suspense fallback={null}>
+          <Dialog
+            x={x - dialogWidth / 2}
+            y={y - dialogHeight / 2}
+            width={dialogWidth}
+            height={dialogHeight}
+            UI={{
+              title: "readme",
+            }}
+            windowId={windowId}
+            minHeight={minHeight}
+            minWidth={minWidth}
+            hitCloseCallback={closeWindow}
+          >
+            <ReadmeBody />
+          </Dialog>
+        </Suspense>
       ),
     });
   };

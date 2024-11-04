@@ -1,10 +1,9 @@
-import React, { useRef, useEffect, useCallback } from "react";
+import React, { useRef, useEffect, useCallback, lazy, Suspense } from "react";
 
 import { setWindowMsg } from "./../home";
 import { getWindowDimensions, Point } from "./../components/dimensions";
-import Dialog from "../components/dialog";
 import { launchWindowFunc } from "./actions";
-import { randomColor } from "./paint";
+import { randomColor } from "../../color";
 
 const minHeight = 150;
 const minWidth = 300;
@@ -32,6 +31,8 @@ function randomLocation(
 }
 
 export function VirusWindow(setwMsg: setWindowMsg): launchWindowFunc {
+  const Dialog = lazy(() => import("../components/dialog"));
+
   return () => {
     const { browserWidth, browserHeight } = getWindowDimensions();
     const { x, y } = randomLocation(
@@ -46,22 +47,24 @@ export function VirusWindow(setwMsg: setWindowMsg): launchWindowFunc {
       spawn: true,
       windowId: windowId,
       windowObj: (
-        <Dialog
-          x={x}
-          y={y}
-          width={minWidth}
-          height={minHeight}
-          minHeight={minHeight}
-          minWidth={minWidth}
-          UI={{
-            title: "virus",
-            titleObj: <VirusTitle />,
-          }}
-          windowId={windowId}
-          hitCloseCallback={() => VirusWindow(setwMsg)()}
-        >
-          <VirusBodyMemo height={minHeight} width={minWidth} />
-        </Dialog>
+        <Suspense fallback={null}>
+          <Dialog
+            x={x}
+            y={y}
+            width={minWidth}
+            height={minHeight}
+            minHeight={minHeight}
+            minWidth={minWidth}
+            UI={{
+              title: "virus",
+              titleObj: <VirusTitle />,
+            }}
+            windowId={windowId}
+            hitCloseCallback={() => VirusWindow(setwMsg)()}
+          >
+            <VirusBodyMemo height={minHeight} width={minWidth} />
+          </Dialog>
+        </Suspense>
       ),
     });
 
