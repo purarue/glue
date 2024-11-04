@@ -113,6 +113,7 @@ const Geocities = () => {
 
   return (
     <TapLink
+      aria-label="link to old geocities website"
       href="https://purarue.xyz/geocities/"
       className="menu-toolbar-item menu-bar-item unlinkify geocities"
       onMouseEnter={() => setHovering(true)}
