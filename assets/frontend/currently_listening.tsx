@@ -149,6 +149,7 @@ const CurrentlyListeningNotification = ({
         >
           {(song.base64_image ?? "").length > 0 && (
             <img
+              alt="album art"
               src={`data:image/jpeg;base64,${song.base64_image}`}
               style={{
                 width: "4rem",
