@@ -1,7 +1,6 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 
 import { setWindowMsg } from "./../home";
-import Dialog from "../components/dialog";
 import { dialogInfo, launchWindowFunc } from "./actions";
 import { AppWindow } from "./folder";
 
@@ -11,6 +10,8 @@ const minWidth = 325;
 const scale = 0.36;
 
 export function CodeWindow(setwMsg: setWindowMsg): launchWindowFunc {
+  const Dialog = lazy(() => import("../components/dialog"));
+
   return () => {
     const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =
       dialogInfo({
@@ -25,22 +26,24 @@ export function CodeWindow(setwMsg: setWindowMsg): launchWindowFunc {
       spawn: true,
       windowId: windowId,
       windowObj: (
-        <Dialog
-          x={x - dialogWidth / 2}
-          y={y - dialogHeight / 2}
-          width={dialogWidth}
-          height={dialogHeight}
-          UI={{
-            title: "code",
-            noCenter: true,
-          }}
-          windowId={windowId}
-          minHeight={minHeight}
-          minWidth={minWidth}
-          hitCloseCallback={closeWindow}
-        >
-          <CodeBody setwMsg={setwMsg} />
-        </Dialog>
+        <Suspense fallback={null}>
+          <Dialog
+            x={x - dialogWidth / 2}
+            y={y - dialogHeight / 2}
+            width={dialogWidth}
+            height={dialogHeight}
+            UI={{
+              title: "code",
+              noCenter: true,
+            }}
+            windowId={windowId}
+            minHeight={minHeight}
+            minWidth={minWidth}
+            hitCloseCallback={closeWindow}
+          >
+            <CodeBody setwMsg={setwMsg} />
+          </Dialog>
+        </Suspense>
       ),
     });
   };

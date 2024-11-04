@@ -1,10 +1,9 @@
-import React, { memo } from "react";
+import React, { lazy, memo, Suspense } from "react";
 
 import { Context, AppContextConsumer } from "../../app_provider";
 import { CubingData, CubingRecords } from "../../api_model";
 import WrapApiError from "../components/wrap_api_error";
 import { setWindowMsg } from "./../home";
-import Dialog from "../components/dialog";
 import TapLink from "../components/taplink";
 import { dialogInfo, fullScreenDialogScale, launchWindowFunc } from "./actions";
 
@@ -12,6 +11,8 @@ const minHeight = 400;
 const minWidth = 300;
 
 export function CubingWindow(setwMsg: setWindowMsg): launchWindowFunc {
+  const Dialog = lazy(() => import("../components/dialog"));
+
   return () => {
     const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =
       dialogInfo({
@@ -26,21 +27,23 @@ export function CubingWindow(setwMsg: setWindowMsg): launchWindowFunc {
       spawn: true,
       windowId: windowId,
       windowObj: (
-        <Dialog
-          x={x - dialogWidth / 2}
-          y={y - dialogHeight / 2}
-          width={dialogWidth}
-          height={dialogHeight}
-          UI={{
-            title: "cubing",
-          }}
-          windowId={windowId}
-          minHeight={minHeight}
-          minWidth={minWidth}
-          hitCloseCallback={closeWindow}
-        >
-          <Cubing />
-        </Dialog>
+        <Suspense fallback={null}>
+          <Dialog
+            x={x - dialogWidth / 2}
+            y={y - dialogHeight / 2}
+            width={dialogWidth}
+            height={dialogHeight}
+            UI={{
+              title: "cubing",
+            }}
+            windowId={windowId}
+            minHeight={minHeight}
+            minWidth={minWidth}
+            hitCloseCallback={closeWindow}
+          >
+            <Cubing />
+          </Dialog>
+        </Suspense>
       ),
     });
   };

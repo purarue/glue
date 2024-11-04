@@ -1,13 +1,13 @@
-import React, { useEffect, useRef } from "react";
+import React, { lazy, Suspense, useEffect, useRef } from "react";
 
 import { setWindowMsg } from "./../home";
-import Dialog from "../components/dialog";
 import { dialogInfo, launchWindowFunc } from "./../windows/actions";
 
 const minHeight = 100;
 const minWidth = 100;
 
 export function Clock(setwMsg: setWindowMsg): launchWindowFunc {
+  const Dialog = lazy(() => import("../components/dialog"));
   return () => {
     const { browserWidth, windowId, closeWindow } = dialogInfo({
       minSize: {
@@ -20,21 +20,23 @@ export function Clock(setwMsg: setWindowMsg): launchWindowFunc {
       spawn: true,
       windowId: windowId,
       windowObj: (
-        <Dialog
-          // spawn in the top right corner
-          x={browserWidth - minWidth - 50}
-          y={30}
-          width={minWidth}
-          height={minHeight}
-          windowId={windowId}
-          minHeight={minHeight}
-          minWidth={minWidth}
-          isResizable={false}
-          // disableBodyDragging={true}
-          hitCloseCallback={closeWindow}
-        >
-          <ClockBody />
-        </Dialog>
+        <Suspense fallback={null}>
+          <Dialog
+            // spawn in the top right corner
+            x={browserWidth - minWidth - 50}
+            y={30}
+            width={minWidth}
+            height={minHeight}
+            windowId={windowId}
+            minHeight={minHeight}
+            minWidth={minWidth}
+            isResizable={false}
+            // disableBodyDragging={true}
+            hitCloseCallback={closeWindow}
+          >
+            <ClockBody />
+          </Dialog>
+        </Suspense>
       ),
     });
   };
