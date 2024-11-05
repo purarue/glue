@@ -132,10 +132,14 @@ const Geocities = () => {
   );
 };
 
-const CurrentlyListeningRender = (props: {enabled: boolean}) => {
+const CurrentlyListeningRender = (props: { enabled: boolean }) => {
   if (props.enabled === true) {
     const Render = lazy(() => import("../currently_listening"));
-    return <Suspense fallback={null}><Render /></Suspense>
+    return (
+      <Suspense fallback={null}>
+        <Render />
+      </Suspense>
+    );
   }
 
   return null;
