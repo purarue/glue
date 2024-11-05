@@ -57,7 +57,7 @@ function downloadTextFile(data: string, filename: string) {
   else {
     // Others
     let a: HTMLAnchorElement = document.createElement("a");
-    let url: string = URL.createObjectURL(file);
+    let url: string = window.URL.createObjectURL(file);
     a.href = url;
     a.download = filename;
     a.style.display = "none";
