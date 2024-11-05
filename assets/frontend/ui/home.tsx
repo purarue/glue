@@ -4,6 +4,8 @@ import React, {
   SetStateAction,
   useState,
   useRef,
+  lazy,
+  Suspense,
 } from "react";
 import clsx from "clsx";
 
@@ -16,7 +18,6 @@ import { IconData } from "../data";
 import { getWindowDimensions } from "./components/dimensions";
 import { ok } from "../utils";
 import { hash } from "../build";
-import CurrentlyListening from "../currently_listening";
 import { AUTOLAUNCH_WIDGETS } from "./widgets/launch";
 
 // represents the current windows on the screen
@@ -129,6 +130,15 @@ const Geocities = () => {
       />
     </TapLink>
   );
+};
+
+const CurrentlyListeningRender = (props: {enabled: boolean}) => {
+  if (props.enabled === true) {
+    const Render = lazy(() => import("../currently_listening"));
+    return <Suspense fallback={null}><Render /></Suspense>
+  }
+
+  return null;
 };
 
 function Home() {
@@ -309,7 +319,7 @@ function Home() {
           </div>
         </div>
       </div>
-      <CurrentlyListening />
+      <CurrentlyListeningRender enabled={loading >= IconData.length} />
     </>
   );
 }
