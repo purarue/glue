@@ -28,7 +28,11 @@ defmodule Glue.OldState do
     page_hits_offset = Application.get_env(:glue, :page_hits_offset)
     guestbook_json_path = Application.get_env(:glue, :guestbook_json_path)
     {:ok, guestbook_json} = parse_guestbook_file(guestbook_json_path)
-    Logger.info("Loaded #{length(guestbook_json)} guestbook comments from #{guestbook_json_path}")
+
+    Logger.debug(
+      "Loaded #{length(guestbook_json)} guestbook comments from #{guestbook_json_path}"
+    )
+
     {:ok, %{page_hits: page_hits_offset, guestbooks: guestbook_json}}
   end
 
