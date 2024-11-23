@@ -48,7 +48,7 @@ defmodule Glue.GuestBookComments.CLI do
 
   defp approve_prompt_loop(new_comment, prompt \\ nil, error \\ false) do
     if error do
-      IO.puts("Didn't receive 'a' or 'd'")
+      IO.puts("Didn't receive 'a', 'd', or 'del'")
     end
 
     IO.inspect(new_comment)
