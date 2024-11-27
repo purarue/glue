@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 // https://stackoverflow.com/a/36862446/9348376
 
-interface Dimensions {
+export interface Dimensions {
   browserWidth: number;
   browserHeight: number;
 }
