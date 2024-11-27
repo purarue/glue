@@ -439,7 +439,7 @@ const Dialog = (props: IDialogProps) => {
               width: dialogWidth,
               height: dialogHeight,
             }}
-            bounds="#desktop-body"
+            // bounds="#desktop-body"
             onResizeStop={saveElementData}
             onDragStop={saveElementData}
             minHeight={props.minHeight}
