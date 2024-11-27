@@ -284,9 +284,7 @@ function Home() {
             {/* dialog/windows */}
             <div id="floating-windows">
               {Object.keys(guiWindows).map((wid) => (
-                <div className="dialog-key-wrapper" key={wid.toString()}>
-                  {guiWindows[wid]}
-                </div>
+                <div key={wid.toString()}>{guiWindows[wid]}</div>
               ))}
             </div>
             {dragRect !== undefined ? <DragRect {...dragRect} /> : <></>}
