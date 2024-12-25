@@ -7,16 +7,13 @@ import { AppWindow } from "./folder";
 const minHeight = 275;
 const minWidth = 325;
 
-const scale = 0.38;
-
 export function ProgramWindow(setwMsg: setWindowMsg): launchWindowFunc {
   const Dialog = lazy(() => import("../components/dialog"));
 
   return () => {
     const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =
       dialogInfo({
-        scale: scale,
-        minSize: {
+        size: {
           height: minHeight,
           width: minWidth,
         },

@@ -5,10 +5,10 @@ import { CubingData, CubingRecords } from "../../api_model";
 import WrapApiError from "../components/wrap_api_error";
 import { setWindowMsg } from "./../home";
 import TapLink from "../components/taplink";
-import { dialogInfo, fullScreenDialogScale, launchWindowFunc } from "./actions";
+import { dialogInfo, launchWindowFunc } from "./actions";
 
-const minHeight = 400;
-const minWidth = 300;
+const height = 400;
+const width = 700;
 
 export function CubingWindow(setwMsg: setWindowMsg): launchWindowFunc {
   const Dialog = lazy(() => import("../components/dialog"));
@@ -16,10 +16,9 @@ export function CubingWindow(setwMsg: setWindowMsg): launchWindowFunc {
   return () => {
     const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =
       dialogInfo({
-        scale: fullScreenDialogScale,
-        minSize: {
-          height: minHeight,
-          width: minWidth,
+        size: {
+          height: height,
+          width: width,
         },
         setwMsg,
       });
@@ -37,8 +36,8 @@ export function CubingWindow(setwMsg: setWindowMsg): launchWindowFunc {
               title: "cubing",
             }}
             windowId={windowId}
-            minHeight={minHeight}
-            minWidth={minWidth}
+            minHeight={height}
+            minWidth={width}
             hitCloseCallback={closeWindow}
           >
             <Cubing />

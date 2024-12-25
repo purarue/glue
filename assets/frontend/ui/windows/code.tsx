@@ -4,10 +4,8 @@ import { setWindowMsg } from "./../home";
 import { dialogInfo, launchWindowFunc } from "./actions";
 import { AppWindow } from "./folder";
 
-const minHeight = 275;
-const minWidth = 325;
-
-const scale = 0.36;
+const height = 275;
+const width = 325;
 
 export function CodeWindow(setwMsg: setWindowMsg): launchWindowFunc {
   const Dialog = lazy(() => import("../components/dialog"));
@@ -15,10 +13,9 @@ export function CodeWindow(setwMsg: setWindowMsg): launchWindowFunc {
   return () => {
     const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =
       dialogInfo({
-        scale: scale,
-        minSize: {
-          height: minHeight,
-          width: minWidth,
+        size: {
+          height: height,
+          width: width,
         },
         setwMsg,
       });
@@ -37,8 +34,8 @@ export function CodeWindow(setwMsg: setWindowMsg): launchWindowFunc {
               noCenter: true,
             }}
             windowId={windowId}
-            minHeight={minHeight}
-            minWidth={minWidth}
+            minHeight={height}
+            minWidth={width}
             hitCloseCallback={closeWindow}
           >
             <CodeBody setwMsg={setwMsg} />

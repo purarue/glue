@@ -4,10 +4,8 @@ import React, { lazy, Suspense } from "react";
 import { setWindowMsg } from "./../home";
 import { dialogInfo, launchWindowFunc } from "./actions";
 
-const minHeight = 150;
-const minWidth = 250;
-
-const scale = 0.5;
+const height = 300;
+const width = 250;
 
 export function Window(setwMsg: setWindowMsg): launchWindowFunc {
   const Dialog = lazy(() => import("../components/dialog"));
@@ -15,10 +13,9 @@ export function Window(setwMsg: setWindowMsg): launchWindowFunc {
   return () => {
     const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =
       dialogInfo({
-        scale: scale,
-        minSize: {
-          height: minHeight,
-          width: minHeight,
+        size: {
+          height: height,
+          width: height,
         },
         setwMsg,
       });
@@ -30,14 +27,14 @@ export function Window(setwMsg: setWindowMsg): launchWindowFunc {
           <Dialog
             x={x - dialogWidth / 2}
             y={y - dialogHeight / 2}
-            width={minWidth}
-            height={minHeight}
+            width={width}
+            height={height}
             UI={{
               title: "title",
             }}
             windowId={windowId}
-            minHeight={minHeight}
-            minWidth={minWidth}
+            minHeight={height - 100}
+            minWidth={width - 100}
             hitCloseCallback={closeWindow}
           >
             <Body />

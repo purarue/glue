@@ -1,10 +1,10 @@
 import React, { useState, useRef, lazy, Suspense } from "react";
 
 import { setWindowMsg } from "./../home";
-import { dialogInfo, fullScreenDialogScale, launchWindowFunc } from "./actions";
+import { dialogInfo, launchWindowFunc } from "./actions";
 
-const minHeight = 400;
-const minWidth = 300;
+const height = 400;
+const width = 600;
 
 export function BrowserWindow(setwMsg: setWindowMsg): launchWindowFunc {
   const Dialog = lazy(() => import("../components/dialog"));
@@ -12,10 +12,9 @@ export function BrowserWindow(setwMsg: setWindowMsg): launchWindowFunc {
   return () => {
     const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =
       dialogInfo({
-        scale: fullScreenDialogScale,
-        minSize: {
-          height: minHeight,
-          width: minWidth,
+        size: {
+          height: height,
+          width: width,
         },
         setwMsg,
       });
@@ -33,9 +32,9 @@ export function BrowserWindow(setwMsg: setWindowMsg): launchWindowFunc {
               title: "browser",
             }}
             windowId={windowId}
-            minHeight={minHeight}
+            minHeight={height}
             disableBodyDragging={true}
-            minWidth={minWidth}
+            minWidth={width}
             hitCloseCallback={closeWindow}
           >
             <Browser />

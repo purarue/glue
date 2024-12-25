@@ -150,8 +150,7 @@ export function CustomizeWindow(setwMsg: setWindowMsg): launchWindowFunc {
 
   return () => {
     const { x, y, windowId, closeWindow } = dialogInfo({
-      scale: 1.0,
-      minSize: {
+      size: {
         height: minHeight,
         width: minWidth,
       },

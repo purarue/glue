@@ -87,7 +87,7 @@ export function getAction(
     window.alert("No URL or action defined for " + JSON.stringify(el));
 }
 
-interface MinSize {
+interface Size {
   width: number;
   height: number;
 }
@@ -104,24 +104,16 @@ export interface DialogInfo {
 }
 
 export function dialogInfo({
-  minSize,
+  size: minSize,
   setwMsg,
-  scale,
 }: {
-  minSize: MinSize;
+  size: Size;
   setwMsg: setWindowMsg;
-  scale?: number;
 }): DialogInfo {
-  const { browserHeight, browserWidth } = getWindowDimensions();
   const { x, y } = jitterCenterLocation();
-  const dialogWidth =
-    scale === undefined
-      ? minSize.width
-      : Math.max(minSize.width, browserWidth * scale);
-  const dialogHeight =
-    scale === undefined
-      ? minSize.height
-      : Math.max(minSize.height, browserHeight * scale);
+  const { browserHeight, browserWidth } = getWindowDimensions();
+  const dialogWidth = minSize.width;
+  const dialogHeight = minSize.height;
   const windowId = Date.now().toString();
   return {
     x,

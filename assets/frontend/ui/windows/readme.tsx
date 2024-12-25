@@ -4,10 +4,8 @@ import { setWindowMsg } from "./../home";
 import { dialogInfo, launchWindowFunc } from "./actions";
 import TapLink from "./../components/taplink";
 
-const minHeight = 450;
-const minWidth = 250;
-
-const readmeScale = 0.55;
+const height = 400;
+const width = 275;
 
 const discordUserName = "purplepinapples";
 
@@ -27,10 +25,9 @@ export function ReadmeWindow(setwMsg: setWindowMsg): launchWindowFunc {
   return () => {
     const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =
       dialogInfo({
-        scale: readmeScale,
-        minSize: {
-          height: minHeight,
-          width: minHeight,
+        size: {
+          height: height,
+          width: height,
         },
         setwMsg,
       });
@@ -48,8 +45,8 @@ export function ReadmeWindow(setwMsg: setWindowMsg): launchWindowFunc {
               title: "readme",
             }}
             windowId={windowId}
-            minHeight={minHeight}
-            minWidth={minWidth}
+            minHeight={height - 100}
+            minWidth={width - 100}
             hitCloseCallback={closeWindow}
           >
             <ReadmeBody />

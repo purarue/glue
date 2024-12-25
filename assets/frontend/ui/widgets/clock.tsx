@@ -10,7 +10,7 @@ export function Clock(setwMsg: setWindowMsg): launchWindowFunc {
   const Dialog = lazy(() => import("../components/dialog"));
   return () => {
     const { browserWidth, windowId, closeWindow } = dialogInfo({
-      minSize: {
+      size: {
         height: minHeight,
         width: minHeight,
       },

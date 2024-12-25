@@ -25,8 +25,7 @@ export function LinkWindow(props: ILinkWindow): launchWindowFunc {
   return () => {
     const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =
       dialogInfo({
-        scale: 0.2,
-        minSize: {
+        size: {
           height: minHeight,
           width: minHeight,
         },

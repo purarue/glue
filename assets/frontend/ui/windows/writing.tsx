@@ -4,10 +4,8 @@ import { setWindowMsg } from "./../home";
 import { dialogInfo, launchWindowFunc } from "./actions";
 import { AppWindow } from "./folder";
 
-const minHeight = 180;
-const minWidth = 300;
-
-const scale = 0.3;
+const height = 180;
+const width = 300;
 
 export function WritingWindow(setwMsg: setWindowMsg): launchWindowFunc {
   const Dialog = lazy(() => import("../components/dialog"));
@@ -15,10 +13,9 @@ export function WritingWindow(setwMsg: setWindowMsg): launchWindowFunc {
   return () => {
     const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =
       dialogInfo({
-        scale: scale,
-        minSize: {
-          height: minHeight,
-          width: minWidth,
+        size: {
+          height: height,
+          width: width,
         },
         setwMsg,
       });
@@ -37,8 +34,8 @@ export function WritingWindow(setwMsg: setWindowMsg): launchWindowFunc {
             width={dialogWidth}
             height={dialogHeight}
             windowId={windowId}
-            minHeight={minHeight}
-            minWidth={minWidth}
+            minHeight={height - 30}
+            minWidth={width - 30}
             hitCloseCallback={closeWindow}
           >
             <WritingBody setwMsg={setwMsg} />

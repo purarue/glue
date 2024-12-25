@@ -1,10 +1,10 @@
 import React, { useState, useRef, lazy, Suspense } from "react";
 
 import { setWindowMsg } from "./../home";
-import { dialogInfo, fullScreenDialogScale, launchWindowFunc } from "./actions";
+import { dialogInfo, launchWindowFunc } from "./actions";
 
 const minHeight = 400;
-const minWidth = 300;
+const minWidth = 500;
 
 export function TextEditorWindow(setwMsg: setWindowMsg): launchWindowFunc {
   const Dialog = lazy(() => import("../components/dialog"));
@@ -12,8 +12,7 @@ export function TextEditorWindow(setwMsg: setWindowMsg): launchWindowFunc {
   return () => {
     const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =
       dialogInfo({
-        scale: fullScreenDialogScale,
-        minSize: {
+        size: {
           height: minHeight,
           width: minHeight,
         },

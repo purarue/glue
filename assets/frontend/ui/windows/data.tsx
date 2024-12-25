@@ -4,10 +4,8 @@ import { setWindowMsg } from "./../home";
 import { dialogInfo, launchWindowFunc } from "./actions";
 import TapLink from "./../components/taplink";
 
-const minHeight = 400;
-const minWidth = 250;
-
-const scale = 0.4;
+const height = 300;
+const width = 400;
 
 export function DataWindow(setwMsg: setWindowMsg): launchWindowFunc {
   const Dialog = lazy(() => import("../components/dialog"));
@@ -15,10 +13,9 @@ export function DataWindow(setwMsg: setWindowMsg): launchWindowFunc {
   return () => {
     const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =
       dialogInfo({
-        scale: scale,
-        minSize: {
-          height: minHeight,
-          width: minHeight,
+        size: {
+          height: height,
+          width: width,
         },
         setwMsg,
       });
@@ -36,8 +33,8 @@ export function DataWindow(setwMsg: setWindowMsg): launchWindowFunc {
               title: "data",
             }}
             windowId={windowId}
-            minHeight={minHeight}
-            minWidth={minWidth}
+            minHeight={height - 100}
+            minWidth={width - 100}
             hitCloseCallback={closeWindow}
           >
             <DataBody />

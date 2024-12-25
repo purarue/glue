@@ -17,9 +17,8 @@ import dayjs, { unix } from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
 
-const minHeight = 300;
-const minWidth = 300;
-const dialogScale = 0.6;
+const height = 350;
+const width = 500;
 
 interface Status {
   success: boolean;
@@ -84,10 +83,9 @@ export function GuestBookWindow(setwMsg: setWindowMsg): launchWindowFunc {
   return () => {
     const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =
       dialogInfo({
-        scale: dialogScale,
-        minSize: {
-          height: minHeight,
-          width: minHeight,
+        size: {
+          height: height,
+          width: height,
         },
         setwMsg,
       });
@@ -105,8 +103,8 @@ export function GuestBookWindow(setwMsg: setWindowMsg): launchWindowFunc {
               title: "guest book",
             }}
             windowId={windowId}
-            minHeight={minHeight}
-            minWidth={minWidth}
+            minHeight={height - 100}
+            minWidth={width - 100}
             disableBodyDragging={true}
             hitCloseCallback={closeWindow}
           >
