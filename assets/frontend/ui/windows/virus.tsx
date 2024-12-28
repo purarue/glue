@@ -8,8 +8,6 @@ import { randomColor } from "../../color";
 const minHeight = 150;
 const minWidth = 300;
 
-const windowBuffer = 20;
-
 function randInt(min: number, max: number) {
   return Math.random() * (max - min) + min;
 }
@@ -20,10 +18,10 @@ function randomLocation(
   dialogHeight: number,
   dialogWidth: number,
 ): Point {
-  const minX = windowBuffer;
-  const minY = windowBuffer;
-  const maxX = browserWidth - dialogWidth * 1.5;
-  const maxY = browserHeight - dialogHeight * 1.7;
+  const minX = -dialogWidth * 0.5;
+  const minY = -dialogHeight * 0.5;
+  const maxX = browserWidth - dialogWidth * 0.5;
+  const maxY = browserHeight - dialogHeight * 0.5;
   return {
     x: randInt(minX, maxX),
     y: randInt(minY, maxY),
