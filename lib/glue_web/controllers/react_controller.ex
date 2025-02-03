@@ -26,9 +26,9 @@ But here are some links to other parts of the site:
 
 Github:\t\t\thttps://github.com/purarue/
 Notes:\t\t\thttps://purarue.xyz/x/
+Photography:\t\thttps://purarue.xyz/x/photography/
 Projects:\t\thttps://purarue.xyz/projects/
 Favorite XKCDs:\t\thttps://purarue.xyz/xkcd/
-A DVD Logo:\t\thttps://purarue.xyz/dvd/
 Anime Short Films:\thttps://purarue.xyz/animeshorts/\n"
 
     IO.ANSI.blue() <> IO.ANSI.italic() <> figlet <> IO.ANSI.reset() <> "\n\n" <> welcome
