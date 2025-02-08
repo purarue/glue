@@ -214,42 +214,42 @@ function Home() {
   }, [wMsg]); // only call the useEffect hook when wMsg changes
 
   // let the user draw rectangles on the desktop
-  const [dragRect, setDragRect] = useState<draggedRect>(draggedRectDefault);
+  // const [dragRect, setDragRect] = useState<draggedRect>(draggedRectDefault);
 
-  const createRect = (x: number, y: number) => {
-    const { browserHeight, browserWidth } = getWindowDimensions();
-    setDragRect({
-      x1: x,
-      x2: x,
-      y1: y,
-      y2: y,
-      browserHeight: browserHeight,
-      browserWidth: browserWidth,
-    });
-  };
+  // const createRect = (x: number, y: number) => {
+  //   const { browserHeight, browserWidth } = getWindowDimensions();
+  //   setDragRect({
+  //     x1: x,
+  //     x2: x,
+  //     y1: y,
+  //     y2: y,
+  //     browserHeight: browserHeight,
+  //     browserWidth: browserWidth,
+  //   });
+  // };
 
-  const updateRect = (x: number, y: number) => {
-    // bounds checking
-    if (x > dragRect!.browserWidth) {
-      x = dragRect!.browserWidth - 3;
-    } else if (x <= 0) {
-      x = dragBuffer;
-    }
-    if (y > dragRect!.browserHeight) {
-      y = dragRect!.browserHeight - 3;
-    } else if (y <= 0) {
-      y = dragBuffer;
-    }
-    setDragRect({
-      ...dragRect!,
-      x2: x,
-      y2: y,
-    });
-  };
-
-  const deleteRect = () => {
-    setDragRect(undefined);
-  };
+  // const updateRect = (x: number, y: number) => {
+  //   // bounds checking
+  //   if (x > dragRect!.browserWidth) {
+  //     x = dragRect!.browserWidth - 3;
+  //   } else if (x <= 0) {
+  //     x = dragBuffer;
+  //   }
+  //   if (y > dragRect!.browserHeight) {
+  //     y = dragRect!.browserHeight - 3;
+  //   } else if (y <= 0) {
+  //     y = dragBuffer;
+  //   }
+  //   setDragRect({
+  //     ...dragRect!,
+  //     x2: x,
+  //     y2: y,
+  //   });
+  // };
+  //
+  // const deleteRect = () => {
+  //   setDragRect(undefined);
+  // };
 
   // TODO: [low priority] on resize, 'update'? somehow the dialogs; so that if its off the page, it resnaps/moves to the current viewport
   return (
@@ -270,16 +270,16 @@ function Home() {
           <div
             id="home-icons-window-wrapper"
             // capture events for drawing the rectangle
-            onMouseDown={(event) => {
-              createRect(event.clientX, event.clientY);
-            }}
-            onMouseMove={(event) => {
-              if (dragRect !== undefined) {
-                updateRect(event.clientX, event.clientY);
-              }
-            }}
-            onMouseUp={deleteRect}
-            onMouseLeave={deleteRect}
+            // onMouseDown={(event) => {
+            //   createRect(event.clientX, event.clientY);
+            // }}
+            // onMouseMove={(event) => {
+            //   if (dragRect !== undefined) {
+            //     updateRect(event.clientX, event.clientY);
+            //   }
+            // }}
+            // onMouseUp={deleteRect}
+            // onMouseLeave={deleteRect}
           >
             {/* dialog/windows */}
             <div id="floating-windows">
@@ -287,7 +287,7 @@ function Home() {
                 <div key={wid.toString()}>{guiWindows[wid]}</div>
               ))}
             </div>
-            {dragRect !== undefined ? <DragRect {...dragRect} /> : <></>}
+            {/* {dragRect !== undefined ? <DragRect {...dragRect} /> : <></>} */}
             <div id="home-icons-container" className="icon-container">
               {IconData.map((el, i) => {
                 const action: string | launchWindowFunc = getAction(

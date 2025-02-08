@@ -68,36 +68,34 @@ const ReadmeBody = memo(() => {
       </p>
       <hr />
       <h4>Contact</h4>
-      <p>
-        I don't use social media all that much, but you can:
-        <ul>
-          <li>
-            {"Add me on "}
-            <a
-              style={{ cursor: "pointer" }}
-              onClick={alertDiscordName}
-              onTouchEnd={alertDiscordName}
-            >
-              {`Discord (${discordUserName})`}
-            </a>
-          </li>
-          <li>
-            <TapLink
-              href="https://github.com/purarue/ama"
-              target="_blank"
-              rel="noreferrer"
-            >
-              AMA
-            </TapLink>
-          </li>
-          <li>
-            <a href="#" onClick={alertEmail} onTouchEnd={alertEmail}>
-              Email
-            </a>
-            {" me"}
-          </li>
-        </ul>
-      </p>
+      <p>I don't use social media all that much, but you can:</p>
+      <ul>
+        <li>
+          {"Add me on "}
+          <a
+            style={{ cursor: "pointer" }}
+            onClick={alertDiscordName}
+            onTouchEnd={alertDiscordName}
+          >
+            {`Discord (${discordUserName})`}
+          </a>
+        </li>
+        <li>
+          <TapLink
+            href="https://github.com/purarue/ama"
+            target="_blank"
+            rel="noreferrer"
+          >
+            AMA
+          </TapLink>
+        </li>
+        <li>
+          <a href="#" onClick={alertEmail} onTouchEnd={alertEmail}>
+            Email
+          </a>
+          {" me"}
+        </li>
+      </ul>
       <p>
         If you're interested in my random thoughts, my{" "}
         <TapLink
