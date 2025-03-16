@@ -18,7 +18,7 @@ export const AppWindow = (props: IAppWindow) => {
   return (
     <>
       <div className="icon-container dialog-icon-container">
-        {props.icons.map((el) => {
+        {props.icons.map((el, i) => {
           const action: string | launchWindowFunc = getAction(
             el,
             props.setwMsg,
@@ -34,6 +34,7 @@ export const AppWindow = (props: IAppWindow) => {
               )}
             >
               <DesktopIcon
+                tabIndex={i}
                 inFolder={true}
                 url={isURL ? (action as string) : undefined}
                 click={!isURL ? (action as launchWindowFunc) : undefined}

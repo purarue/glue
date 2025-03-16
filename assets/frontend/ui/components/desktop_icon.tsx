@@ -25,6 +25,7 @@ const LinkWrap = memo(({ url, newTab, children }: ILinkWrap) => {
 // dont attach the link here, handle the onClick at the higher level
 // this just handles drawing the icon
 interface IDesktopIcon {
+  tabIndex?: number;
   caption: string;
   iconurl: string;
   inFolder?: boolean;
@@ -77,6 +78,7 @@ const DesktopIcon = (props: IDesktopIcon) => {
   if (props.click !== undefined) {
     return (
       <figure
+        tabIndex={props.tabIndex}
         className="desktop-icon"
         onClick={handleLaunchWindow}
         onTouchStart={mouseEnter}
@@ -107,6 +109,7 @@ const DesktopIcon = (props: IDesktopIcon) => {
     // const isExternal = props.url!.startsWith("http");
     return (
       <figure
+        tabIndex={props.tabIndex}
         className="desktop-icon"
         onTouchStart={mouseEnter}
         onTouchEnd={mouseLeave}

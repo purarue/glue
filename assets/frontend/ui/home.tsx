@@ -15,7 +15,7 @@ import DesktopIcon from "./components/desktop_icon";
 import TapLink from "./components/taplink";
 import { getAction, launchWindowFunc } from "./windows/actions";
 import { IconData } from "../data";
-import { getWindowDimensions } from "./components/dimensions";
+// import { getWindowDimensions } from "./components/dimensions";
 import { ok } from "../utils";
 import { hash } from "../build";
 import { AUTOLAUNCH_WIDGETS } from "./widgets/launch";
@@ -57,17 +57,17 @@ function removeWindow(
 }
 
 // rectangles the user can draw on the screen
-interface _draggedRect {
-  x1: number;
-  y1: number;
-  x2: number;
-  y2: number;
-  browserWidth: number;
-  browserHeight: number;
-}
-type draggedRect = _draggedRect | undefined;
-const draggedRectDefault = undefined;
-const dragBuffer = 3; // to make sure nothing weird happens with scrollbar, keep a small buffer
+// interface _draggedRect {
+//   x1: number;
+//   y1: number;
+//   x2: number;
+//   y2: number;
+//   browserWidth: number;
+//   browserHeight: number;
+// }
+// type draggedRect = _draggedRect | undefined;
+// const draggedRectDefault = undefined;
+// const dragBuffer = 3; // to make sure nothing weird happens with scrollbar, keep a small buffer
 
 const desktopRenderTick = 60;
 
@@ -306,6 +306,7 @@ function Home() {
                     )}
                   >
                     <DesktopIcon
+                      tabIndex={i + 1}
                       url={isURL ? (action as string) : undefined}
                       click={!isURL ? (action as launchWindowFunc) : undefined}
                       mouseEnter={() => setSelectedIcon(el.name)}
@@ -326,36 +327,36 @@ function Home() {
   );
 }
 
-const DragRect = React.memo((props: _draggedRect) => {
-  // by default, assume the user dragged down and to the right
-  let topLeftX: number = props.x1;
-  let topLeftY: number = props.y1;
-  let height: number = props.y2 - props.y1;
-  let width: number = props.x2 - props.x1;
-  // if the user dragged left, x2 > x1
-  if (props.x1 >= props.x2) {
-    topLeftX = props.x2;
-    width = props.x1 - props.x2;
-  }
-  // if user dragged up
-  if (props.y1 >= props.y2) {
-    topLeftY = props.y2;
-    height = props.y1 - props.y2;
-  }
-  return (
-    <div
-      id="draggable-rect"
-      style={{
-        top: topLeftY,
-        left: topLeftX,
-        height: height,
-        width: width,
-      }}
-    >
-      <div className="draggable-rect-body"></div>
-    </div>
-  );
-});
+// const DragRect = React.memo((props: _draggedRect) => {
+//   // by default, assume the user dragged down and to the right
+//   let topLeftX: number = props.x1;
+//   let topLeftY: number = props.y1;
+//   let height: number = props.y2 - props.y1;
+//   let width: number = props.x2 - props.x1;
+//   // if the user dragged left, x2 > x1
+//   if (props.x1 >= props.x2) {
+//     topLeftX = props.x2;
+//     width = props.x1 - props.x2;
+//   }
+//   // if user dragged up
+//   if (props.y1 >= props.y2) {
+//     topLeftY = props.y2;
+//     height = props.y1 - props.y2;
+//   }
+//   return (
+//     <div
+//       id="draggable-rect"
+//       style={{
+//         top: topLeftY,
+//         left: topLeftX,
+//         height: height,
+//         width: width,
+//       }}
+//     >
+//       <div className="draggable-rect-body"></div>
+//     </div>
+//   );
+// });
 
 const HeaderRight = () => {
   return (
