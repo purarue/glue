@@ -105,6 +105,7 @@ defmodule Glue.GuestBookComments.CLI do
   """
   def all() do
     Repo.all(GuestBookComment)
+    |> Enum.reverse()
     |> prompt_comments()
   end
 
