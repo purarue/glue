@@ -122,6 +122,11 @@ const IconData: LinkInfo[] = [
     url: "https://github.com/purarue/ama",
   },
   {
+    name: "MEAMs",
+    icon: "/images/frontend/brain.png",
+    url: "https://purarue.xyz/x/meam/",
+  },
+  {
     name: "media accts",
     icon: "/images/frontend/musicnote.png",
   },
