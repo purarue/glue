@@ -28,9 +28,8 @@ function randomLocation(
   };
 }
 
+const Dialog = lazy(() => import("../components/dialog"));
 export function VirusWindow(setwMsg: setWindowMsg): launchWindowFunc {
-  const Dialog = lazy(() => import("../components/dialog"));
-
   return () => {
     const { browserWidth, browserHeight } = getWindowDimensions();
     const { x, y } = randomLocation(

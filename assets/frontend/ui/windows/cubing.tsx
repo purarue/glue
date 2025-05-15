@@ -10,9 +10,8 @@ import { dialogInfo, launchWindowFunc } from "./actions";
 const height = 400;
 const width = 700;
 
+const Dialog = lazy(() => import("../components/dialog"));
 export function CubingWindow(setwMsg: setWindowMsg): launchWindowFunc {
-  const Dialog = lazy(() => import("../components/dialog"));
-
   return () => {
     const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =
       dialogInfo({
@@ -21,6 +20,7 @@ export function CubingWindow(setwMsg: setWindowMsg): launchWindowFunc {
           width: width,
         },
         setwMsg,
+        increaseSizeIfAvailable: true,
       });
     setwMsg({
       spawn: true,

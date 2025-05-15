@@ -17,8 +17,8 @@ import dayjs, { unix } from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
 
-const height = 350;
-const width = 500;
+const height = 400;
+const width = 300;
 
 interface Status {
   success: boolean;
@@ -77,17 +77,17 @@ async function handleRequest(
   return res.success;
 }
 
+const Dialog = lazy(() => import("../components/dialog"));
 export function GuestBookWindow(setwMsg: setWindowMsg): launchWindowFunc {
-  const Dialog = lazy(() => import("../components/dialog"));
-
   return () => {
     const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =
       dialogInfo({
         size: {
           height: height,
-          width: height,
+          width: width,
         },
         setwMsg,
+        increaseSizeIfAvailable: true,
       });
     setwMsg({
       spawn: true,

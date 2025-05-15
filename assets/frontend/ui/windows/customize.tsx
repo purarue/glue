@@ -145,9 +145,8 @@ export const PaintControls = ({
   );
 };
 
+const Dialog = lazy(() => import("../components/dialog"));
 export function CustomizeWindow(setwMsg: setWindowMsg): launchWindowFunc {
-  const Dialog = lazy(() => import("../components/dialog"));
-
   return () => {
     const { x, y, windowId, closeWindow } = dialogInfo({
       size: {

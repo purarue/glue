@@ -16,9 +16,8 @@ interface ILinkWindow {
   minHeight?: number;
 }
 
+const Dialog = lazy(() => import("../components/dialog"));
 export function LinkWindow(props: ILinkWindow): launchWindowFunc {
-  const Dialog = lazy(() => import("../components/dialog"));
-
   const minWidth = props.minWidth ?? defaultMinWidth;
   // 40 is a buffer for the menu bar
   const minHeight = props.minHeight ?? 40 + props.links.length * linkLineHeight;

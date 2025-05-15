@@ -6,9 +6,8 @@ import { dialogInfo, launchWindowFunc } from "./actions";
 const minHeight = 400;
 const minWidth = 500;
 
+const Dialog = lazy(() => import("../components/dialog"));
 export function TextEditorWindow(setwMsg: setWindowMsg): launchWindowFunc {
-  const Dialog = lazy(() => import("../components/dialog"));
-
   return () => {
     const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =
       dialogInfo({
@@ -17,6 +16,7 @@ export function TextEditorWindow(setwMsg: setWindowMsg): launchWindowFunc {
           width: minHeight,
         },
         setwMsg,
+        increaseSizeIfAvailable: true,
       });
     setwMsg({
       spawn: true,

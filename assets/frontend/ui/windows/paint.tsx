@@ -7,10 +7,10 @@ import { getWindowDimensions } from "../components/dimensions";
 const minHeight = 400;
 const minWidth = 300;
 
-export function PaintWindow(setwMsg: setWindowMsg): launchWindowFunc {
-  const Dialog = lazy(() => import("./../components/dialog"));
-  const PaintBody = lazy(() => import("./paint_internal"));
+const Dialog = lazy(() => import("./../components/dialog"));
+const PaintBody = lazy(() => import("./paint_internal"));
 
+export function PaintWindow(setwMsg: setWindowMsg): launchWindowFunc {
   return () => {
     const { browserHeight, browserWidth } = getWindowDimensions();
     const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =

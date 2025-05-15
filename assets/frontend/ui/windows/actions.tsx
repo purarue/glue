@@ -106,14 +106,27 @@ export interface DialogInfo {
 export function dialogInfo({
   size: minSize,
   setwMsg,
+  increaseSizeIfAvailable = false,
 }: {
   size: Size;
   setwMsg: setWindowMsg;
+  increaseSizeIfAvailable?: boolean;
 }): DialogInfo {
   const { x, y } = jitterCenterLocation();
   const { browserHeight, browserWidth } = getWindowDimensions();
-  const dialogWidth = minSize.width;
-  const dialogHeight = minSize.height;
+  let dialogWidth = minSize.width;
+  let dialogHeight = minSize.height;
+  if (increaseSizeIfAvailable) {
+    // if we have enough room, increase the dialog size
+    const heightRatio = browserHeight / dialogHeight;
+    if (heightRatio > 1.5) {
+      dialogHeight *= heightRatio * 0.5;
+    }
+    const widthRatio = browserWidth / dialogWidth;
+    if (widthRatio > 1.5) {
+      dialogWidth *= widthRatio * 0.5;
+    }
+  }
   const windowId = Date.now().toString();
   return {
     x,

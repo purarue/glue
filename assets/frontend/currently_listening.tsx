@@ -130,7 +130,7 @@ const CurrentlyListeningNotification = ({
         padding: "1rem",
         backgroundColor: bg,
         color: "white",
-        zIndex: 1000,
+        zIndex: 4,
         maxWidth: "30rem",
         textOverflow: "ellipsis",
         overflow: "hidden",

@@ -7,9 +7,8 @@ import TapLink from "./../components/taplink";
 const height = 300;
 const width = 400;
 
+const Dialog = lazy(() => import("../components/dialog"));
 export function DataWindow(setwMsg: setWindowMsg): launchWindowFunc {
-  const Dialog = lazy(() => import("../components/dialog"));
-
   return () => {
     const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =
       dialogInfo({
@@ -18,6 +17,7 @@ export function DataWindow(setwMsg: setWindowMsg): launchWindowFunc {
           width: width,
         },
         setwMsg,
+        increaseSizeIfAvailable: true,
       });
     setwMsg({
       spawn: true,

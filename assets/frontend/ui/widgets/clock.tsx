@@ -6,8 +6,9 @@ import { dialogInfo, launchWindowFunc } from "./../windows/actions";
 const minHeight = 100;
 const minWidth = 100;
 
+const Dialog = lazy(() => import("../components/dialog"));
+
 export function Clock(setwMsg: setWindowMsg): launchWindowFunc {
-  const Dialog = lazy(() => import("../components/dialog"));
   return () => {
     const { browserWidth, windowId, closeWindow } = dialogInfo({
       size: {

@@ -19,9 +19,8 @@ function alertEmail() {
   );
 }
 
+const Dialog = lazy(() => import("../components/dialog"));
 export function ReadmeWindow(setwMsg: setWindowMsg): launchWindowFunc {
-  const Dialog = lazy(() => import("../components/dialog"));
-
   return () => {
     const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =
       dialogInfo({
@@ -30,6 +29,7 @@ export function ReadmeWindow(setwMsg: setWindowMsg): launchWindowFunc {
           width: height,
         },
         setwMsg,
+        increaseSizeIfAvailable: true,
       });
     setwMsg({
       spawn: true,

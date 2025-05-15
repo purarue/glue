@@ -9,9 +9,9 @@ interface IDesktopErrorDialogProps {
   closeDialog: () => void;
 }
 
-const DesktopErrorDialog = (props: IDesktopErrorDialogProps) => {
-  const Dialog = lazy(() => import("../components/dialog"));
+const Dialog = lazy(() => import("../components/dialog"));
 
+const DesktopErrorDialog = (props: IDesktopErrorDialogProps) => {
   const { browserHeight, browserWidth } = useWindowDimensions();
 
   const dialogHeight = props.height ?? 140;

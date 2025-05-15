@@ -7,9 +7,8 @@ import { AppWindow } from "./folder";
 const height = 275;
 const width = 325;
 
+const Dialog = lazy(() => import("../components/dialog"));
 export function CodeWindow(setwMsg: setWindowMsg): launchWindowFunc {
-  const Dialog = lazy(() => import("../components/dialog"));
-
   return () => {
     const { x, y, dialogWidth, dialogHeight, windowId, closeWindow } =
       dialogInfo({
