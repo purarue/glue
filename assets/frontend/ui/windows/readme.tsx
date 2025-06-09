@@ -7,12 +7,6 @@ import TapLink from "./../components/taplink";
 const height = 400;
 const width = 275;
 
-const discordUserName = "purplepinapples";
-
-function alertDiscordName() {
-  window.alert(discordUserName);
-}
-
 function alertEmail() {
   window.alert(
     "I don't leave my email publicly visible anymore, but you can leave yours in the guestbook (comments are private till I approve them) and I'll get back to you!",
@@ -70,16 +64,6 @@ const ReadmeBody = memo(() => {
       <h4>Contact</h4>
       <p>I don't use social media all that much, but you can:</p>
       <ul>
-        <li>
-          {"Add me on "}
-          <a
-            style={{ cursor: "pointer" }}
-            onClick={alertDiscordName}
-            onTouchEnd={alertDiscordName}
-          >
-            {`Discord (${discordUserName})`}
-          </a>
-        </li>
         <li>
           <TapLink
             href="https://github.com/purarue/ama"
