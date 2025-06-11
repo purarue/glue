@@ -235,9 +235,9 @@ const GuestBookForm = () => {
         }}
       >
         <div className="guestbook-form-row">
-          <label onClick={focusName} onTouchEnd={focusName}>
+          <span className="label" onClick={focusName} onTouchEnd={focusName}>
             Name:{" "}
-          </label>
+          </span>
 
           <input
             ref={nameField}
@@ -251,9 +251,13 @@ const GuestBookForm = () => {
           />
         </div>
         <div className="guestbook-form-row guestbook-textarea-row">
-          <label onClick={focusCommentField} onTouchEnd={focusCommentField}>
+          <span
+            className="label"
+            onClick={focusCommentField}
+            onTouchEnd={focusCommentField}
+          >
             Comment:{" "}
-          </label>
+          </span>
           <textarea
             ref={commentField}
             onTouchEnd={focusCommentField}
@@ -266,7 +270,7 @@ const GuestBookForm = () => {
         </div>
         <a
           href="#"
-          className="input-go pixel unlinkify guestbook-form-row"
+          className="input-go pixel unlinkify guestbook-submit"
           onTouchEnd={handleSubmit}
           onClick={handleSubmit}
         >

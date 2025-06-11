@@ -1158,30 +1158,41 @@ textarea {
             margin-left: calc(100px + 2em);
           }
 
-          // exclude the a.guestbook-form-row, the div here is important
-          div.guestbook-form-row {
+          .guestbook-form-row {
             width: 60%;
 
             &.guestbook-textarea-row {
               width: 80%;
             }
 
+            .label {
+              width: 100%;
+            }
+
             input,
             textarea {
               width: 100%;
             }
-          }
 
-          .guestbook-form-row {
+            /* fix alignment with labels */
+            input {
+              margin-left: 20px;
+            }
+
+            textarea {
+              margin-left: 13px;
+            }
+
             margin-top: 0.25em;
             display: flex;
-            flex-flow: row nowrap;
+            flex-flow: column nowrap;
             align-items: center;
-
-            &.input-go {
-              margin-bottom: 0.25em;
-            }
           }
+        }
+
+        .guestbook-submit {
+          margin-top: 0.25em;
+          margin-bottom: 0.25em;
         }
 
         .guestbook-comments {
