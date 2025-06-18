@@ -72,13 +72,13 @@ const CubingBody = memo(({ data }: ICubingBody) => {
   return (
     <div className="cubing-body">
       <p>
-        These are my records from{" "}
+        These are{" "}
         <TapLink
-          href="https://www.worldcubeassociation.org/"
+          href="https://www.worldcubeassociation.org/persons/2017BREC02"
           target="_blank"
           rel="noreferrer"
         >
-          WCA
+          my records from WCA
         </TapLink>{" "}
         (World Cube Association) approved competitions. I've been to{" "}
         {data.competitions} competitions and have {data.completed_solves}{" "}
