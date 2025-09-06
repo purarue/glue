@@ -98,7 +98,7 @@ export const HomeScreen: React.FC<{}> = () => {
           // include gui/full-screen root-el wrapper div here (otherwise included
           // in GUI) so that loading text has the same border as the loaded screen
           return (
-            <div id="gui" className="full-screen root-el">
+            <div id="gui" className="full-screen root-el loading-screen">
               <div className="loading-text pixel">
                 {loadingText.map((line: string, index: number) => {
                   return <div key={index}>{loading >= index ? line : ""}</div>;

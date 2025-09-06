@@ -110,7 +110,7 @@ const DesktopIcon = (props: IDesktopIcon) => {
     return (
       <figure
         tabIndex={props.tabIndex}
-        className="desktop-icon"
+        className="desktop-icon external"
         onTouchStart={mouseEnter}
         onTouchEnd={mouseLeave}
         onMouseEnter={mouseEnter}

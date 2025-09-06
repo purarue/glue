@@ -232,6 +232,10 @@ textarea {
   padding-top: 1em;
 }
 
+.loading-screen {
+  cursor: wait;
+}
+
 #gui {
   color: $offwhite;
   border: $outer_border_width solid black;
@@ -547,7 +551,6 @@ textarea {
         figure.desktop-icon {
           display: flex;
           flex-flow: column;
-          cursor: pointer;
           position: relative;
 
           /* if this is a link instead of onClick
@@ -613,6 +616,8 @@ textarea {
     width: 100%;
     height: 100%;
 
+    cursor: drag;
+
     .widget-body {
       width: 100%;
       height: 100%;
@@ -658,6 +663,16 @@ textarea {
 
   $dialog_exit_button_width: 25px;
   $dialog_gutter_width: 10px;
+
+  // some react-rnd classes to match when its being dragged
+  .rnd .dialog-menu-title {
+    cursor: grab;
+  }
+  .rnd.react-draggable-dragging .dialog,
+  .rnd.react-draggable-dragging .widget-body,
+  .rnd.react-draggable-dragging .dialog-menu-title {
+    cursor: grabbing;
+  }
 
   .dialog {
     color: #eee;

@@ -170,7 +170,7 @@ const CurrentlyListeningNotification = ({
                 onClick={copyCurrentSong}
                 style={{
                   marginLeft: "0.5rem",
-                  cursor: "pointer",
+                  cursor: "copy",
                 }}
                 title="Copy to clipboard"
                 role="button"
