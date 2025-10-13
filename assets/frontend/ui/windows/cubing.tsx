@@ -72,17 +72,9 @@ const CubingBody = memo(({ data }: ICubingBody) => {
   return (
     <div className="cubing-body">
       <p>
-        These are{" "}
-        <TapLink
-          href="https://www.worldcubeassociation.org/persons/2017BREC02"
-          target="_blank"
-          rel="noreferrer"
-        >
-          my records from WCA
-        </TapLink>{" "}
-        (World Cube Association) approved competitions. I've been to{" "}
-        {data.competitions} competitions and have {data.completed_solves}{" "}
-        completed official solves.
+        These are my records from WCA (World Cube Association) approved
+        competitions. I've been to {data.competitions} competitions and have{" "}
+        {data.completed_solves} completed official solves.
       </p>
       <p>
         For those unfamiliar with the notation, a Single is the time for a
