@@ -116,11 +116,11 @@ const IconData: LinkInfo[] = [
     url: "https://purarue.xyz/x/photography/",
     icon: "/images/frontend/camera.png",
   },
-  {
-    name: "ama",
-    icon: "/images/frontend/question.png",
-    url: "https://github.com/purarue/ama",
-  },
+  // {
+  //   name: "ama",
+  //   icon: "/images/frontend/question.png",
+  //   url: "https://github.com/purarue/ama",
+  // },
   {
     name: "MEAMs",
     icon: "/images/frontend/brain.png",
