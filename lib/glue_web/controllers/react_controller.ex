@@ -44,10 +44,7 @@ Anime Short Films:\thttps://purarue.xyz/animeshorts/\n"
   end
 
   def catchall(conn, _params) do
-    is_curl = is_curl(conn)
-    Logger.info("is a curl request: #{is_curl}")
-
-    if is_curl do
+    if is_curl(conn) do
       text(conn, ansi())
     else
       render(conn, "index.html")
