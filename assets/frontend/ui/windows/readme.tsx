@@ -65,15 +65,6 @@ const ReadmeBody = memo(() => {
       <p>I don't use social media all that much, but you can:</p>
       <ul>
         <li>
-          <TapLink
-            href="https://github.com/purarue/ama"
-            target="_blank"
-            rel="noreferrer"
-          >
-            AMA
-          </TapLink>
-        </li>
-        <li>
           <a href="#" onClick={alertEmail} onTouchEnd={alertEmail}>
             Email
           </a>
