@@ -8,8 +8,6 @@ The home page is a GUI interface, where each 'page' is a window, inspired by old
 
 The `./development_server` and `./production_server` run this locally/in prod/have a couple extra commands to help me manage approving comments for the guestbook. All run with [`supervisor`](https://github.com/Supervisor/supervisor) by some code [here](https://github.com/purarue/vps).
 
-![](./assets/screenshot.png)
-
 Before this iteration of the design, this [sort of looked like a geocities website](https://www.cameronsworld.net/), I extracted a version out of the git history [available here](https://github.com/purarue/glue_geocities)
 
 #### Dashboard
