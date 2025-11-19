@@ -24,7 +24,7 @@
     "css-loader": "^7.1.2",
     "css-minimizer-webpack-plugin": "^7.0.0",
     "dayjs": "^1.10.7",
-    "glob": "^11.0.0",
+    "glob": "^11.1.0",
     "mini-css-extract-plugin": "^2.5.3",
     "nth-check": ">=2.0.1",
     "postcss": ">=8.4.31",
