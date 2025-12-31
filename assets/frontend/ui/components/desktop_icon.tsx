@@ -80,6 +80,13 @@ const DesktopIcon = (props: IDesktopIcon) => {
       <figure
         tabIndex={props.tabIndex}
         className="desktop-icon"
+        role="button"
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            handleLaunchWindow();
+          }
+        }}
         onClick={handleLaunchWindow}
         onTouchStart={mouseEnter}
         onTouchEnd={() => {
@@ -110,6 +117,19 @@ const DesktopIcon = (props: IDesktopIcon) => {
     return (
       <figure
         tabIndex={props.tabIndex}
+        role="link"
+        onKeyDown={(e) => {
+          if (!window.location || props.url === undefined) {
+            return;
+          }
+          if (e.key === "Enter" || e.key === " ") {
+            if (e.ctrlKey) {
+              window.open(props.url, "_blank");
+            } else {
+              window.location.href = props.url;
+            }
+          }
+        }}
         className="desktop-icon external"
         onTouchStart={mouseEnter}
         onTouchEnd={mouseLeave}

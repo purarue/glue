@@ -129,6 +129,7 @@ const UIWindow = (props: UIWIndowProps) => {
               "dialog-menu-button dialog-exit-button",
               winShow.showExitButton || "dialog-part-hidden",
             )}
+            role="button"
             onClick={props.hitCloseCallback}
             onTouchEnd={props.hitCloseCallback} // also close on touch events
             onMouseEnter={props.handleDisableRND}
