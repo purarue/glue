@@ -35,12 +35,23 @@ Anime Short Films:\thttps://purarue.xyz/animeshorts/\n"
     # welcome
   end
 
+  # support xh/curl
+  @terminal_filetypes ["xh", "curl"]
+
   @spec is_curl(Plug.Conn.t()) :: boolean()
   defp is_curl(conn) do
-    conn.req_headers
-    |> Enum.filter(fn {k, _} -> String.downcase(k) == "user-agent" end)
-    |> Enum.filter(fn {_, v} -> String.downcase(v) |> String.starts_with?("curl") end)
-    |> length() > 0
+    matched_headers =
+      conn.req_headers
+      |> Enum.filter(fn {k, _} -> String.downcase(k) == "user-agent" end)
+      |> Enum.filter(fn {_, v} ->
+        String.starts_with?(
+          String.downcase(v),
+          @terminal_filetypes
+        )
+      end)
+
+    # IO.inspect(matched_headers)
+    matched_headers |> length() > 0
   end
 
   def catchall(conn, _params) do
