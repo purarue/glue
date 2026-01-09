@@ -13,6 +13,21 @@ defmodule GlueWeb.ReactController do
 
   plug :put_layout, "react_layout.html"
 
+  @links [
+    ["Notes/Wiki", "https://purarue.xyz/x/"],
+    ["Media Feed", "https://purarue.xyz/feed/"],
+    ["Github", "https://purarue.xyz/github"],
+    ["Photography", "https://purarue.xyz/photos"],
+    ["Projects", "https://purarue.xyz/projects"],
+    ["Blog", "https://purarue.xyz/blog"],
+    ["RSS", "https://purarue.xyz/x/rss.xml"],
+    ["======================", "=============================="],
+    ["Letterboxd", "https://purarue.xyz/letterboxd"],
+    ["Anilist", "https://purarue.xyz/anilist"],
+    ["Albums Spreadsheet", "https://purarue.xyz/albums"],
+    ["World Cube Association", "https://purarue.xyz/wca"]
+  ]
+
   # returns a string
   @spec ansi() :: String.t()
   def ansi() do
@@ -20,26 +35,20 @@ defmodule GlueWeb.ReactController do
       "                                       \n _ __  _   _ _ __ __ _ _ __ _   _  ___ \n| '_ \\| | | | '__/ _` | '__| | | |/ _ \\\n| |_) | |_| | | | (_| | |  | |_| |  __/\n| .__/ \\__,_|_|  \\__,_|_|   \\__,_|\\___|\n|_|                                    \n"
 
     welcome =
-      "Typically this works as a react app (I would recommend using a browser)
+      TableRex.Table.new(@links)
+      |> TableRex.Table.render!()
 
-But here are some links to other parts of the site:
+    (IO.ANSI.blue() <> IO.ANSI.italic() <> figlet <> IO.ANSI.reset() <> "\n" <> welcome)
+    |> String.trim()
 
-Github:\t\t\thttps://github.com/purarue/
-Notes:\t\t\thttps://purarue.xyz/x/
-Photography:\t\thttps://purarue.xyz/x/photography/
-Projects:\t\thttps://purarue.xyz/projects/
-Favorite XKCDs:\t\thttps://purarue.xyz/xkcd/
-Anime Short Films:\thttps://purarue.xyz/animeshorts/\n"
-
-    IO.ANSI.blue() <> IO.ANSI.italic() <> figlet <> IO.ANSI.reset() <> "\n\n" <> welcome
     # welcome
   end
 
   # support xh/curl
   @terminal_filetypes ["xh", "curl"]
 
-  @spec is_curl(Plug.Conn.t()) :: boolean()
-  defp is_curl(conn) do
+  @spec is_terminal(Plug.Conn.t()) :: boolean()
+  defp is_terminal(conn) do
     matched_headers =
       conn.req_headers
       |> Enum.filter(fn {k, _} -> String.downcase(k) == "user-agent" end)
@@ -55,7 +64,7 @@ Anime Short Films:\thttps://purarue.xyz/animeshorts/\n"
   end
 
   def catchall(conn, _params) do
-    if is_curl(conn) do
+    if is_terminal(conn) do
       text(conn, ansi())
     else
       render(conn, "index.html")
