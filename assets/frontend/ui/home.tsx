@@ -401,7 +401,7 @@ const PageHitRender = React.memo(({ count }: IPageHitRender) => {
 
 const OSVersion = React.memo(() => {
   const [hoveringImage, setHoveringImage] = useState(false);
-  const [imageUrl, setImageUrl] = useState("/image/frontend/source-0.png");
+  const [imageUrl, setImageUrl] = useState("/images/frontend/source-0.png");
 
   useEffect(() => {
     if (hoveringImage) {
