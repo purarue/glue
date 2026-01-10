@@ -38,8 +38,8 @@ defmodule GlueWeb.ReactController do
       TableRex.Table.new(@links)
       |> TableRex.Table.render!()
 
-    (IO.ANSI.blue() <> IO.ANSI.italic() <> figlet <> IO.ANSI.reset() <> "\n" <> welcome)
-    |> String.trim()
+    ((IO.ANSI.blue() <> IO.ANSI.italic() <> figlet <> IO.ANSI.reset() <> "\n" <> welcome)
+     |> String.trim()) <> "\n"
 
     # welcome
   end
