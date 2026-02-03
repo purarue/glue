@@ -1,15 +1,15 @@
 <noscript>
   <div class="noscript">
     <p>
-      Hi! This page is typically rendered with JavaScript; It has links off to some of my other projects, here are some of them:
+      [No JavaScript detected]
+    </p>
+    <p>
+      Here are some links to some other places I live on the internet!
     </p>
     <ul>
-      <li><a href="https://purarue.xyz/x/">Notes</a></li>
-      <li><a href="https://purarue.xyz/x/photography/">Photography</a></li>
-      <li><a href="https://github.com/purarue">Github</a></li>
-      <li><a href="https://purarue.xyz/animeshorts">AnimeShorts</a></li>
-      <li><a href="https://purarue.xyz/dbsentinel">MAL DB Sentinel</a></li>
-      <li><a href="https://purarue.xyz/xkcd">Favorite XKCDs</a></li>
+      <%= for row <- @links do %>
+        <li><a href={Enum.at(row, 1)}><%= Enum.at(row, 0) %></a></li>
+      <% end %>
     </ul>
   </div>
 </noscript>

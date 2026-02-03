@@ -67,7 +67,10 @@ defmodule GlueWeb.ReactController do
     if is_terminal(conn) do
       text(conn, ansi())
     else
-      render(conn, "index.html")
+      render(conn, "index.html",
+        links:
+          @links |> Enum.filter(fn row -> row |> Enum.at(1) |> String.starts_with?("https") end)
+      )
     end
   end
 end

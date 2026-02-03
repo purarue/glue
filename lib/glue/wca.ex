@@ -23,11 +23,6 @@ defmodule Glue.WCA do
     {:reply, state[:data], state}
   end
 
-  defp read_json_file(nil) do
-    Logger.warning("No Cubing JSON file!")
-    %{}
-  end
-
   defp read_json_file(path) when is_bitstring(path) do
     File.read!(path) |> Jason.decode!()
   end
