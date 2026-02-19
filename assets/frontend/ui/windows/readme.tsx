@@ -9,7 +9,7 @@ const width = 275;
 
 function alertEmail() {
   window.alert(
-    "I don't leave my email publicly visible anymore, but you can leave yours in the guestbook (comments are private till I approve them) and I'll get back to you!",
+    "You can email me using 'contact' as the username, with the address at this domain, i.e., c******@p******.x**",
   );
 }
 
