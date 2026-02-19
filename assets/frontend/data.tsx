@@ -8,7 +8,7 @@ interface LinkInfo {
 const MediaElsewhere: LinkInfo[] = [
   {
     name: "Movies [Letterboxd]",
-    url: "https://letterboxd.com/purplepinapples/",
+    url: "https://letterboxd.com/purarue/",
     tooltip: "Just the Movies",
   },
   {
