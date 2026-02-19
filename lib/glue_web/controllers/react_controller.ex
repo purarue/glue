@@ -22,7 +22,7 @@ defmodule GlueWeb.ReactController do
     ["Blog", "https://purarue.xyz/blog"],
     ["RSS", "https://purarue.xyz/x/rss.xml"],
     ["======================", "=============================="],
-    ["Letterboxd", "https://purarue.xyz/letterboxd"],
+    ["Letterboxd", "https://letterboxd.com/purarue"],
     ["Anilist", "https://purarue.xyz/anilist"],
     ["Albums Spreadsheet", "https://purarue.xyz/albums"],
     ["World Cube Association", "https://purarue.xyz/wca"]
