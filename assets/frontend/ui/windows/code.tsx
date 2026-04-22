@@ -55,10 +55,10 @@ const CodeBody = ({ setwMsg }: { setwMsg: setWindowMsg }) => {
           url: "https://purarue.xyz/projects",
           icon: "/images/frontend/laptop.png",
         },
-        {
-          name: "data",
-          icon: "/images/frontend/barchart.png",
-        },
+        // {
+        //   name: "data",
+        //   icon: "/images/frontend/barchart.png",
+        // },
         {
           name: "dotfiles",
           icon: "/images/frontend/dotfiles.png",

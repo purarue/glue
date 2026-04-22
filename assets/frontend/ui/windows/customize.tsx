@@ -132,6 +132,7 @@ export const PaintControls = ({
             <div
               key={palColor}
               className="palette-box"
+              role="button"
               style={{
                 backgroundColor: palColor,
               }}
