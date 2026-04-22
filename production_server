@@ -85,7 +85,8 @@ mix phx.digest.clean
 
 cd ./assets
 # allowed for react-canvas-draw, can maybe remove "paint" window if this gets to be an issue
-npm install --legacy-peer-deps
+# disable install during deploy to supply chain attacks
+# npm install --legacy-peer-deps
 npm run deploy
 cd "${THIS_DIR}"
 exec mix glue.prod.server
